@@ -31,14 +31,21 @@
 
 \section{Introduction}
 	\subsection{Complex Networks}
-	Almost every scientific and engineering discipline deals with data that come from experimental observations or simulations running on a computer. Traditionally, data have been numerals, such as temperature, velocity, voltage, etc., and methodologies that analyze these numerals have been established for over hundreds of years.
+	Almost every scientific and engineering discipline deals with data that come from experimental observations or simulations running on a computer. Traditionally, data have been numerals, which may represent temperature, velocity, or voltage, and methodologies that analyze these numerals have been established for over hundreds of years. 
 	
-	 \textit{Graph} or \textit{network}, which is essentially structured data as opposed to simple numeric values, has been used as a new way to approach real-world problems in  recent decades. Social science, for instance, has witness the power of network analysis with the recent emergence of online social network services such as Facebook, Twitter, LinkedIn, etc.  Social scientists have been solving previously intractable questions in the field with the tremendous amount of  data and advanced graph algorithms with high-performance computers. Biological sciences use networks as a tool to dissect biological, chemical and even ecological processes in order to gain insight into how neurons in our brain interact with each other, how nutrients get broken down into pieces and get re-assembled in another molecular form, and how animals eat or be eaten by other animals. Engineering systems such as the Internet, power grids, water distribution networks, transportation networks, etc. have also been investigated with using network analysis tools for constructing efficient and robust systems. 
+	\textit{Graph} or \textit{network}, which is essentially structured data as opposed to simple numeric values, has been used as a new way to approach real-world problems in  recent decades. Social science, for instance, has witness the power of network analysis with the recent emergence of online social network services such as Facebook, Twitter, LinkedIn, etc.  Social scientists have been solving previously intractable questions in the field with the tremendous amount of  data and advanced graph algorithms with high-performance computers. Biological sciences use networks as a tool to dissect biological, chemical and even ecological processes in order to gain insight into how neurons in our brain interact with each other, how nutrients get broken down into pieces and get re-assembled in another molecular form, and how animals eat or be eaten by other animals. Engineering systems such as the Internet, power grids, water distribution networks, transportation networks, etc. have also been investigated with using network analysis tools for constructing efficient and robust systems. 
 	
-	As such, various fields of science and engineering have extensively utilized networks as a new tool to analyze phenomena and even construct a system of a particular interest. One of the main research themes in \textit{Network Science}, an interdisciplinary field which studies properties of networks ranging from biological and social networks to engineering system networks, is to find hidden universal patterns in those networks. A model called \textit{small-world network}, introduced by Watts and Strogatz, produces networks having properties of: 1. high density of triangles and 2. low average distance between a pair of nodes in a network. These properties are, surprisingly, often found not only in a single category of networks, but also in the wide range of kinds. Another universal property, that is claimed throughout in many disciplines, is \textit{power-law} degree distribution, in which one observes a number of nodes with few connections while there is few nodes with many connections to others. This very skewed distribution of degree, connections attached to a node, can be found among diverse sets of networks.
 	
-	\subsection{Inference and Comparison of Network Categories}
+	\subsection{Structural Universality of Networks}
+	
+	One of the main research themes in Network Science, an interdisciplinary field which studies properties of networks ranging from biological and social networks to engineering system networks, is to find hidden universal patterns in the networks of various categories. A model called \textit{small-world network}, introduced by Watts and Strogatz \cite{watts1998cds}, produces networks having properties of: 1. high density of triangles and 2. low average distance between a pair of nodes in a network. These properties are, surprisingly, often found not only in a single category of networks, but also in the wide range of kinds. Another universal property is \textit{power-law} degree distribution sometimes referred to as \textit{scale-free}, in which one observes a number of nodes with few connections while there is few nodes with many connections to others. This very skewed distribution of degree, connections attached to a node, can be found among diverse sets of networks \cite{Barabasi99emergenceScaling}. 
+
+
+	\subsection{Structural Diversity of Networks}
+	Contrary to prevalent small-world and scale-free properties, each category of networks exhibits unique structural profiles of its own. Milo \textit{et al.} introduced a concept called \textit{network motifs} that is essentially patterns of frequent  sub-graph (motif) in a particular network \cite{Milo_motif}. They have shown each category of network, such as gene regulation (transcription), food webs, electronic circuits, etc., has a distinct pattern of network motifs. Furthermore, Milo \textit{et al.} revealed the existence of superfamilies of networks that  are groups of network categories having the highly convergent motif profiles \cite{Milo_SuperFamily}. Onnela \textit{et al.} constructed a taxonomy of 746 networks  of diverse categories using \textit{Mesoscopic Response Functions}(MRFS) that essentially describes the changes of specific values related to the community structure of a network with respect to a parameter $\xi \in [0,1]$\cite{Onnela_Taxonomy}. Each network has its own MRFS and they calculated distance between networks which is defined as the area of difference between two networks' MRFS. They have successfully identified clusters of similar networks in a dendrogram constructed based on MRFS distance.
+	
 	\subsection{Searching The Underlying Principles}
+Networks are merely a simplified mathematical object and yet, one could gain some insight into a phenomenon and/or process of a studied field just from network structure. Here, questions arise: \textit{What aspects of network structure make a specific category of network different from others?} \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?}
 
 
 \section{Data Sets}
@@ -66,6 +73,9 @@
 
 \section{Analyses}
 \subsection{}
+
+\bibliographystyle{ieeetr}
+\bibliography{reference} 
 
 \end{document}
 
