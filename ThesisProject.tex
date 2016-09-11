@@ -39,12 +39,20 @@ The structure of complex networks has been of interest in many scientific and en
 	
 	\subsection{Structural Universality of Networks}
 	
-	One of the main research themes in Network Science, an interdisciplinary field which studies properties of networks ranging from biological and social networks to engineering system networks, is to find hidden universal patterns in the networks of various categories. A model called \textit{small-world network}, introduced by Watts and Strogatz \cite{watts1998cds}, produces networks having properties of: 1. high density of triangles and 2. low average distance between a pair of nodes in a network. These properties are, surprisingly, often found not only in a single category of networks, but also in the wide range of kinds. Another property that is claimed to be universal by some researchers, yet that is still controversial, is \textit{power-law} degree distribution sometimes referred to as \textit{scale-free}, in which one observes a number of nodes with few connections while there is few nodes with many connections to others. This very skewed distribution of degree, connections attached to a node, is claimed to be found among diverse sets of networks \cite{Barabasi99emergenceScaling}. 
+	One of the main research themes in Network Science, an interdisciplinary field which studies properties of networks ranging from biological and social networks to engineering system networks, is to find hidden universal patterns in the networks of various categories. 
+	Watts and Strogatz proposed a random network model that, depending on the parameter setting, produces a network having properties as follows: 1. high density of triangles, implying that if three nodes are connected, it is likely that those three nodes actually compose a triangle; 2. low average distance between a pair of nodes, which indicates that from any node it is just a few steps, in average, to reach any other node in the network \cite{watts1998cds}. Networks having these attributes are often called "small-world" networks and many kinds of networks have been reported as having the small world property \cite{Network_Small-World-Ness}.
+
+	
+	
+	 Another property that is claimed to be universal by some researchers, yet that is still controversial, is \textit{power-law} degree distribution which is sometimes referred to as \textit{scale-free}. In a scale-free network, one observes a number of nodes with few connections while there are few nodes with many connections to others. This very skewed distribution of degree, connections attached to a node, is claimed to be found among diverse sets of networks \cite{Barabasi99emergenceScaling}. However, claims that a network follows the power-law degree distribution often lacks a valid statistical treatment in order to show it is indeed following the distribution \cite{Clauset:PowerLaw}
 
 
 	\subsection{Structural Diversity of Networks}
 	Contrary to prevalent small-world and scale-free properties, each category of networks exhibits unique structural profiles of its own. Social networks have been investigated by many researchers and found out that they exhibit unique structural characteristics: high density of triangle (clustering coefficient) and positive degree assortativity \cite{WhySocialNetworks, Mislove:2007:OnlineSocial}. High triangle density indicates the high probability of one's friends being friends each other and the positive  degree assortativity shows a tendency that high-degree nodes (nodes having many connections) connect to other high-degree nodes while low-degree nodes connect to other low-degree nodes.
-	Milo \textit{et al.} introduced a concept called \textit{network motifs} that are essentially patterns of frequent  sub-graph (motif) in a particular network \cite{Milo_motif}. They have shown each category of network, such as gene regulation (transcription), food webs, electronic circuits, etc., has a distinct pattern of network motifs. Furthermore, Milo \textit{et al.} revealed the existence of superfamilies of networks that  are groups of network categories having the highly convergent motif profiles \cite{Milo_SuperFamily}. Onnela \textit{et al.} constructed a taxonomy of 746 networks  of diverse categories using \textit{Mesoscopic Response Functions}(MRFS) that essentially describes the changes of specific values related to the community structure of a network with respect to a parameter $\xi \in [0,1]$\cite{Onnela_Taxonomy}. Each network has its own MRFS and they calculated distance between networks which is defined as the area of difference between two networks' MRFS. They have successfully identified clusters of similar networks in a dendrogram constructed based on MRFS distance.
+	
+	Roth \textit{et al.} identified a unique structure of subway networks, that is called core-branch structure in the literature \cite{Train}. Many real world subway networks have a ring-shape connections of stations and dense connections therein, referred to as the "core" of the network. In the core, stations are relatively densely connected to each other, enabling residents of a city to move around quickly. From the ring of the core, branches radiate outward connecting stations far from the center of the city. 
+	
+	Milo \textit{et al.} introduced a concept called \textit{network motifs} that are essentially patterns of frequent sub-graph (motif) in a particular network compared to its randomized network\cite{Milo_motif}. They have shown each category of network, such as gene regulation (transcription), food webs, electronic circuits, etc., has a distinct pattern of network motifs. Furthermore, Milo \textit{et al.} revealed the existence of superfamilies of networks that  are groups of network categories having the highly convergent motif profiles \cite{Milo_SuperFamily}. Onnela \textit{et al.} constructed a taxonomy of 746 networks  of diverse categories using "Mesoscopic Response Functions" (MRFS) that essentially describes the changes of specific values related to the community structure of a network with respect to a parameter $\xi \in [0,1]$\cite{Onnela_Taxonomy}. Each network has its own MRFS and they calculated distance between networks which is defined as the area of difference between two networks' MRFS. They have successfully identified clusters of similar networks in a dendrogram constructed based on MRFS distance.
 	
 	\subsection{Searching The Underlying Principles}
 Network is merely a simplified mathematical object and yet, one could gain some insight into a phenomenon and/or process of a studied field just from network structure. 
@@ -63,26 +71,43 @@ The second part of the question asks if there is any structural similarity betwe
 The last part of the question is essentially all about elucidating the meta-structure in domains or class labels. What if two very distinct categories (labels) of networks, say biological and technological ones, exhibit very similar network structure and a classifier misclassifies them many times? Is this because their underlying network generative processes, or their processes on networks themselves are the same? Answering this question helps us understand a driving mechanism for network structure.
 
 
-The contribution of answering those questions comes in two ways: 1 (scientific point). it gives us a general conceptual framework upon which networks are studied across domains. Previous studies have only looked at single category or multiple categories as one category, ignoring the relationships between categories. By studying networks across domains, one could find general theories of networks or test a hypothesis across domains in a more plausible way.  For instance, one could test validity of a network model across all of domains and find out which domains the network model can explain well. 2 (practical point). it gives us the knowledge base upon which various network-related algorithms could be constructed and tuned properly.  Many practical graph algorithms take no assumption in domain-specific network structure. It may be possible, however, to construct a new algorithm which runs faster and more efficiently on a specific kind of networks by taking into account of such domain-specific knowledge. For example, if there exists any unique network structural property of recommendation networks,  it may be applied to construct or fine tune a recommendation engine that utilizes knowledge of unique network structure. As the size of networks we obtain has grown in an unprecedented scale, domain-specific knowledge in network structure will be a key to analyze such large networks in a faster and more efficient way.
+The contribution of answering those questions comes in two ways: 1 (scientific point). it gives us a general conceptual framework upon which networks are studied across domains. Previous studies have only looked at a single category or multiple categories as one category, ignoring the relationships between categories. By studying networks across domains, one could find general theories of networks or test a hypothesis across domains in a more plausible way.  For instance, one could test validity of a network model across all of domains and find out which domains the network model can explain well; 2 (practical point). it gives us the knowledge base upon which various network-related algorithms could be constructed and tuned properly.  Many practical graph algorithms take no assumption in domain-specific network structure. It may be possible, however, to construct a new algorithm which runs faster and more efficiently on a specific kind of networks by taking into account of such domain-specific knowledge. For example, if there exists any unique network structural property of recommendation networks,  it may be applied to construct or fine tune a recommendation engine that utilizes knowledge of unique network structure. As the size of networks we obtain has grown in an unprecedented scale, domain-specific knowledge in network structure will be a key to analyze such large networks in a faster and more efficient way.
 
 \subsection{Project Description}
 
-In this thesis, we study 1200 (the number may change later) of various kinds of networks, ranging from ecological food-web to online social network to digital circuit. We extract network statistics as features of a network, construct a high-dimensional feature space and map each network onto the feature space. We then train a machine learning algorithm called \textit{random forest} with the network data and let it classify the networks based on their features. As the category distribution is skewed, we try several sampling strategies and show the effect of each methodology. We construct confusion matrices based upon classification results and proceed to analyze the misclassification. We then conclude with discussion based on several hypotheses and classification results.
+In this thesis, we study 1200 (the number may change later) of various kinds of networks, ranging from ecological food-web to online social network to digital circuit. We extract network statistics as features of a network, construct a high-dimensional feature space and map each network onto the feature space. We then train a machine learning algorithm called \textit{random forest} with the training set of network data and let it classify the test networks based on their features. As the category distribution is skewed, meaning that some categories of networks have larger number of instances than other minority categories, we try several sampling strategies and show the effect of each methodology. We construct confusion matrices based upon classification results and proceed to analyze the misclassification with which we can answer research questions explained in the previous section. We then conclude with discussion based on several hypotheses and classification results.
+
+
+
+\section{What Is A Network?}
+	\subsection{Formal Definition}
+	Formally, a network or graph is a mathematical object consisting of a set of edges (arcs) and nodes (vertices), which can be written as $G = (E,V)$. In many cases, an \textit{adjacency matrix} is used as a representation of a network, where each element of the matrix $A_{ij}$ takes a binary value, $1$ for presence of an edge between nodes $i$ and $j$, and $0$ if there is no edge between these nodes in an unweighted network, or real value if edges of the network are weighted. If the matrix is symmetric, namely $A_{ij} = A_{ji},  \forall i,j \in V$, the matrix represents an \textit{undirected} network in which edges do not have directionality at all. If the matrix is asymmetric, on the other hand, it's representing a \textit{directed} network, where edges have directionality. If the diagonal elements of a matrix $A$ are non-zero, the network has \textit{self-loops} which indicates that there are edges originating from and pointing to the exact same node. In many studies such self-loops are simply ignored for the sake of simplicity.
+	
+	\subsection{Structural Features of A Network}
+	Network representation often provides us excessive information regarding the network itself, hindering the patterns underneath the network to be discovered. Therefore, a number of methods to squeeze out some sort of values as metrics from the network have been invented over many years \cite{NetworkCharacterizationSurvey}. We refer to these metrics as structural features of a network and in the following sections we describe important structural features that are used in this study.
+		
+	
+	\subsubsection{Degree}
+	\subsubsection{Clustering Coefficient}
+	\subsubsection{Modularity}
+	\subsubsection{Mean Geodesic Distance}
+	\subsubsection{Degree Assortativity}
+	\subsubsection{Network Motifs}
+
+
 
 \section{Data Sets}
-	\subsection{Collection and Conversion}
-	\subsection{Category Distribution}
+	
+	Our network data set has been accumulated with a lot of effort over years and hyper links to most of the data are available at \url{https://icon.colorado.edu}.
+	Since data format of real world networks is not standardized, we proceeded to convert all the data into a single format called \textit{Graph Modeling Language} or GML. The format allows us to flexibly specify arbitrary node and edge attributes. However, 
+	
+	
 
 \section{Methods}
-	\subsection{Network Features}
-		\subsubsection{Clustering Coefficient}
-		\subsubsection{Modularity}
-		\subsubsection{Mean Geodesic Distance}
-		\subsubsection{Degree Assortativity}
-		\subsubsection{Network Motifs}
 
-	\subsection{Sampling Methods}
+	\subsection{Sampling Strategies}
 		\subsubsection{Random Over Sampling}
+		\subsubsection{Random Under Sampling}
 		\subsubsection{SMOTE}
 	
 	\subsection{Classification}
