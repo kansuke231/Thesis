@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{color}
-\usepackage{amsmath}
+\usepackage[tbtags]{amsmath}
 \usepackage{textcomp}
 \usepackage{subcaption}
 \usepackage[top=25truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
@@ -81,18 +81,83 @@ In this thesis, we study 1200 (the number may change later) of various kinds of 
 
 \section{What Is A Network?}
 	\subsection{Formal Definition}
-	Formally, a network or graph is a mathematical object consisting of a set of edges (arcs) and nodes (vertices), which can be written as $G = (E,V)$. In many cases, an \textit{adjacency matrix} is used as a representation of a network, where each element of the matrix $A_{ij}$ takes a binary value, $1$ for presence of an edge between nodes $i$ and $j$, and $0$ if there is no edge between these nodes in an unweighted network, or real value if edges of the network are weighted. If the matrix is symmetric, namely $A_{ij} = A_{ji},  \forall i,j \in V$, the matrix represents an \textit{undirected} network in which edges do not have directionality at all. If the matrix is asymmetric, on the other hand, it's representing a \textit{directed} network, where edges have directionality. If the diagonal elements of a matrix $A$ are non-zero, the network has \textit{self-loops} which indicates that there are edges originating from and pointing to the exact same node. In many studies such self-loops are simply ignored for the sake of simplicity.
+	Formally, a network or graph is a mathematical object consisting of a set of edges (arcs) and nodes (vertices), which can be written as $G = (E,V)$. In many cases, an \textit{adjacency matrix} is used as a representation of a network, where each element of the matrix $A_{ij}$ takes a binary value, $1$ for presence of an edge between nodes $i$ and $j$, and $0$ if there is no edge between these nodes in an unweighted network, or real value if edges of the network are weighted. If the matrix is symmetric, namely $A_{ij} = A_{ji},  \forall i,j \in V$, the matrix represents an \textit{undirected} network in which edges do not have directionality at all. If the matrix is asymmetric, on the other hand, it's representing a \textit{directed} network, where edges have directionality. If the diagonal elements of a matrix $A$ are non-zero, the network has \textit{self-loops} which indicates that there are edges originating from and pointing to the exact same node. In many studies such self-loops are simply ignored for the sake of simplicity and out study is no exception as well.
 	
 	\subsection{Structural Features of A Network}
-	Network representation often provides us excessive information regarding the network itself, hindering the patterns underneath the network to be discovered. Therefore, a number of methods to squeeze out some sort of values as metrics from the network have been invented over many years \cite{NetworkCharacterizationSurvey}. We refer to these metrics as structural features of a network and in the following sections we describe important structural features that are used in this study.
+	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. In the following sections we describe important structural features that are relevant in this study.
 		
-	
+	 
 	\subsubsection{Degree}
+	A \textit{degree} of a node in a network is essentially the number of edges attached to the node. For a node $i$ in an unweighted network, it can be written mathematically as:
+	
+	\begin{equation}
+ 	 k_i = \sum_{j = 1}^n A_{ij}.
+	\end{equation}
+	
+	In a directed network, there are two kinds of degree, namely \textit{in-degree} and \textit{out-degree}, each of which represents a degree of a node $i$ for incoming edges and outgoing edges respectively:
+	
+	\begin{equation}
+ 	 k_i^{in} = \sum_{j = 1}^n A_{ij},
+	\end{equation}
+	
+	\begin{equation}
+ 	 k_i^{out} = \sum_{i = 1}^n A_{ij}.
+	\end{equation}
+
+	
 	\subsubsection{Clustering Coefficient}
-	\subsubsection{Modularity}
-	\subsubsection{Mean Geodesic Distance}
+	Clustering coefficient, which describes a degree of \textit{transitivity} in a network, is one of the most widely used metrics in network analysis especially in the context of social network. Transitivity in the context of networks means that if nodes $a$ and $b$ are connected as well as nodes $b$ and $c$, then nodes $a$ and $c$ are connected. Mathematically, the definition of clustering coefficient is given by the following equation:
+	\begin{equation}
+	C = \frac{\text{number of closed paths of length two}}{\text{number of paths of length two}}.
+	\end{equation}
+
 	\subsubsection{Degree Assortativity}
-	\subsubsection{Network Motifs}
+	\textit{Assortativity} in a network indicates a tendency for nodes to be connected to other nodes with similar node attribute. In a social network, for instance, node attributes which could be the basis for assortativity include language, age, income, alma mater, etc. On the other hand, \textit{disassortativity} exhibits nodes' tendency to be connected to other nodes having different node attribute in the network. An example network of disassortatvity would be a social network of sexual-relationship among people. 
+	\textit{Degree assortativity} is a form of assortativity in which nodes with similar degree value tend to be connected together. Therefore in a network exhibiting high degree assortativity, there is a core of highly connected nodes with high degree and periphery of nodes sparsely connected to other low-degree nodes.
+	
+	Here, we first derive a general \textit{assortativity coefficient} of an undirected, unweighted network based on scalar node attribute, excluding enumerative ones such as language, alma mater, etc., then we easily find \textit{degree assortativity coefficient}.
+	
+	First we calculate the covariance of $x_i$ and $x_j$ for the vertices at the ends of all edges, where $x_i$,$x_j$ are nodes $i$ and $j$'s attributes.
+	The mean $\mu$ of the value of $x_i$ at the end of one edge is defined as:
+	\begin{equation}
+	\mu = \frac{ \sum_{ij}A_{ij}x_i }{\sum_{ij}A_{ij}} = \frac{\sum_i k_i x_i}{\sum_i k_i} = \frac{1}{2m}\sum_i k_i x_i,
+	\end{equation}
+where $k_i$ is a degree of node $i$.
+
+Then, the covariance of of $x_i$ and $x_j$ over all edges is derived as:
+	\begin{equation}
+	\begin{split}
+	\text{cov}(x_i, x_j)  &= \frac
+					{ \sum_{ij}A_{ij}(x_i - \mu)(x_j - \mu) }
+					{\sum_{ij}A_{ij} } \\
+					&= \frac{1}{2m}\sum_{ij}A_{ij} (x_i x_j - \mu x_i - \mu x_j +\mu^2) \\
+					&= \frac{1}{2m}\sum_{ij}A_{ij}x_i x_j - \mu^2 \\
+					&= \frac{1}{2m}\sum_{ij}A_{ij}x_i x_j - \frac{1}{(2m)^2}\sum_{ij}k_i k_j x_i x_j \\
+					&= \frac{1}{2m}\sum_{ij}(A_{ij} - \frac{k_i k_j}{2m})x_i x_j.
+	\end{split}
+	\end{equation}
+This covariance will be positive if both $x_i$ and $x_j$ have, in average, similar values, and will be negative if both $x_i$ and $x_j$ tend to change in a different direction. We normalized cov($x_i$,$x_j$) by another quantity which represents a perfect assortativity, so that it takes a value $r \in [-1 ,1]$. The perfect matching happens if $x_i = x_j$ for all edges, and cov($x_i$,$x_i$) becomes:
+	\begin{equation}
+	\begin{split}
+	 \text{cov}(x_i, x_i) &=  \frac{1}{2m}\sum_{ij}(A_{ij} x_i^2 - \frac{k_i k_j}{2m} x_i x_j) \\
+	 		             &=  \frac{1}{2m}\sum_{ij}(k_i \delta_{ij} - \frac{k_i k_j}{2m}) x_i x_j,
+	\end{split}
+	\end{equation}
+	where $\delta_{ij}$ is Kronecker delta.
+Thus, the normalized covariance becomes as follows:
+	\begin{equation}
+	\begin{split}
+	 r = \frac{ \text{cov}(x_i, x_j)}{ \text{cov}(x_i, x_i)} = 
+	 \cfrac{\sum_{ij}(A_{ij} - \cfrac{k_i k_j}{2m})x_i x_j}{\sum_{ij}(k_i \delta_{ij} - \cfrac{k_i k_j}{2m}) x_i x_j}.
+	\end{split}
+	\end{equation}
+
+Degree assortativity coefficient can easily be obtained by substituting $x_i$ and $x_j$ with degrees of respective vertices, thus:
+	\begin{equation}
+	 r =  \cfrac{\sum_{ij}(A_{ij} - \cfrac{k_i k_j}{2m})x_i x_j}{\sum_{ij}(k_i \delta_{ij} - \cfrac{k_i k_j}{2m}) k_i k_j}.
+	\end{equation}
+
+	\subsubsection{Network Motifs} 
 
 
 
