@@ -158,8 +158,27 @@ Degree assortativity coefficient can easily be obtained by substituting $x_i$ an
 	\end{equation}
 
 	\subsubsection{Network Motifs} 
+The idea of \textit{network motifs} was first introduced by Milo \textit{et al.} \cite{Milo_motif}. Network motif is a sub-graph of a network that appears statistically significant than in its randomized counterpart, usually random network having the same degree distribution. There are a number of studies using network motifs of directed networks, where edges have directions, especially in biological sciences \cite{Alon2007, MotifsInBrain}. We, however, only use "connected" network motifs of undirected networks, that produce fewer variations in motif kinds, but can be applied to any network regardless of edge directionality which is crucial for our study. Fig. \ref{motifs} shows the complete list of $k=4$ undirected connected motifs used in this study.
 
+\begin{figure}[ht]
+	\begin{center}
+		\vspace{0.5cm}
+		\includegraphics[clip,width=12cm,height = 3cm]{motifs.png}
+		\vspace{0.5cm}
+		\caption{Network motifs of $k =4$, where $k$ is the number of node in a connected sub-graph.}
+		\label{motifs}
+	\end{center}
+\end{figure}
 
+In order to quantify network motifs, we first count the occurrence of each sub-graph in the original network, then repeat the same process on the randomized networks that have the exact same degree distribution. Such random networks are often referred to as \textit{configuration model} and are widely used as a null model for calculating various statistics related to networks. After counting occurrences of sub-graphs in both original and multiple random networks, we proceed to calculate z-score for each sub-graph $i$ as follows:
+	\begin{equation}
+	Z_i = \cfrac{N_i^{\text{original}} - \langle N_i^{\text{random}} \rangle }{\sigma_i^{\text{random}}},
+	\end{equation}
+
+where $N_i^{\text{original}}$ is the number of occurrence of a sub-graph $i$ in the original network and $ \langle N_i^{\text{random}} \rangle$ and $\sigma_i^{\text{random}}$ are the average and the standard deviation of the number of occurrence of a sub-graph $i$ in an ensemble of random networks. It is usually convenient to normalize this z-score as some networks exhibits very large values due to the size of the networks. Such normalized z-score is called \textit{significance profile} and is defined as follows:
+	\begin{equation}
+	SP_i = \cfrac{Z_i}{\sum_j Z_j^2}.
+	\end{equation}
 
 \section{Data Sets}
 	
