@@ -19,13 +19,13 @@
 \def\vector#1{\mbox{\boldmath $#1$}}
 \begin{document}
 
-\title{Inter-domain Relationships in The Structure of Complex Network}
+\title{Inter-domain Relationships of Complex Networks}
 \author{Kansuke Ikehara}
 \maketitle
 
 \begin{abstract}
-The structure of complex networks has been of interest in many scientific and engineering disciplines over decades. A number of scientists have reported findings that indicated the characteristics of network structure that are claimed to be universal, such as \textit{small-world} and \textit{small-world} networks. Domain specific characteristics, for example specific profiles of network motifs and high-triangle density in social networks, have also been reported previously. However, there is no comprehensive study of inter-domain relationships in the structure of various complex networks. In this thesis, we study over 1200 networks of diverse domains ranging from ecological food-web to online social network using machine learning techniques, such as random forest and confusion matrix and show the relationships among network domains in terms of network structure. Our result indicates that there are some pairs of network domains (categories) that are inherently hard to distinguish based purely on network structure. We have found that these domains tend to have similar underlying mechanisms which generate a network or drive the growth of a network or processes which happen on a network itself.
-
+The structure of complex networks has been of interest in many scientific and engineering disciplines over decades. A number of scientists have reported findings that indicated the characteristics of network structure that are claimed to be universal, such as \textit{small-world} and \textit{small-world} networks. Domain specific characteristics, for example specific profiles of network motifs and high-triangle density in social networks, have also been reported previously. However, there is no comprehensive study of inter-domain relationships of complex networks based on the network structure. In this paper, we study over 1200 of real-world networks of diverse domains ranging from ecological food-web to online social network along with networks generated from four popular network models. Our study is data-driven, utilizing machine learning techniques such as random forest and confusion matrix and we show the relationships among network domains in terms of network structure. Our result indicates that there are some pairs of network domains (categories) that are inherently hard to distinguish based purely on network structure. We have found that these domains tend to have similar underlying mechanisms which generate a network or drive the growth of a network or processes which happen on a network itself.
+  
 \end{abstract}
 \tableofcontents
 
@@ -34,7 +34,7 @@ The structure of complex networks has been of interest in many scientific and en
 	\subsection{Complex Networks}
 	Almost every scientific and engineering discipline deals with data that come from experimental observations or simulations running on a computer. Traditionally, data have been numerals, which may represent temperature, velocity, or voltage, and methodologies that analyze these numerals have been established for over hundreds of years. 
 	
-	\textit{Graph} or \textit{network}, which is essentially structured data as opposed to simple numeric values, has been used as a new way to approach real-world problems in last decades. Social science, for instance, has witnessed the power of network analysis with the recent emergence of online social network services such as Facebook, Twitter, LinkedIn, etc.  Social scientists have been solving previously intractable questions in the field with the large amount of  data and advanced graph algorithms with high-performance computers. Biological sciences use networks as a tool to dissect biological, chemical and even ecological processes in order to gain insight into how neurons in our brain interact with each other, how nutrients get broken down into pieces and get re-assembled in another molecular form, and how animals eat or be eaten by other animals. Engineering systems such as the Internet, power grids, water distribution networks, transportation networks, etc. have also been investigated with using network analysis tools for constructing efficient and robust systems. 
+	\textit{Graph} or \textit{network}, which is essentially structured data as opposed to simple numbers, has been used as a new way to approach real-world problems in the last decades. Social science, for instance, has witnessed the power of network analysis with the recent emergence of online social network services such as Facebook, Twitter, LinkedIn, etc.  Social scientists have been solving previously intractable questions in the field with the large amount of  data and advanced graph algorithms with high-performance computers. Biological sciences use networks as a tool to dissect biological, chemical and even ecological processes in order to gain insight into how neurons in our brain interact with each other, how nutrients get broken down into pieces and get re-assembled in another molecular form, and how animals eat or be eaten by other animals. Engineering systems such as the Internet, power grids, water distribution networks, transportation networks, etc. have also been investigated with using network analysis tools for constructing efficient and robust systems. 
 	
 	
 	\subsection{Structural Universality of Networks}
@@ -54,7 +54,7 @@ The structure of complex networks has been of interest in many scientific and en
 	
 	Milo \textit{et al.} introduced a concept called \textit{network motifs} that are essentially patterns of frequent sub-graph (motif) in a particular network compared to its randomized network\cite{Milo_motif}. They have shown each category of network, such as gene regulation (transcription), food webs, electronic circuits, etc., has a distinct pattern of network motifs. Furthermore, Milo \textit{et al.} revealed the existence of superfamilies of networks that  are groups of network categories having the highly convergent motif profiles \cite{Milo_SuperFamily}. Onnela \textit{et al.} constructed a taxonomy of 746 networks  of diverse categories using "Mesoscopic Response Functions" (MRFS) that essentially describes the changes of specific values related to the community structure of a network with respect to a parameter $\xi \in [0,1]$\cite{Onnela_Taxonomy}. Each network has its own MRFS and they calculated distance between networks which is defined as the area of difference between two networks' MRFS. They have successfully identified clusters of similar networks in a dendrogram constructed based on MRFS distance.
 	
-	\subsection{Searching The Underlying Principles}
+	\subsection{Searching for The Underlying Principles}
 Network is merely a simplified mathematical object and yet, one could gain some insight into a phenomenon and/or process of a studied field just from network structure. 
 If there is a diverse set of networks of various kinds and scales, what can we say about inter-domain relationships between network categories? The question is threefold: 
 \begin{enumerate}
@@ -63,7 +63,7 @@ If there is a diverse set of networks of various kinds and scales, what can we s
 	\item \textit{If two networks of different categories are indistinguishable by network structure, are their mechanisms of underlying processes the same? And vice versa.}
 \end{enumerate}
 
-The first part of the question is, in some sense, an extension to studying social networks' structural uniqueness. As far as we know, no previous study has done extensive investigation in finding unique characteristics of specific kinds of networks compared to other kinds except social network.
+The first part of the question is in some sense an extension to studying social networks' structural uniqueness. For example, what kinds of network structure is unique in, say metabolic networks? As far as we know, few previous studies have done extensive investigation in finding unique characteristics of specific kinds of networks compared to other kinds except social network.
 
 The second part of the question asks if there is any structural similarity between different kinds of networks. We, however, use the word "indistinguishable" in stead of "similar" since we try to observe the commonality from a confusion matrix of a classifier, where a misclassified instance is considered to be indistinguishable from a class it's classified as because it is so similar to other instances of the wrong class the algorithm fails to label the instance correctly.
 
@@ -75,7 +75,7 @@ The contribution of answering those questions comes in two ways: 1 (scientific p
 
 \subsection{Project Description}
 
-In this thesis, we study 1200 (the number may change later) of various kinds of networks, ranging from ecological food-web to online social network to digital circuit. We extract network statistics as features of a network, construct a high-dimensional feature space and map each network onto the feature space. We then train a machine learning algorithm called \textit{random forest} with the training set of network data and let it classify the test networks based on their features. As the category distribution is skewed, meaning that some categories of networks have larger number of instances than other minority categories, we try several sampling strategies and show the effect of each methodology. We construct confusion matrices based upon classification results and proceed to analyze the misclassification with which we can answer research questions explained in the previous section. We then conclude with discussion based on several hypotheses and classification results.
+In this thesis, we study 1200 (the number may change later) of various kinds of real- world networks, ranging from ecological food-web to online social network to digital circuit along with synthetic networks generated from four different models. We extract network statistics as features of a network, construct a high-dimensional feature space, where each axis corresponds to one of the network features, and map each network onto the feature space. We then train a machine learning algorithm called \textit{random forest} with the training set of network data and let it classify the test networks based on their features. As the category distribution is skewed, meaning that some categories of networks have larger number of instances than other minority categories, we try several sampling strategies and show the effect of each methodology. We construct confusion matrices based upon classification results and proceed to analyze the misclassification with which we can answer research questions explained in the previous section. We then conclude with discussion based on several hypotheses and classification results.
 
 
 
@@ -88,13 +88,13 @@ In this thesis, we study 1200 (the number may change later) of various kinds of 
 		
 	 
 	\subsubsection{Degree}
-	A \textit{degree} of a node in a network is essentially the number of edges attached to the node. For a node $i$ in an unweighted network, it can be written mathematically as:
+	The \textit{degree} of a node in a network is essentially the number of edges attached to the node. For a node $i$ in an unweighted network, the degree $k_i$ of the node can be written mathematically as:
 	
 	\begin{equation}
  	 k_i = \sum_{j = 1}^n A_{ij}.
 	\end{equation}
 	
-	In a directed network, there are two kinds of degree, namely \textit{in-degree} and \textit{out-degree}, each of which represents a degree of a node $i$ for incoming edges and outgoing edges respectively:
+	In a directed network, there are two kinds of degree, namely \textit{in-degree} and \textit{out-degree}, each of which represents the degree of a node $i$ for incoming edges and outgoing edges respectively:
 	
 	\begin{equation}
  	 k_i^{in} = \sum_{j = 1}^n A_{ij},
@@ -110,10 +110,12 @@ In this thesis, we study 1200 (the number may change later) of various kinds of 
 	\begin{equation}
 	C = \frac{\text{number of closed paths of length two}}{\text{number of paths of length two}}.
 	\end{equation}
-
+	
+	\subsubsection{Mean Geodesic Distance}
+	
 	\subsubsection{Degree Assortativity}
 	\textit{Assortativity} in a network indicates a tendency for nodes to be connected to other nodes with similar node attribute. In a social network, for instance, node attributes which could be the basis for assortativity include language, age, income, alma mater, etc. On the other hand, \textit{disassortativity} exhibits nodes' tendency to be connected to other nodes having different node attribute in the network. An example network of disassortatvity would be a social network of sexual-relationship among people. 
-	\textit{Degree assortativity} is a form of assortativity in which nodes with similar degree value tend to be connected together. Therefore in a network exhibiting high degree assortativity, there is a core of highly connected nodes with high degree and periphery of nodes sparsely connected to other low-degree nodes.
+	\textit{Degree assortativity} is a form of assortativity in which nodes with similar degree value tend to be connected together. Therefore in a network exhibiting high degree assortativity, there is a core of highly connected nodes with the high degree and periphery of nodes sparsely connected to other low-degree nodes.
 	
 	Here, we first derive a general \textit{assortativity coefficient} of an undirected, unweighted network based on scalar node attribute, excluding enumerative ones such as language, alma mater, etc., then we easily find \textit{degree assortativity coefficient}.
 	
@@ -158,12 +160,12 @@ Degree assortativity coefficient can easily be obtained by substituting $x_i$ an
 	\end{equation}
 
 	\subsubsection{Network Motifs} 
-The idea of \textit{network motifs} was first introduced by Milo \textit{et al.} \cite{Milo_motif}. Network motif is a sub-graph of a network that appears statistically significant than in its randomized counterpart, usually random network having the same degree distribution. There are a number of studies using network motifs of directed networks, where edges have directions, especially in biological sciences \cite{Alon2007, MotifsInBrain}. We, however, only use "connected" network motifs of undirected networks, that produce fewer variations in motif kinds, but can be applied to any network regardless of edge directionality which is crucial for our study. Fig. \ref{motifs} shows the complete list of $k=4$ undirected connected motifs used in this study.
+The idea of \textit{network motifs} was first introduced by Milo \textit{et al.} \cite{Milo_motif}. Network motif is a sub-graph of a network that appears statistically significant than in its randomized counterparts, usually random networks having the same degree distribution. There are a number of studies using network motifs of directed networks, where edges have directions, especially in biological sciences \cite{Alon2007, MotifsInBrain}. We, however, only use "connected" network motifs of undirected networks, that produce fewer variations in motif kinds, but can be applied to any network regardless of edge directionality which is crucial for our study. Fig. \ref{motifs} shows the complete list of $k=4$ undirected connected motifs used in this study.
 
 \begin{figure}[ht]
 	\begin{center}
 		\vspace{0.5cm}
-		\includegraphics[clip,width=12cm,height = 3cm]{motifs.png}
+		\includegraphics[clip,width=12cm,height = 3cm]{figs/motifs.png}
 		\vspace{0.5cm}
 		\caption{Network motifs of $k =4$, where $k$ is the number of node in a connected sub-graph.}
 		\label{motifs}
@@ -182,27 +184,108 @@ where $N_i^{\text{original}}$ is the number of occurrence of a sub-graph $i$ in 
 
 \section{Data Sets}
 	
-	Our network data set has been accumulated with a lot of effort over years and hyper links to most of the data are available at \url{https://icon.colorado.edu}.
-	Since data format of real world networks is not standardized, we proceeded to convert all the data into a single format called \textit{Graph Modeling Language} or GML. The format allows us to flexibly specify arbitrary node and edge attributes. However, 
+	Our network data set has been accumulated with a lot of effort over years and links to most of the data are available at \url{https://icon.colorado.edu}.
+	Since data format of real world networks is not standardized, we proceeded to convert all the data into a single format called \textit{Graph Modeling Language} or simply GML \cite{GML}. The format allows us to flexibly specify arbitrary node and edge attributes. We, however, do not use any node and edge attribute, including edge weight, as our study only focuses on simple network structure.
 	
+	We have also added some synthesized network data which are generated from specific models as follows: 1. Erd\H{o}s-R\'enyi random network (ER Network) \cite{ER_Network}, Watts-Strogatz model (Small World) \cite{watts1998cds}, Barab\'asi-Albert model (Scale Free) \cite{Barabasi99emergenceScaling} and the forest fire model (Forest Fire Network) \cite{ForestFire}
+	
+	The distributions of network domains and sub-domains, as shown in figs.\ref{domain_ratio} and \ref{sub_dist}, are very skewed since instances of some network categories are hard to obtain due to their inherent difficulty of collecting data or legal concerns, or hard to analyze due to their network size. This skewed categorical distribution leads us to explore several sampling strategies, which are explained in the following chapter.
+	
+	
+	\begin{figure}[ht]
+	\begin{center}
+		\vspace{0.5cm}
+		\includegraphics[clip,width=12cm,height = 12cm]{figs/category_ratio.png}
+		\vspace{0.5cm}
+		\caption{The categorical ratio of network domains.}
+		\label{domain_ratio}
+	\end{center}
+	\end{figure}
+	
+	\begin{figure}[ht]
+	\begin{center}
+		\vspace{0.5cm}
+		\includegraphics[clip,width=19cm,height = 12cm]{figs/subdomain_dist.png}
+		\vspace{0.5cm}
+		\caption{Count distribution of network sub-domains. Sub-domains of the same network domain are grouped together having the same color in the figure. Color code from top: Biological, Economic, Informational, Social, Synthesized, Technological and Transportation.}
+		\label{sub_dist}
+	\end{center}
+	\end{figure}
+
 	
 
-\section{Methods}
+\section{Methodology}
 
 	\subsection{Sampling Strategies}
-		\subsubsection{Random Over Sampling}
-		\subsubsection{Random Under Sampling}
-		\subsubsection{SMOTE}
-	
-	\subsection{Classification}
-		\subsubsection{Random Forest Classifier}
-		\subsubsection{Confusion Matrix}
-		\subsubsection{}
-		
-	\subsection{}
+Most of machine learning algorithms perform well on evenly populated instances of multiple classes. However, once this class balance no longer persists, the algorithms perform poorly on minority classes . This problem, called \textit{class imbalance}, essentially causes any machine learning algorithm being naive to the data set to focus exclusively on the majority class, ignoring any minority classes. One of the most widely used approaches for mitigating the problem is sampling the data set of interest so that the distribution of classes becomes balanced. Although there are many proposed sampling strategies as of now \cite{SurveySampling}, we primarily use three sampling strategies in this study: random over-sampling, random under-sampling and SMOTE \cite{SMOTE}.
 
+
+		\subsubsection{Random Over/Under Sampling}
+		Random sampling method is one of the simplest strategies for mitigating the class imbalance problem. \textit{Random Oversampling} essentially over-samples any minority classes to an extent that the number of instances in each class becomes even. However, this could potentially make a classifier overfit to points that are over-sampled, therefore lead to poor generalization. \textit{Random Undersampling}, on the other hand, under-samples the majority class, essentially throwing out some data in order to make the "cloud" of data points sparser. This "throwing out instances" implies an obvious drawback of this sampling method: It discards potentially important instances that compose the backbone of majority classes, implying the true shape of majority class is no longer retained.
+		
+		\subsubsection{SMOTE}
+		\textit{Synthetic Minority Over-sampling Technique}, widely known as SMOTE \cite{SMOTE}, is an alternative sampling method that synthesizes data points in the training set for a classifier. The high level description of the sampling technique can be explained as follows:
+		
+		\begin{enumerate}
+			\item Ignore the majority class. If classification is multi-class, ignore all of the classes except the class on which one is going to sample.
+			\item For every minority class instance, choose its $k$ nearest neighbors. This $k$ is a parameter of the sampling algorithm.
+			\item On every line segment between a chosen data point and its  $k$ nearest neighbors, create new instances and place them randomly. See Figure \ref{smote} for this process.
+		\end{enumerate}
+		
+		\begin{figure}[ht]
+		\begin{center}
+		\vspace{0.5cm}
+		\includegraphics[clip,width=12cm,height = 3cm]{figs/SMOTE.png}
+		\vspace{0.5cm}
+		\caption{Synthesizing phase of SMOTE. Here the number of nearest neighbors $k$ is 3.}
+		\label{smote}
+		\end{center}
+		\end{figure}
+
+The core concept of SMOTE is filling out the cloud of minority class instances by interpolating existing data points so it closely resembles a \textit{convex set}. This idea, making a convex set of minority instances by interpolation, assumes that the underling data distribution itself is convex. In a high dimensional space, it is often the case that the distribution of data forms a quite intricate manifold from which the data we observe is generated. So interpolating data points of the complex manifold yields a convex set, that is radically different from the underlying concept that a classifier tries to learn.
+
+	\subsection{Classification}
+	In order to find similarities and differences of data of different classes, one needs to develop a notion of "distance" between the classes. In this study we derive such notion of distance from confusion matrices that are produced by random forest classifiers. Following sub-sections describe the details of decision tree which is an essential component of random forest, random forest classifier and confusion matrix.
+	
+		\subsubsection{Decision Tree}
+		Decision tree is a model which describes the relationship between input variables and output class by recursively asking a question on a single input variable and splitting the data set into two based on the answer to the question until a data set has enough homogeneity of a class in it. In a high dimensional space, such spitting the data set corresponds to hyperplane in the space. The algorithm for learning decision tree splits the data set based on a criterion of values of an input variable such that the resulting data sets become less heterogeneous or less "impure" in terms of class labels. One of the widely used such criteria and the one we use in this study is \textit{Gini impurity}. The definition of Gini impurity for a data set with $J$ classes is the following:
+	\begin{equation}
+	I_G(f) = \sum_{i=1}^J f_i(1-f_i) = \sum_{i=1}^J (f_i-f_i^2) =  \sum_{i=1}^J f_i - \sum_{i=1}^J f_i^2 = 1- \sum_{i=1}^J f_i^2,
+	\end{equation}
+where $f_i$ is a probability that an item that belongs to class $i$ is chosen in the data set. Gini impurity becomes $0$ if all items in a set belong to the same class, meaning the set is "pure" and takes a value greater than $0$ if the set contains items of multiple classes. Each splitting essentially seeks the best possible value of an input variable such that the decrease of Gini impurity is the largest when the data set is split at the value (or hyperplane defined with it). Splitting continues until no further improvement can be made and the terminal of a tree are called leaves of the tree, each corresponding to one of the class labels in the data set.
+		
+	
+		\subsubsection{Random Forest Classifier}
+Random forest is a type of \textit{ensemble learning method} that combines a number of so called "weak" classifiers together \cite{RandomForest}. When it's given a data set to predict after training weak classifiers, it outputs a majority of all outputs from the weak classifiers and this aggregation of weak classifiers prevents random forest from overfitting to the training data. In random forest, such weak classifiers are decision tree which is explained in the previous section.
+
+The learning phase of random forest classifier first involves random sub-sampling of the original data with replacement for $B$ times, each time the sub-sampled data set is fed to a decision tree. For each decision tree a set of randomly sampled input variables (features) is used for splitting and this randomly selecting features is called random subspace method or feature bagging. This prevents the classifier to focus too much on feature sets that are highly predictive in the training set. 
+
+One of the advantageous byproducts of random forest is that one could rank input variables or features based on the importance in the classification. Each time a split is made on a node in a decision tree, the decease of Gini impurity can be attributed to selecting a feature as a splitting point.  Calculating the average decrease of Gini impurity for selecting a feature over all decision trees in random forest gives us the importance of the feature that is very consistent with the result of original method for calculating variable importance \cite{RandomForest,RandomForestOnline}. This ranking of feature importance is the crucial part of the analysis we we describe in the next chapter.
+
+
+		\subsubsection{Confusion Matrix and Distance}
+	Confusion matrix depicts when and how frequently a classifier makes mistakes. The row labels of the matrix usually correspond to  true labels and the column labels correspond to predicted labels. An element $c_{ij}$ in a confusion matrix represents the number of occurrences that a classifier predicted an instance of class $i$ as class $j$. So it is easy to notice that diagonal elements of a confusion matrix, namely $c_{ii}$ for $i = 1,...,n$ represents the correct predictions of a classifier. What we are interested in, however, lie in off-diagonal elements of a confusion matrix. This information that a classifier gets confused with classes $i$ and $j$ implies the distance between classes: if the points of two different classes in a high dimensional feature space are often misclassified as each other,  
+the points of the two classes are in fact overlapped in the feature space, implying that the distance between the two is small.
+
+However, we cannot directly use a confusion matrix as a distance matrix between classes due to the following problems:
+\begin{enumerate}
+	\item  In a confusion matrix the higher a value of an element $c_{ij}$ the more similar the classes $i$ and $j$. In a distance matrix similar classes should have a small value for a corresponding element $d_{ij}$.
+	\item In a confusion matrix classes with abundant data tend to have large counts for elements in the matrix whereas classes with fewer data have fewer counts in the matrix.
+	\item Usually the confusion matrix is not symmetrical, but a number of distance-related methods assume the input matrix has the symmetry.
+\end{enumerate}
+
+In order to derive a distance matrix based on a confusion matrix, we do the following operations:
+\begin{enumerate}
+	\item Normalize each row $i$ of the confusion matrix so that $\sum_{j=1}^J c_{ij} = 1$
+	\item Symmetrize the resulting matrix from operation $1$ by setting each pair of symmetric elements as: $c_{ij},c_{ji} = \max (c_{ij},c_{ji})$
+\end{enumerate}
+	
+		
+		
 \section{Analyses}
-\subsection{}
+In this chapter, we present experimental settings for analyses, each of which tries to gain some insights for answering the question we proposed in the introduction, and show the results of such analyses.
+\subsection{Discriminative Feature Set}
+The first question we have asked was: \textit{What aspects of network structure make a specific category of network different from others?} This question can be answered by looking at the statistics of feature importance from random forest classifiers.
 
 \bibliographystyle{ieeetr}
 \bibliography{reference} 
