@@ -264,7 +264,7 @@ One of the advantageous byproducts of random forest is that one could rank input
 
 
 		\subsubsection{Confusion Matrix and Distance}
-	Confusion matrix depicts when and how frequently a classifier makes mistakes. The row labels of the matrix usually correspond to  true labels and the column labels correspond to predicted labels. An element $c_{ij}$ in a confusion matrix represents the number of occurrences that a classifier predicted an instance of class $i$ as class $j$. So it is easy to notice that diagonal elements of a confusion matrix, namely $c_{ii}$ for $i = 1,...,n$ represents the correct predictions of a classifier. What we are interested in, however, lie in off-diagonal elements of a confusion matrix. This information that a classifier gets confused with classes $i$ and $j$ implies the distance between classes: if the points of two different classes in a high dimensional feature space are often misclassified as each other,  
+	Confusion matrix depicts when and how frequently a classifier makes mistakes. The row labels of the matrix usually correspond to  true labels and the column labels correspond to predicted labels. An element $c_{ij}$ in a confusion matrix represents the number of occurrences that a classifier predicted an instance of class $i$ as class $j$. So it is easy to notice that diagonal elements of a confusion matrix, namely $c_{ii}$ for $i = 1,...,n$ represents the correct predictions of a classifier. What we are interested in, however, lies in off-diagonal elements of a confusion matrix. This information that a classifier gets confused with classes $i$ and $j$ implies the distance between classes: if the points of two different classes in a high dimensional feature space are often misclassified as each other,  
 the points of the two classes are in fact overlapped in the feature space, implying that the distance between the two is small.
 
 However, we cannot directly use a confusion matrix as a distance matrix between classes due to the following problems:
@@ -278,14 +278,97 @@ In order to derive a distance matrix based on a confusion matrix, we do the foll
 \begin{enumerate}
 	\item Normalize each row $i$ of the confusion matrix so that $\sum_{j=1}^J c_{ij} = 1$
 	\item Symmetrize the resulting matrix from operation $1$ by setting each pair of symmetric elements as: $c_{ij},c_{ji} = \max (c_{ij},c_{ji})$
+	\item Convert each element of normalized symmetrical confusion matrix as follows: $c_{ij} := 1 - c_{ij}$, so that similar classes have smaller values and dissimilar classes have large values.
 \end{enumerate}
 	
 		
 		
 \section{Analyses}
-In this chapter, we present experimental settings for analyses, each of which tries to gain some insights for answering the question we proposed in the introduction, and show the results of such analyses.
+In this chapter, we present experimental settings for analyses, each of which tries to gain some insights for answering the questions we proposed in the introduction, and show the results of such analyses.
 \subsection{Discriminative Feature Set}
-The first question we have asked was: \textit{What aspects of network structure make a specific category of network different from others?} This question can be answered by looking at the statistics of feature importance from random forest classifiers.
+The first question we have asked was: \textit{What aspects of network structure make a specific category of network different from others?} This question can be answered by looking at the statistics of feature importance from random forest classifiers. The experimental setting is the following: 
+
+\begin{enumerate}[label={}]
+	\item First, we select a set of six representative network sub-domains since not all of the sub-domains have enough number of samples to support our findings. These representative sub-domains are: protein interaction, ecological food web, metabolic, connectome,  online social and communication (autonomous system)
+	\item Second, for each representative class we proceed to run binary classification 1000 times using random forest in which all of the class labels are grouped together except the target class label. In each run the score of accuracy and AUC (Area Under the ROC Curve) is calculated and the ranking of feature importance is recorded. We then average accuracy and AUC scores over 1000 runs and aggregate all of the recorded rankings of feature importance.
+	\item Lastly we select the two most importance features from the aggregated ranking, plot the all of the data points in the two dimensional feature space.
+\end{enumerate}
+
+Fig.\ref{2d_figures} shows two dimensional plots for representative network sub-domains with axes being the selected important features.
+One important observation here is the accuracy of a binary classification does not necessary describe the separability of the target class from other aggregated classes. All of the classifications score more than 98\% which seems quite remarkable. Nevertheless, this is due to the effect of class imbalance as we do not sub/over-sample in this analysis. However, the score of AUC well captures the separability of two classes. 
+
+Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature importance. In this figure, one can observe the general trend of informative feature set and the "strength" of those features in the ranking. For example, the motif $m4\_6$ of metabolic networks and the motif $m4\_1$ of online social networks are the most important features and their strength is quite dominant:  $m4\_6$ of metabolic networks ranks as the first 996 times out of 1000 runs and $m4\_1$ of online social networks ranks as the first 963 times  out of 1000 runs, respectively.
+
+%From these figures and the score of AUC, one could observe the structural uniqueness and underlying mechanism of some of the representative networks. Ecological food webs exhibit a very high score for the motif $m4\_4$ and the structure of this motif implicitly tells us the underlying mechanism of food web: 
+
+\begin{figure}[t!]
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/protein/2d.png}
+\caption{Protein interaction. average accuracy: 98.07\%; average AUC score: 0.713} \label{protein_2d}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/food_web/2d.png}
+\caption{Ecological food web. average accuracy: 99.76\%; average AUC score: 0.946} \label{foodweb_2d}
+\end{subfigure}
+
+\medskip
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/metabolic/2d.png}
+\caption{Metabolic. average accuracy: 99.1\%; average AUC score: 0.936} \label{metabolic_2d}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/connectome/2d.png}
+\caption{Connectome. average accuracy: 98.71\%; average AUC score: 0.682} \label{connectome_2d}
+\end{subfigure}
+
+\medskip
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/online_social/2d.png}
+\caption{Online social. average accuracy: 99.16\%; average AUC score: 0.939} \label{online_social_2d}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/communication/2d.png}
+\caption{Communication. average accuracy: 99.68\%; average AUC score: 0.976} \label{communication_2d}
+\end{subfigure}
+
+\caption{2D plots for all representative network sub-domains. X axis corresponds to the most importance feature and y axis the second most important.} \label{2d_figures}
+\end{figure}
+
+\begin{figure}[t!]
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/protein/feature_importance.png}
+\caption{Protein interaction.} \label{protein_feature}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/food_web/feature_importance.png}
+\caption{Ecological food web.} \label{foodweb_feature}
+\end{subfigure}
+
+\medskip
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/metabolic/feature_importance.png}
+\caption{Metabolic. } \label{metabolic_feature}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/connectome/feature_importance.png}
+\caption{Connectome.} \label{connectome_feature}
+\end{subfigure}
+
+\medskip
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/online_social/feature_importance.png}
+\caption{Online social.} \label{online_social_feature}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/one_by_many/communication/feature_importance.png}
+\caption{Communication.} \label{communication_feature}
+\end{subfigure}
+
+\caption{Aggregated rankings of feature importance. The height of a color bar indicates a frequency of the corresponding specific feature being at the rank. The importance decreases along the x-axis} \label{feature_importance_figures}.
+\end{figure}
+
+
+\clearpage
 
 \bibliographystyle{ieeetr}
 \bibliography{reference} 
