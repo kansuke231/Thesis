@@ -8,6 +8,7 @@
 \usepackage[tbtags]{amsmath}
 \usepackage{textcomp}
 \usepackage{subcaption}
+\usepackage{float}
 \usepackage[top=25truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
 
 
@@ -84,7 +85,7 @@ In this thesis, we study 1200 (the number may change later) of various kinds of 
 	Formally, a network or graph is a mathematical object consisting of a set of edges (arcs) and nodes (vertices), which can be written as $G = (E,V)$. In many cases, an \textit{adjacency matrix} is used as a representation of a network, where each element of the matrix $A_{ij}$ takes a binary value, $1$ for presence of an edge between nodes $i$ and $j$, and $0$ if there is no edge between these nodes in an unweighted network, or real value if edges of the network are weighted. If the matrix is symmetric, namely $A_{ij} = A_{ji},  \forall i,j \in V$, the matrix represents an \textit{undirected} network in which edges do not have directionality at all. If the matrix is asymmetric, on the other hand, it's representing a \textit{directed} network, where edges have directionality. If the diagonal elements of a matrix $A$ are non-zero, the network has \textit{self-loops} which indicates that there are edges originating from and pointing to the exact same node. In many studies such self-loops are simply ignored for the sake of simplicity and out study is no exception as well.
 	
 	\subsection{Structural Features of A Network}
-	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. In the following sections we describe important structural features that are relevant in this study.
+	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. Some network features, however, are implicitly correlated with the size of networks, which itself is a very strong feature: the number of nodes in web graphs is usually a magnitude of $10^6$ or more whereas ecological food webs contain usually less than 100 nodes. The feature set we use in this study is scale-invariant, meaning the size of network is supposed not to effect the value of a feature. This set of features allows us to compare networks without the notion of network size. In the following sections we describe important structural features that are relevant in this study.
 		
 	 
 	\subsubsection{Degree}
@@ -110,8 +111,6 @@ In this thesis, we study 1200 (the number may change later) of various kinds of 
 	\begin{equation}
 	C = \frac{\text{number of closed paths of length two}}{\text{number of paths of length two}}.
 	\end{equation}
-	
-	\subsubsection{Mean Geodesic Distance}
 	
 	\subsubsection{Degree Assortativity}
 	\textit{Assortativity} in a network indicates a tendency for nodes to be connected to other nodes with similar node attribute. In a social network, for instance, node attributes which could be the basis for assortativity include language, age, income, alma mater, etc. On the other hand, \textit{disassortativity} exhibits nodes' tendency to be connected to other nodes having different node attribute in the network. An example network of disassortatvity would be a social network of sexual-relationship among people. 
@@ -181,7 +180,7 @@ where $N_i^{\text{original}}$ is the number of occurrence of a sub-graph $i$ in 
 	\begin{equation}
 	SP_i = \cfrac{Z_i}{\sum_j Z_j^2}.
 	\end{equation}
-
+	
 \section{Data Sets}
 	
 	Our network data set has been accumulated with a lot of effort over years and links to most of the data are available at \url{https://icon.colorado.edu}.
@@ -263,25 +262,25 @@ The learning phase of random forest classifier first involves random sub-samplin
 One of the advantageous byproducts of random forest is that one could rank input variables or features based on the importance in the classification. Each time a split is made on a node in a decision tree, the decease of Gini impurity can be attributed to selecting a feature as a splitting point.  Calculating the average decrease of Gini impurity for selecting a feature over all decision trees in random forest gives us the importance of the feature that is very consistent with the result of original method for calculating variable importance \cite{RandomForest,RandomForestOnline}. This ranking of feature importance is the crucial part of the analysis we we describe in the next chapter.
 
 
-		\subsubsection{Confusion Matrix and Distance}
-	Confusion matrix depicts when and how frequently a classifier makes mistakes. The row labels of the matrix usually correspond to  true labels and the column labels correspond to predicted labels. An element $c_{ij}$ in a confusion matrix represents the number of occurrences that a classifier predicted an instance of class $i$ as class $j$. So it is easy to notice that diagonal elements of a confusion matrix, namely $c_{ii}$ for $i = 1,...,n$ represents the correct predictions of a classifier. What we are interested in, however, lies in off-diagonal elements of a confusion matrix. This information that a classifier gets confused with classes $i$ and $j$ implies the distance between classes: if the points of two different classes in a high dimensional feature space are often misclassified as each other,  
-the points of the two classes are in fact overlapped in the feature space, implying that the distance between the two is small.
+		\subsubsection{Confusion Matrix, Similarity and Distance}
+	Confusion matrix depicts when and how frequently a classifier makes mistakes. The row labels of the matrix usually correspond to  true labels and column labels correspond to predicted labels. An element $c_{ij}$ in a confusion matrix represents the number of occurrences that a classifier predicted an instance of class $i$ as class $j$. So it is easy to notice that diagonal elements of a confusion matrix, namely $c_{ii}$ for $i = 1,...,n$ represents the correct predictions of a classifier. What we are interested in, however, lies in off-diagonal elements of a confusion matrix. This information that a classifier gets confused with classes $i$ and $j$ implies the similarity or distance between classes: if the points of two different classes in a high dimensional feature space are often misclassified as each other,  
+the points of the two classes are in fact overlapped to some extent in the feature space, implying that these classes are so similar the distance between them is small.
 
-However, we cannot directly use a confusion matrix as a distance matrix between classes due to the following problems:
+Using a confusion matrix as either similarity or distance matrix involves following issues:
 \begin{enumerate}
-	\item  In a confusion matrix the higher a value of an element $c_{ij}$ the more similar the classes $i$ and $j$. In a distance matrix similar classes should have a small value for a corresponding element $d_{ij}$.
-	\item In a confusion matrix classes with abundant data tend to have large counts for elements in the matrix whereas classes with fewer data have fewer counts in the matrix.
-	\item Usually the confusion matrix is not symmetrical, but a number of distance-related methods assume the input matrix has the symmetry.
+	\item  In a confusion matrix the higher a value of an element $c_{ij}$ the more similar the classes $i$ and $j$. This is fine for a similarity matrix. In a distance matrix, however, similar classes should have a small value for a corresponding element $d_{ij}$.
+	\item In a confusion matrix classes with abundant data tend to have large counts for elements in the matrix due to the abundance of test data whereas classes with fewer data have fewer counts in the matrix.
+	\item Usually the confusion matrix is not symmetrical, but a number of similarity/distance-related methods assume an input matrix has the symmetry.
 \end{enumerate}
 
-In order to derive a distance matrix based on a confusion matrix, we do the following operations:
+Therefore we proceed on the following operations in order to derive a similarity/distance matrix based on a confusion matrix:
 \begin{enumerate}
 	\item Normalize each row $i$ of the confusion matrix so that $\sum_{j=1}^J c_{ij} = 1$
 	\item Symmetrize the resulting matrix from operation $1$ by setting each pair of symmetric elements as: $c_{ij},c_{ji} = \max (c_{ij},c_{ji})$
-	\item Convert each element of normalized symmetrical confusion matrix as follows: $c_{ij} := 1 - c_{ij}$, so that similar classes have smaller values and dissimilar classes have large values.
+	\item For a distance matrix, convert each element of normalized symmetrical confusion matrix as follows: $c_{ij} := 1 - c_{ij}$, so that similar classes have smaller values and dissimilar classes have large values.
 \end{enumerate}
-	
-		
+
+We utilize both similarity and distance matrices in experiments which are described in the subsequent chapter.
 		
 \section{Analyses}
 In this chapter, we present experimental settings for analyses, each of which tries to gain some insights for answering the questions we proposed in the introduction, and show the results of such analyses.
@@ -290,7 +289,7 @@ The first question we have asked was: \textit{What aspects of network structure 
 
 \begin{enumerate}[label={}]
 	\item First, we select a set of six representative network sub-domains since not all of the sub-domains have enough number of samples to support our findings. These representative sub-domains are: protein interaction, ecological food web, metabolic, connectome,  online social and communication (autonomous system)
-	\item Second, for each representative class we proceed to run binary classification 1000 times using random forest in which all of the class labels are grouped together except the target class label. In each run the score of accuracy and AUC (Area Under the ROC Curve) is calculated and the ranking of feature importance is recorded. We then average accuracy and AUC scores over 1000 runs and aggregate all of the recorded rankings of feature importance.
+	\item Second, for each representative class we proceed to run binary classification 1000 times using random forest in which all of the class labels are grouped together except the target class label. In each run we split the data set into training and test sets with the ratio of $7:3$ while preserving the ratio of class distribution. In each run the score of accuracy and AUC (Area Under the ROC Curve) is calculated and the ranking of feature importance is recorded. We then average accuracy and AUC scores over 1000 runs and aggregate all of the recorded rankings of feature importance.
 	\item Lastly we select the two most importance features from the aggregated ranking, plot the all of the data points in the two dimensional feature space.
 \end{enumerate}
 
@@ -301,7 +300,7 @@ Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature im
 
 %From these figures and the score of AUC, one could observe the structural uniqueness and underlying mechanism of some of the representative networks. Ecological food webs exhibit a very high score for the motif $m4\_4$ and the structure of this motif implicitly tells us the underlying mechanism of food web: 
 
-\begin{figure}[t!]
+\begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/one_by_many/protein/2d.png}
 \caption{Protein interaction. average accuracy: 98.07\%; average AUC score: 0.713} \label{protein_2d}
@@ -334,7 +333,7 @@ Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature im
 \caption{2D plots for all representative network sub-domains. X axis corresponds to the most importance feature and y axis the second most important.} \label{2d_figures}
 \end{figure}
 
-\begin{figure}[t!]
+\begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/one_by_many/protein/feature_importance.png}
 \caption{Protein interaction.} \label{protein_feature}
@@ -365,6 +364,43 @@ Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature im
 \end{subfigure}
 
 \caption{Aggregated rankings of feature importance. The height of a color bar indicates a frequency of the corresponding specific feature being at the rank. The importance decreases along the x-axis} \label{feature_importance_figures}.
+\end{figure}
+
+
+\subsection{Similarities in Networks of Different Kinds}
+Every network belongs to some sort of network domain or sub-domain that usually describes the properties and even structure of a network. As we have seen in the previous section, some networks of selected representative sub-domains exhibit structural uniqueness which makes them stand out among others in the feature space.
+
+However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig. \ref{2d_figures}, which leads to a question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest, confusion matrix and dendrogram of hierarchical clustering.  
+
+\subsection{Experimental Settings}
+We derive structural similarities/distance between network (sub-) domains from a confusion matrix that describes when a random forest classifier makes mistakes and when it does not. However, due to the nature of the classification algorithm and randomly splitting the data into training and testing sets, there involves some randomness in a confusion matrix every time one runs the analysis. Therefore, in order to alleviate a factor of randomness as much as possible, we run the analysis 1000 times and average the outcomes, namely confusion matrices and feature importance. 
+
+In order to see the effect of class imbalance problem, we set four sampling strategies: no-sampling, namely run the analysis on the original data set; random over-sampling in which minority classes are over-sampled to an extent where all classes have the same number of instances as the largest class; random under-sampling in which majority classes are under-sampled to an extent where all classes have the same number of instances at the smallest class; SMOTE in which all minority classes have synthesized new instances so that the number of data points equals to the one of the largest class.
+ 
+ 
+\subsection{Network Domains}
+
+\begin{figure}[H]
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion.png}
+\caption{No sampling.} \label{no_confusion}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion.png}
+\caption{Random over-sampling.} \label{random_over_confusion}
+\end{subfigure}
+
+\medskip
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion.png}
+\caption{Random under-sampling.} \label{random_under_confusion}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion.png}
+\caption{SMOTE.} \label{somte_confusion}
+\end{subfigure}
+\
+\caption{Confusion matrices for each of the sampling strategy.} \label{confusion}
 \end{figure}
 
 

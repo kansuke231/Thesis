@@ -1,0 +1,9 @@
+average accuracy: 0.904227
+[('m4_1', 440), ('m4_2', 375), ('ClusteringCoefficient', 179), ('m4_4', 6), ('m4_6', 0), ('m4_5', 0), ('m4_3', 0), ('DegreeAssortativity', 0)]
+[('m4_2', 365), ('m4_1', 343), ('ClusteringCoefficient', 267), ('m4_4', 24), ('DegreeAssortativity', 1), ('m4_6', 0), ('m4_5', 0), ('m4_3', 0)]
+[('ClusteringCoefficient', 451), ('m4_2', 219), ('m4_1', 170), ('m4_4', 134), ('m4_3', 20), ('m4_5', 4), ('m4_6', 2), ('DegreeAssortativity', 0)]
+[('m4_4', 557), ('m4_3', 131), ('ClusteringCoefficient', 73), ('DegreeAssortativity', 67), ('m4_5', 57), ('m4_1', 41), ('m4_2', 39), ('m4_6', 35)]
+[('m4_3', 287), ('m4_4', 198), ('DegreeAssortativity', 189), ('m4_5', 149), ('m4_6', 145), ('ClusteringCoefficient', 25), ('m4_1', 5), ('m4_2', 2)]
+[('DegreeAssortativity', 275), ('m4_3', 256), ('m4_6', 207), ('m4_5', 204), ('m4_4', 54), ('ClusteringCoefficient', 4), ('m4_2', 0), ('m4_1', 0)]
+[('m4_6', 281), ('DegreeAssortativity', 272), ('m4_5', 241), ('m4_3', 181), ('m4_4', 24), ('ClusteringCoefficient', 1), ('m4_2', 0), ('m4_1', 0)]
+[('m4_5', 345), ('m4_6', 330), ('DegreeAssortativity', 196), ('m4_3', 125), ('m4_4', 3), ('m4_1', 1), ('m4_2', 0), ('ClusteringCoefficient', 0)]
