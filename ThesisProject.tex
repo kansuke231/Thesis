@@ -287,18 +287,17 @@ In this chapter, we present experimental settings for analyses, each of which tr
 \subsection{Discriminative Feature Set}
 The first question we have asked was: \textit{What aspects of network structure make a specific category of network different from others?} This question can be answered by looking at the statistics of feature importance from random forest classifiers. The experimental setting is the following: 
 
-\begin{enumerate}[label={}]
-	\item First, we select a set of six representative network sub-domains since not all of the sub-domains have enough number of samples to support our findings. These representative sub-domains are: protein interaction, ecological food web, metabolic, connectome,  online social and communication (autonomous system)
-	\item Second, for each representative class we proceed to run binary classification 1000 times using random forest in which all of the class labels are grouped together except the target class label. In each run we split the data set into training and test sets with the ratio of $7:3$ while preserving the ratio of class distribution. In each run the score of accuracy and AUC (Area Under the ROC Curve) is calculated and the ranking of feature importance is recorded. We then average accuracy and AUC scores over 1000 runs and aggregate all of the recorded rankings of feature importance.
+\begin{enumerate}
+	\item We select a set of six representative network sub-domains since not all of the sub-domains have enough number of samples to support our findings. These representative sub-domains are: protein interaction, ecological food web, metabolic, connectome,  online social and communication (autonomous system)
+	\item For each representative class we proceed to run binary classification 1000 times using random forest in which all of the class labels are grouped together except the target class label. A set of features for this task includes: clustering coefficient, degree assortativity and $k = 4$ connected network motifs, thus the total of eight features. In each run we split the data set into training and test sets with the ratio of $7:3$ while preserving the ratio of class distribution. In each run the score of accuracy and AUC (Area Under the ROC Curve) is calculated and the ranking of feature importance is recorded. We then average accuracy and AUC scores over 1000 runs and aggregate all of the recorded rankings of feature importance.
 	\item Lastly we select the two most importance features from the aggregated ranking, plot the all of the data points in the two dimensional feature space.
 \end{enumerate}
 
-Fig.\ref{2d_figures} shows two dimensional plots for representative network sub-domains with axes being the selected important features.
-One important observation here is the accuracy of a binary classification does not necessary describe the separability of the target class from other aggregated classes. All of the classifications score more than 98\% which seems quite remarkable. Nevertheless, this is due to the effect of class imbalance as we do not sub/over-sample in this analysis. However, the score of AUC well captures the separability of two classes. 
+Fig.\ref{2d_figures} shows two dimensional plots for representative network sub-domains with axes being the top two important features selected from the statistics of aggregated feature importance shown in Fig. \ref{feature_importance_figures}. One important observation here is the accuracy of a binary classification does not necessary describe the separability of the target class from other aggregated classes. All of the classifications score more than 98\% which seems quite remarkable. Nevertheless, this is due to the effect of class imbalance as we do not sub/over-sample in this analysis. However, the score of AUC well captures the separability of two classes. 
 
 Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature importance. In this figure, one can observe the general trend of informative feature set and the "strength" of those features in the ranking. For example, the motif $m4\_6$ of metabolic networks and the motif $m4\_1$ of online social networks are the most important features and their strength is quite dominant:  $m4\_6$ of metabolic networks ranks as the first 996 times out of 1000 runs and $m4\_1$ of online social networks ranks as the first 963 times  out of 1000 runs, respectively.
 
-%From these figures and the score of AUC, one could observe the structural uniqueness and underlying mechanism of some of the representative networks. Ecological food webs exhibit a very high score for the motif $m4\_4$ and the structure of this motif implicitly tells us the underlying mechanism of food web: 
+%These most importance features selected from aggregated rankings 
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
@@ -375,32 +374,41 @@ However we can also observe the overlaps between networks of representative sub-
 \subsection{Experimental Settings}
 We derive structural similarities/distance between network (sub-) domains from a confusion matrix that describes when a random forest classifier makes mistakes and when it does not. However, due to the nature of the classification algorithm and randomly splitting the data into training and testing sets, there involves some randomness in a confusion matrix every time one runs the analysis. Therefore, in order to alleviate a factor of randomness as much as possible, we run the analysis 1000 times and average the outcomes, namely confusion matrices and feature importance. 
 
-In order to see the effect of class imbalance problem, we set four sampling strategies: no-sampling, namely run the analysis on the original data set; random over-sampling in which minority classes are over-sampled to an extent where all classes have the same number of instances as the largest class; random under-sampling in which majority classes are under-sampled to an extent where all classes have the same number of instances at the smallest class; SMOTE in which all minority classes have synthesized new instances so that the number of data points equals to the one of the largest class.
+In order to see the effect of class imbalance problem, we formulate four sampling strategies: no-sampling, namely running the analysis on the original data set; random over-sampling in which minority classes are over-sampled to an extent where all classes have the same number of instances as the largest class; random under-sampling in which majority classes are under-sampled to an extent where all classes have the same number of instances at the smallest class; SMOTE in which all minority classes have synthesized new instances so that the number of data points equals to the one of the largest class. A set of features includes, as before, clustering coefficient, degree assortativity and $k = 4$ connected network motifs.
  
  
-\subsection{Network Domains}
+\subsection{Network Domains} 
+We first proceed to work on classification of network domains that include: Biological, Economic, Social, Informational, Synthetic, Technological and Transportation.
+Fig.\ref{confusion} shows the aggregated confusion matrices for each of the sampling strategies. The number of each cell in a confusion matrix represents an averaged frequency that an instance of class $i$ is classified as class $j$ in 1000 runs. As the majority classes inherently contain a number of test data points that leads to a larger count in the confusion matrix, there needs to be some normalization so that each class of network domains becomes comparable with others. The normalization in this study is defined as the following: Let $c_{ij}$ be an element in a confusion matrix. We normalize this quantity by a summation of elements in a row $c_{ij}$ belongs to, namely $\sum_{j=1}^N c_{ij}$, where $N$ is the number of network domains. 
+
+The diagonal elements of confusion matrices shown in Fig.\ref{confusion} indicate the correct classifications. In no-sampling, random over-sampling and SMOTE instances of all network domains are relatively classified correctly, which is observable from the intensity of cells' color, except Informational network for which we observe unsuccessful classifications. Surprisingly, the occurrence of correct classification of Informational networks in SMOTE is fewer than no-sampling and random over-sampling. This phenomenon may be explained by the following: instances of Informational network is so diverse in terms of structure and few that test instances are often outside of a convex hull constructed by SMOTE and they are not classified correctly.  
+
+On the other hand, a confusion matrix for random under-sampling shown in Fig.\ref{random_under_confusion} shows a diagonal pattern of  correct classifications across all domains even including Information network with worse classification accuracy (approximately 73\%). This is due to the fact that the number of training instances for each domain is now as few as the most minor class. The strong diagonal pattern in a confusion matrix with random under-sampling implies that instances of various network domains are quite separable thanks to the the diversity of their network structures.
+
+% connect the argument to the hierarchical clustering ...  
+
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion.png}
-\caption{No sampling.} \label{no_confusion}
+\caption{No sampling. Averaged accuracy: 90.05\%} \label{no_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion.png}
-\caption{Random over-sampling.} \label{random_over_confusion}
+\caption{Random over-sampling. Averaged accuracy: 90.42\%} \label{random_over_confusion}
 \end{subfigure}
 
 \medskip
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion.png}
-\caption{Random under-sampling.} \label{random_under_confusion}
+\caption{Random under-sampling. Averaged accuracy: 72.93\%} \label{random_under_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion.png}
-\caption{SMOTE.} \label{somte_confusion}
+\caption{SMOTE. Averaged accuracy: 89.18\%} \label{smote_confusion}
 \end{subfigure}
 \
-\caption{Confusion matrices for each of the sampling strategy.} \label{confusion}
+\caption{Confusion matrices for each of the sampling strategy. The number of each cell indicates an averaged count for a class $i$ to be classified as class $j$ in 1000 runs, where indices $i$ and $j$ correspond to a true label and predicted label, respectively. The color of each cell represents a value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix.} \label{confusion}
 \end{figure}
 
 
