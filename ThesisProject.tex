@@ -180,9 +180,9 @@ where $N_i^{\text{original}}$ is the number of occurrence of a sub-graph $i$ in 
 	\begin{equation}
 	SP_i = \cfrac{Z_i}{\sum_j Z_j^2}.
 	\end{equation}
-	
+
 \section{Data Sets}
-	
+	\subsection{Description}	
 	Our network data set has been accumulated with a lot of effort over years and links to most of the data are available at \url{https://icon.colorado.edu}.
 	Since data format of real world networks is not standardized, we proceeded to convert all the data into a single format called \textit{Graph Modeling Language} or simply GML \cite{GML}. The format allows us to flexibly specify arbitrary node and edge attributes. We, however, do not use any node and edge attribute, including edge weight, as our study only focuses on simple network structure.
 	
@@ -190,6 +190,8 @@ where $N_i^{\text{original}}$ is the number of occurrence of a sub-graph $i$ in 
 	
 	The distributions of network domains and sub-domains, as shown in figs.\ref{domain_ratio} and \ref{sub_dist}, are very skewed since instances of some network categories are hard to obtain due to their inherent difficulty of collecting data or legal concerns, or hard to analyze due to their network size. This skewed categorical distribution leads us to explore several sampling strategies, which are explained in the following chapter.
 	
+	\subsection{Feature Extraction}
+	After converting into GML format, we calculate a set of features explained in the precious chapter for each network. We have extensively used a Python library \textit{igraph} \cite{igraph} for extracting features including clustering coefficient and degree assortativity and other miscellaneous operations on network data. For calculating network motifs, we used a parallel motif computing algorithm for undirected motifs developed by Ahmed \textit{et al.} \cite{ahmed2015icdm}. A number of computations involved in this study are parallelized by using a command-line tool \textit{GNU Parallel} \cite{GNUParallel}.
 	
 	\begin{figure}[ht]
 	\begin{center}
@@ -371,46 +373,146 @@ Every network belongs to some sort of network domain or sub-domain that usually 
 
 However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig. \ref{2d_figures}, which leads to a question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest, confusion matrix and dendrogram of hierarchical clustering.  
 
-\subsection{Experimental Settings}
-We derive structural similarities/distance between network (sub-) domains from a confusion matrix that describes when a random forest classifier makes mistakes and when it does not. However, due to the nature of the classification algorithm and randomly splitting the data into training and testing sets, there involves some randomness in a confusion matrix every time one runs the analysis. Therefore, in order to alleviate a factor of randomness as much as possible, we run the analysis 1000 times and average the outcomes, namely confusion matrices and feature importance. 
+\subsubsection{Experimental Settings}
+We derive structural similarity/distance between network (sub-) domains from a confusion matrix that describes when a random forest classifier makes mistakes and when it does not. However, due to the nature of the classification algorithm and randomly splitting the data into training and testing sets, there involves some randomness in a confusion matrix every time one runs the analysis. Therefore, in order to alleviate a factor of randomness as much as possible, we run the analysis 1000 times and average the outcomes, namely confusion matrices and feature importance. 
 
 In order to see the effect of class imbalance problem, we formulate four sampling strategies: no-sampling, namely running the analysis on the original data set; random over-sampling in which minority classes are over-sampled to an extent where all classes have the same number of instances as the largest class; random under-sampling in which majority classes are under-sampled to an extent where all classes have the same number of instances at the smallest class; SMOTE in which all minority classes have synthesized new instances so that the number of data points equals to the one of the largest class. A set of features includes, as before, clustering coefficient, degree assortativity and $k = 4$ connected network motifs.
  
  
-\subsection{Network Domains} 
+\subsubsection{Network Domains} 
 We first proceed to work on classification of network domains that include: Biological, Economic, Social, Informational, Synthetic, Technological and Transportation.
-Fig.\ref{confusion} shows the aggregated confusion matrices for each of the sampling strategies. The number of each cell in a confusion matrix represents an averaged frequency that an instance of class $i$ is classified as class $j$ in 1000 runs. As the majority classes inherently contain a number of test data points that leads to a larger count in the confusion matrix, there needs to be some normalization so that each class of network domains becomes comparable with others. The normalization in this study is defined as the following: Let $c_{ij}$ be an element in a confusion matrix. We normalize this quantity by a summation of elements in a row $c_{ij}$ belongs to, namely $\sum_{j=1}^N c_{ij}$, where $N$ is the number of network domains. 
+Fig.\ref{confusion} shows the aggregated confusion matrices for each of the sampling strategies. The number of each cell in a confusion matrix represents an averaged frequency that an instance of class $i$ is classified as class $j$ in 1000 experiments. As the majority classes inherently contain a number of test data points that leads to a larger count in the confusion matrix, there needs to be some normalization so that each class of network domains becomes comparable with others. The normalization in this study is defined as the following: Let $c_{ij}$ be an element in a confusion matrix. We normalize this quantity by a summation of elements in a row $c_{ij}$ belongs to, namely $\sum_{j=1}^N c_{ij}$, where $N$ is the number of network domains. 
 
-The diagonal elements of confusion matrices shown in Fig.\ref{confusion} indicate the correct classifications. In no-sampling, random over-sampling and SMOTE instances of all network domains are relatively classified correctly, which is observable from the intensity of cells' color, except Informational network for which we observe unsuccessful classifications. Surprisingly, the occurrence of correct classification of Informational networks in SMOTE is fewer than no-sampling and random over-sampling. This phenomenon may be explained by the following: instances of Informational network is so diverse in terms of structure and few that test instances are often outside of a convex hull constructed by SMOTE and they are not classified correctly.  
+The diagonal elements of confusion matrices shown in Fig.\ref{confusion} indicate the correct classifications. In every sampling strategy, instances of all network domains are relatively classified correctly, which is observable from the intensity of cells' color, except Informational network for which we observe unsuccessful classifications. In spite of the fact that the classification accuracy for random under-sampling results in 73\%, the confusion matrix for the sampling strategy exhibits the strong diagonal pattern, which may imply that instances of various network domains are inherently quite separable.
 
-On the other hand, a confusion matrix for random under-sampling shown in Fig.\ref{random_under_confusion} shows a diagonal pattern of  correct classifications across all domains even including Information network with worse classification accuracy (approximately 73\%). This is due to the fact that the number of training instances for each domain is now as few as the most minor class. The strong diagonal pattern in a confusion matrix with random under-sampling implies that instances of various network domains are quite separable thanks to the the diversity of their network structures.
-
-% connect the argument to the hierarchical clustering ...  
-
+Although it is a meaningful result that the instances of network domains may inherently be separable, our focus now moves on to the off-diagonal elements of confusion matrices. In all matrices, a number of instances of Informational networks are classified as other domains, such as Biological, Synthesized and Technological which is observable from elements of a row corresponding to  "true Informational." Also instances of many domains are classified as Biological networks, observed in elements of a column corresponding to "predicted Biological." These pieces of information imply the existence of underlying similarities within network domains. However, it is hard to perceive the structure of inter-domain similarity just by looking at the confusion matrix. Here, we construct a "meta" network of network domains from an adjacency matrix that is constructed based on a confusion matrix that is shown in Fig.\ref{meta_network}. In all cases Biological, Informational and Technological domains are connected with wide edges together, indicating their structural similarities derived from confusion matrices. Strengths of connectedness of other domains, such as Social, Transportation, etc., are dependent on sampling strategy. This analysis based on network domains is informative in a sense that it consistently exhibits the well connected group of domains that includes Biological, Informational and Technological. However, each network domain includes sub-domains within itself and these network sub-domains are quite diverse in terms of network's function. For example, neural networks in a brain and ecological food web, both in Biological domain, function very differently. Grouping sub-domains of different functions together as a single category may lose some information local to a specific sub-domain. Therefore, we proceed to analyze the networks on a more fine-grained setting, namely using network sub-domains as the class label in classification tasks.
+ 
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion.png}
-\caption{No sampling. Averaged accuracy: 90.05\%} \label{no_confusion}
+\caption{No sampling. Averaged accuracy: 89.19\%} \label{no_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion.png}
-\caption{Random over-sampling. Averaged accuracy: 90.42\%} \label{random_over_confusion}
+\caption{Random over-sampling. Averaged accuracy: 89.79\%} \label{random_over_confusion}
 \end{subfigure}
 
 \medskip
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion.png}
-\caption{Random under-sampling. Averaged accuracy: 72.93\%} \label{random_under_confusion}
+\caption{Random under-sampling. Averaged accuracy: 73.47\%} \label{random_under_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion.png}
-\caption{SMOTE. Averaged accuracy: 89.18\%} \label{smote_confusion}
+\caption{SMOTE. Averaged accuracy: 89.43\%} \label{smote_confusion}
 \end{subfigure}
 \
 \caption{Confusion matrices for each of the sampling strategy. The number of each cell indicates an averaged count for a class $i$ to be classified as class $j$ in 1000 runs, where indices $i$ and $j$ correspond to a true label and predicted label, respectively. The color of each cell represents a value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix.} \label{confusion}
 \end{figure}
 
+\begin{figure}[H]
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/None/graph.png}
+\caption{No sampling} \label{no_graph}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/graph.png}
+\caption{Random over-sampling.} \label{random_over_graph}
+\end{subfigure}
+
+\medskip
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/graph.png}
+\caption{Random under-sampling.} \label{random_under_graph}
+\end{subfigure}\hspace*{\fill}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/graph.png}
+\caption{SMOTE.} \label{smote_graph}
+\end{subfigure}
+\
+\caption{Meta networks for different sampling strategies. The widths of edges are proportional to the magnitude of the value in a symmetrized, normalized confusion matrix. Biological, Informational and Technological domains are well connected in all cases.} \label{meta_network}
+\end{figure}
+
+
+\subsubsection{Network Sub-domains}
+Here we continue the same analysis as we have done in the previous section, but using network sub-domains as class labels for classification task.
+Although in total we have 37 network sub-domains as shown in Fig. \ref{sub_dist}, some sub-domains have only few instances, which makes it infeasible to do classification task as it involves train-test split of data and SMOTE assumes a training set to have enough amount of instances for selecting $k$ nearest neighbors. Therefore we first exclude sub-domains that the number of instances within themselves are less than seven. This filtering results in 23 network sub-domains for this analysis. 
+
+Same as the previous setting for network domain, we run classification tasks 1000 times for each sampling strategy, aggregate resulting confusion matrices, normalize and symmetrize them. Figure \ref{confusion_sub} shows the aggregated confusion matrices for each sampling strategy.  We can observe that all of the confusion matrices exhibit the strong diagonal pattern, an indication of underlying separability of network sub-domains. Note that, however, some sub-domains such as Bayesian, Web Graph, Offline Social, Water Distribution and Software Dependency, are often not classified correctly which may be due to the fewer number of instances and/or the fact that underlying structures of their instances are actually quite similar to ones of other sub-domains.
+
+In order to visualize the underlying similarities within network sub-domain, we again construct meta networks of sub-domains based on aggregated confusion matrices, which are shown in Fig.\ref{meta_network}. From this figure, we can observe the diversity within a network category that corresponds to the color of nodes in a meta network: Informational networks including Web Graph, Bayesian and Peer to Peer, are not clustered together at all; Biological networks, such as Metabolic, Gene regulation, Food Web, etc. seem to have some sort of sub-clusters spread across the entire meta network. Figure \ref{meta_network} essentially implies that network domains are not necessarily a good indicator for the similarity between network instances of the same domain. Then the question is \textit{what could be a good indicator of similarity in networks of different kinds?} In order to answer this question, we first need to discover the "communities" of meta networks which are groups of nodes within which the edge density is high, but between which the edge density is low \cite{Modularity1,Modularity2}.
+
+\begin{figure}[H]
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/confusion.png}
+	\caption{No sampling. Averaged accuracy: 90.92\%} \label{no_confusion_sub}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/confusion.png}
+	\caption{Random over-sampling. Averaged accuracy: 91.59\%} \label{random_over_confusion_sub}
+	\end{subfigure}
+	
+	\medskip
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion.png}
+	\caption{Random under-sampling. Averaged accuracy: 69.73\%} \label{random_under_confusion_sub}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/confusion.png}
+	\caption{SMOTE. Averaged accuracy: 90.95\%} \label{smote_confusion_sub}
+	\end{subfigure}
+\
+\caption{Confusion matrices for each of the sampling strategy. The number of each cell indicates an averaged count for a sub-domain $i$ to be classified as sub-domain $j$ in 1000 runs, where indices $i$ and $j$ correspond to a true label and predicted label, respectively. The color of each cell represents a value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on the normalized value of a confusion matrix shown in above. Lines within confusion matrices indicate the separations of network domains.} \label{confusion_sub}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph.png}
+	\caption{Meta network based on no sampling.} \label{no_graph_sub_original}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph.png}
+	\caption{Meta network based on random over-sampling.} \label{random_over_graph_sub_original}
+	\end{subfigure}
+	
+	\medskip
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph.png}
+	\caption{Meta network based on random under-sampling.} \label{random_under_graph_sub_original}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph.png}
+	\caption{Meta network based on SMOTE.} \label{smote_graph_sub_original}
+	\end{subfigure}
+\
+\caption{The meta networks of network sub-domains. The color of each node corresponds to a domain the sub-domain (node) belongs to.} \label{meta_network}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph_community.png}
+	\caption{Meta network based on no sampling. The number of communities is $4$.} \label{no_graph_sub_community}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph_community.png}
+	\caption{Meta network based on random over-sampling sampling.  The number of communities is $5$.} \label{random_over_graph_sub_community}
+	\end{subfigure}
+	
+	\medskip
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph_community.png}
+	\caption{Meta network based on random under-sampling.  The number of communities is $3$.} \label{random_under_graph_sub_community}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}{0.48\textwidth}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph_community.png}
+	\caption{Meta network based on SMOTE.  The number of communities is $4$.} \label{SMOTE_graph_sub_community}
+	\end{subfigure}
+\
+\caption{The meta networks of network sub-domains with community labelings. The color of node now corresponds to a community found by the algorithm.} \label{meta_network_community}
+\end{figure}
+
+Fig.\ref{meta_network_community} shows the meta networks of sub-domains on which the colors of nodes correspond to the community membership that is found by a community detection algorithm proposed by Clauset \textit{et al.} \cite{CNMAlgorithm}.
 
 \clearpage
 
