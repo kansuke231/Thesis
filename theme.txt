@@ -1,0 +1,14 @@
+The goal is to characterize the structural diversity of all real-world networks,
+ and to investigate the degree to which networks from different sources are distinguishable, 
+ based on their structure alone. If networks are distinguishable based on their structural patterns, 
+ then networks from different sources that are never-the-less easily confused, structurally,
+  may indicate common underlying constraints or generative processes that produce similar structural patterns. 
+
+
+
+  A number of studies in network classification have only focused on structural features that make networks distinguishable from others and/or finding “super-families” of networks.
+ There is no study investigating the relationship among network categories/domains.
+	 E.g. How much are social networks different from brain networks?
+		    How much are digital circuits different from brain networks?
+                 Which categories of networks are drastically different from each other?
+		  
