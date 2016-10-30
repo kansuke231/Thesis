@@ -20,7 +20,7 @@
 \def\vector#1{\mbox{\boldmath $#1$}}
 \begin{document}
 
-\title{Inter-domain Relationships of Complex Networks}
+\title{Structure of complex networks across domains}
 \author{Kansuke Ikehara}
 \maketitle
 
@@ -35,17 +35,19 @@ The structure of complex networks has been of interest in many scientific and en
 	\subsection{Complex Networks}
 	Almost every scientific and engineering discipline deals with data that come from some sorts of experimental observations. Traditionally, such data are expressed as numbers, which may represent temperature, velocity, or voltage, and methodologies that analyze these numbers have been established for over hundreds of years. \textit{Graph} or \textit{network}, which is a kind of data representation describing the relations among some entities such as persons, molecules, animals, logical gates, etc., has been used as a new way to approach, interpret and solve real-world problems in the last decades. Social science, for instance, has witnessed the power of network analysis with the recent emergence of online social network services such as Facebook, Twitter, LinkedIn, etc.\cite{Kleinberg:1}. With the abundance of online data, faster and more efficient computational resources along with advancements of graph algorithms, previously invisible social phenomena at the scale of off-line social networks, which usually consist of tens to hundreds of nodes at most, have been observed in a large scale online social networks.  Biological sciences use networks as a tool to dissect biological, chemical and ecological processes in order to gain insight into the functionality of a brain that consists of networks of neurons \cite{BrainNetwork}, complex metabolic reactions within a human's cells and relationships between malfunctioning metabolic processes and human diseases \cite{MetabolicNetworkAndDiseases} and the effect in biodiversity, that might result from perturbation in an ecological network, such as food-web, mutualistic network, etc. \cite{EcologicalNetwork}. Engineering systems such as the Internet \cite{Internet}, power grids \cite{PowerGrid}, water distribution networks \cite{WaterDistribution}, transportation networks \cite{Train}, etc. have also been investigated with using network analysis tools for constructing efficient and robust systems. 
 	
-	A term \textit{complex network} depicts an essential difference from ordinary graphs having some kinds of regular structure that have been studied in the field of mathematics for a long time: the structure of real world networks almost always exhibits an unusual pattern that greatly deviates from the regular structure and this seemingly irregular and complex structure can often be a clue to the underlying mechanism and/or phenomenon of the process of interest.  For example, the unusual density of triangles in social networks implies an underlying mechanism in our society: the formation of our social circles tends to be made by local interactions, such as introducing your friend to another friend in your circle. There have been a number of studies that investigate the structure of complex networks of diverse fields and connections between the structure and the underlying mechanism of the process. In the next section we discuss them in greater detail.
+	A term \textit{complex network} depicts an essential difference from ordinary graphs having some kinds of regular structure that have been studied in the field of mathematics for a long time: the structure of real world networks almost always exhibits an unusual pattern that greatly deviates from the regular structure and this seemingly irregular and complex structure can often be a clue to the underlying mechanism and/or phenomenon of the process of interest.  For example, the unusual density of triangles in social networks implies an underlying mechanism in our society: the formation of our social circles tends to be made by local interactions, such as introducing your friend to another friend in your circle. There have been a number of studies that investigate the structure of complex networks of diverse fields and connections between the structure and the underlying mechanism of the process. In the next section we discuss them in the greater detail.
 	
 	\subsection{Common Properties in The Structure of Networks}
 	The structure of a network can be characterized in a number of ways, but one of the most prevalent is describing the \textit{degree distribution} of a network. The degree of a node is a measure of how many edges are connected to the particular node, and the probability distribution $p(k)$ over all nodes essentially describes the "unfairness" in the network. If all of the nodes in a network have the exact same number of connections, the fairest case, then $p(k)$ behaves like Kronecker delta, where $p(k)$ has a value $1$ only at a specific degree. Or if it is less fair, one may observe a narrow Gaussian-like distribution around an average degree. In the real world network, however, this almost never happens. What is observed most of the time instead, is a very skewed degree distribution in which most of the nodes have a small connection incident upon them, and very few nodes have a disproportionally large number of connections with them. \textit{Power-law} distribution is one of candidate distributions that describes the observed phenomena well, and a network having this distribution is often called \textit{scale-free} network \cite{Barabasi99emergenceScaling}. Surprisingly, a number of networks  from diverse fields, such the Internet, metabolic reactions, World-Wide-Web, etc. have been claimed to be a scale-free network. However, one needs to be careful in order to validate if a network of interest indeed has power-law degree distribution and there seems to be that a number of such claims need more statistically valid treatment such one proposed by Clauset \textit{et al.} for justification \cite{Clauset:PowerLaw}. The disproportionality of the skewed degree distribution indicates an existence of  \textit{hubs}, \textit{cores} or \textit{elites} in a network. Such important nodes in a network play a critical role for a network to function properly and the failure of such nodes results in a catastrophe \cite{ScaleFreeAttack}.
 	
 	Another prevalent structural characteristic of networks is so-called \textit{small-world-ness}, first conceptually introduced by a Milgram's experiment \cite{Milgram} and mathematically proposed in a paper by Watts and Strogatz \cite{watts1998cds}. They proposed a random network model that, depending on the parameter setting, produces a network having properties as follows: 1. high density of triangles, implying that if three nodes are connected, it is likely that those three nodes actually compose a triangle; 2. low average distance between a pair of nodes, which indicates that from any node it is just a few steps, in average, to reach any other node in the network. These properties are accomplished by an existence of "long-range" connections bridging together pairs of nodes far away from each other. As a skewed degree distribution, such as power-law, small-world-ness are likewise observed in a number of networks of diverse domains \cite{Network_Small-World-Ness}. Small-world-ness holds seemingly contradicting properties together: the large degree of local-ness exhibited as a large clustering coefficient value and the large degree of global-ness expressed as a small value of mean geodesic distance.  These properties make small-world networks a very efficient system for information flow \cite{SmallWorldEfficiency} and synchronizing coupled oscillators in the network \cite{SmallWorldSynchronization}.
 	
+	Many of the real-world networks contain \textit{modules} or \textit{communities} in which nodes are densely connected but among which there are sparse edges running. This structure is called \textit{community structure} of a network and there has been a number of studies investigating such communities and inventing a new algorithm for detecting communities in the network \cite{Modularity1, Modularity2, ModularityReview}. The communities in a network found by algorithms often correspond to the functional units of the network: a unit of chemical reactions producing vital chemical product in the metabolic network, a group of densely connected neurons taking charge of a cognitive function, such as language and visual processing, and a group of scientists working together in the same field.
 	
 	
-	\subsection{Structural Uniqueness of Networks}
-The prevalent small-world and scale-free properties can be found in networks of various domains, but they alone cannot explain a diversity of networks in terms of network structure. Social networks, regardless of whether they are off-line as we see in our daily lives or online like Facebook, have long been known for their uniqueness in terms of network structure: high density of triangle (clustering coefficient) and positive degree assortativity \cite{AssortativeMixing,WhySocialNetworks, Mislove:2007:OnlineSocial}. High triangle density indicates the high probability of one's friends being friends each other and the positive  degree assortativity shows a tendency that high-degree nodes (nodes having many connections) connect to other high-degree nodes while low-degree nodes connect to other low-degree nodes.
+	
+	\subsection{Distinguishing Structural Features of Networks}
+The prevalent small-world and scale-free properties can be found in networks of various domains, but they alone cannot explain a diversity of networks in terms of network structure. Social networks, regardless of whether they are off-line as we see in our daily lives or online like Facebook, have long been known for their strangeness in terms of network structure: high density of triangle (clustering coefficient) and positive degree assortativity \cite{AssortativeMixing,WhySocialNetworks, Mislove:2007:OnlineSocial}. High triangle density indicates the high probability of one's friends being friends each other and the positive  degree assortativity shows a tendency that high-degree nodes (nodes having many connections) connect to other high-degree nodes while low-degree nodes connect to other low-degree nodes.
 
 Brain networks, often referred to as \textit{connectome}, have been in the focus of neuroscience in the last decade in order to solve the long-standing scientific question: \textit{How does a brain works?}  The field that studies extensively brain networks using a tool set from mathematics, computer science, etc., is called \textit{connectomics} and one of the recent research topics in this field is investigating how a topology of a brain network affects the brain's function \cite{ComparativeConnectome}. A number of studies show the topological feature of brain networks, including not only human brain but also other animals, is that: 1. they are highly modularly structured; 2. they have topological connections that are anatomically long, implying high cost of wiring, and make a brain network topologically small, like a small-world network; and 3. they have a core of highly connected nodes, called \textit{rich-club} in some literatures, that connect modules across the network together. The modular structure in a brain network is found to be correlating with a discrete physiological and cognitive function of a brain. The existence of topologically short yet anatomically long connections enables a brain to have an efficient way to process the information flowing on the network. The rich club of a brain network plays an important role of integrating information that is produced and processed in different parts of the brain and this integration of information enables animals including human beings to do a complex task.
 
@@ -63,28 +65,32 @@ Networks of subways in the major cities around the world have an interesting com
 	One of the most recent studies in graph comparison and classification investigated 746 networks and constructed a taxonomy of such networks \cite{Onnela_Taxonomy}.  Onnela \textit{et al.} used a technique called \textit{mesoscopic response functions} (MRFS) that essentially describes the change of a specific value related to the community structure of a network with respect to a parameter $\xi \in [0,1]$. Each network has its own MRFS and they calculated the distance between networks which is defined as an area of difference between two networks' MRFS. Their framework successfully identifies groups of networks that are similar in terms of community structure.
 
 	
-	\subsection{Inter-domain Relationships Based on Structure}
-	A number of graph comparison and classification studies have only focused on finding features that make network categories distinguishable from other kinds and/or finding the groups or super families of networks that are structurally similar. With the abundance of network data of various kinds and scales that are available online thanks to the researchers contributing world-wide, we could investigate the \textit{inter-domain} relationships among various network domains. This is essentially an extension to the previous graph comparison and classification studies in a sense that we now compare the categories of networks based on comparison of networks themselves. The followings are the important questions to be answered regarding the inter-domain relationships:
-	
+	%\subsection{Inter-domain Relationships Based on Structure}
+	\subsection{Structural Diversity of Networks}
+	A number of graph comparison and classification studies have only focused on finding features that make network categories distinguishable from other kinds and/or finding the groups or super families of networks that are structurally similar. 
+	With the abundance of available network data of various kinds and scales and the techniques from the field of machine learning, we could tackle the fundamental, yet unexplored question: \textit{What makes complex networks structurally diverse?} There has been a number of studies that try to discover or formulate an idea that explains the structural \textit{universality} of networks, including skewed degree distribution, small-world networks, community structure and so on. There is, however, no general theory that explains the structural \textit{diversity} of complex networks across a number of domains/fields. The aim of  this thesis is to establish such a general theory explaining the structural diversity of complex networks. Below are the three  questions we have formulated as research objectives:
+	%With the abundance of network data of various kinds and scales that are available online thanks to the researchers contributing world-wide, we could investigate the \textit{inter-domain} relationships among various network domains. This is essentially an extension to the previous graph comparison and classification studies in a sense that we now compare the categories of networks based on comparison of networks themselves. The followings are the important questions to be answered regarding the inter-domain relationships:
+
+
 \begin{enumerate}
 	\item \textit{What aspects of network structure make a specific category of network different from others?}
 	\item \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} 
 	\item \textit{If two networks of different categories are indistinguishable by network structure, are their mechanisms of underlying processes the same? And vice versa.}
 \end{enumerate}
 
-The first question is to some extent an extension to the studies investigating social networks' structural uniqueness. For example, what kinds of network structure are unique in, say metabolic networks? As far as we know, few previous studies have done extensive investigation in finding unique characteristics of specific kinds of networks compared to other kinds except social network.
+The first question is to, in some extent, an extension to the studies investigating social networks' structural strangeness. For example, what kinds of network structure are distinguishing, say metabolic networks from the other kinds? As far as we know, few previous studies have done extensive investigation in finding distinctive characteristics of specific kinds of networks compared to other kinds except social networks.
 
-The second question asks if there is any structural similarity between different kinds of networks. We, however, use the word "indistinguishable" in stead of "similar" since we try to observe the commonality from a confusion matrix of a classifier, where a misclassified instance is considered to be indistinguishable from a class it's classified as because it is so similar to other instances of the wrong class the algorithm fails to label the instance correctly.
+The second question asks if there is any structural similarity between different kinds of networks. We, however, use the word "indistinguishable" in stead of "similar" since we try to observe the commonality from a confusion matrix of a classifier, where a misclassified instance is considered to be indistinguishable from a class it was classified as because it is so similar to other instances of the wrong class, the algorithm fails to label the instance correctly.
 
 
-The last question is essentially all about elucidating the meta-structure in domains or class labels. What if two very distinct categories (domain) of networks, say biological and technological ones, exhibit very similar network structure and a classifier misclassifies them many times? Is this because their underlying network generative processes, or their processes on networks themselves are the same? Answering this question helps us understand a driving mechanism for network structure.
+The last question is essentially all about elucidating the meta-structure in the network domains. What if two very distinct categories (domain) of networks, say biological and technological ones, exhibit very similar network structure and a classifier misclassifies them many times? Is this because their underlying network generative processes, or their processes on networks themselves are the same? Answering this question helps us understand a mechanism for the formation of a specific network structure.
 
 
 The contribution of answering those questions comes in two ways: 1 (scientific point). it gives us a general conceptual framework upon which networks are studied across domains. Previous studies have only looked at a single category or multiple categories as one category, ignoring the relationships between categories. By studying networks across domains, one could find general theories of networks or test a hypothesis across domains in a more plausible way.  For instance, one could test validity of a network model across all of domains and find out which domains the network model can explain well; 2 (practical point). it gives us the knowledge base upon which various network-related algorithms could be constructed and tuned properly.  Many practical graph algorithms take no assumption in domain-specific network structure. It may be possible, however, to construct a new algorithm which runs faster and more efficiently on a specific kind of networks by taking into account of such domain-specific knowledge. For example, if there exists any unique network structural property of recommendation networks,  it may be applied to construct or fine tune a recommendation engine that utilizes knowledge of unique network structure. As the size of networks we obtain has grown in an unprecedented scale, domain-specific knowledge in network structure will be a key to analyze such large networks in a faster and more efficient way.
 
 \subsection{Project Description}
 
-In this thesis, we study 1200 (the number may change later) of various kinds of real- world networks, ranging from ecological food-web to online social network to digital circuit along with synthetic networks generated from four different models. We extract network statistics as features of a network, construct a high-dimensional feature space, where each axis corresponds to one of the network features, and map each network onto the feature space. We then train a machine learning algorithm called \textit{random forest} with the training set of network data and let it classify the test networks based on their features. As the category distribution is skewed, meaning that some categories of networks have larger number of instances than other minority categories, we try several sampling strategies and show the effect of each methodology. We construct confusion matrices based upon classification results and proceed to analyze the misclassification with which we can answer research questions explained in the previous section. We then conclude with discussion based on several hypotheses and classification results.
+In this thesis, we study approximately 1000 of various kinds of real- world networks, ranging from ecological food-web to online social network to digital circuit along with 600 of synthetic networks generated from four different models.  We extract network statistics as features of a network, construct a high-dimensional feature space, where each axis corresponds to one of the network features, and map each network onto the feature space. We then train a machine learning algorithm called \textit{random forest} with the training set of network data and let it classify the test networks based on their features. As the category distribution is skewed, meaning that some categories of networks have larger number of instances than other minority categories, we try several sampling methods and show the effect of each methodology. We construct confusion matrices based upon classification results and proceed to analyze the misclassification with which we can answer research questions explained in the previous section. We then conclude with discussion based on several hypotheses and classification results.
 
 
 
@@ -93,11 +99,11 @@ In this thesis, we study 1200 (the number may change later) of various kinds of 
 	Formally, a network or graph is a mathematical object consisting of a set of edges (arcs) and nodes (vertices), which can be written as $G = (E,V)$. In many cases, an \textit{adjacency matrix} is used as a representation of a network, where each element of the matrix $A_{ij}$ takes a binary value, $1$ for presence of an edge between nodes $i$ and $j$, and $0$ if there is no edge between these nodes in an unweighted network, or real value if edges of the network are weighted. If the matrix is symmetric, namely $A_{ij} = A_{ji},  \forall i,j \in V$, the matrix represents an \textit{undirected} network in which edges do not have directionality at all. If the matrix is asymmetric, on the other hand, it's representing a \textit{directed} network, where edges have directionality. If the diagonal elements of a matrix $A$ are non-zero, the network has \textit{self-loops} which indicates that there are edges originating from and pointing to the exact same node. In many studies such self-loops are simply ignored for the sake of simplicity and out study is no exception as well.
 	
 	\subsection{Structural Features of A Network}
-	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. Some network features, however, are implicitly correlated with the size of networks, which itself is a very strong feature: the number of nodes in web graphs is usually a magnitude of $10^6$ or more whereas ecological food webs contain usually less than 100 nodes. The feature set we use in this study is scale-invariant, meaning the size of network is supposed not to effect the value of a feature. This set of features allows us to compare networks without the notion of network size. In the following sections we describe important structural features that are relevant in this study.
+	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. Some network features, however, are implicitly correlated with the size of networks, which itself is a very strong feature: the number of nodes in web graphs is usually a magnitude of $10^6$ or more whereas ecological food webs contain usually less than 100 nodes. The feature set we use in this study is scale-invariant, meaning the size of network is supposed not to affect the value of a feature. This set of features allows us to compare networks without the notion of network size. In the following sections we describe important structural features that are relevant in this study.
 		
 	 
 	\subsubsection{Degree}
-	The \textit{degree} of a node in a network is essentially the number of edges attached to the node. For a node $i$ in an unweighted network, the degree $k_i$ of the node can be written mathematically as:
+	The \textit{degree} of a node in a network is the number of edges attached to the node. For a node $i$ in an unweighted network, the degree $k_i$ of the node can be written mathematically as:
 	
 	\begin{equation}
  	 k_i = \sum_{j = 1}^n A_{ij}.
@@ -225,7 +231,7 @@ where $N_i^{\text{original}}$ is the number of occurrence of a sub-graph $i$ in 
 
 \section{Methodology}
 
-	\subsection{Sampling Strategies}
+	\subsection{Sampling Methods}
 Most of machine learning algorithms perform well on evenly populated instances of multiple classes. However, once this class balance no longer persists, the algorithms perform poorly on minority classes . This problem, called \textit{class imbalance}, essentially causes any machine learning algorithm being naive to the data set to focus exclusively on the majority class, ignoring any minority classes. One of the most widely used approaches for mitigating the problem is sampling the data set of interest so that the distribution of classes becomes balanced. Although there are many proposed sampling strategies as of now \cite{SurveySampling}, we primarily use three sampling strategies in this study: random over-sampling, random under-sampling and SMOTE \cite{SMOTE}.
 
 
@@ -272,25 +278,23 @@ The learning phase of random forest classifier first involves random sub-samplin
 One of the advantageous byproducts of random forest is that one could rank input variables or features based on the importance in the classification. Each time a split is made on a node in a decision tree, the decease of Gini impurity can be attributed to selecting a feature as a splitting point.  Calculating the average decrease of Gini impurity for selecting a feature over all decision trees in random forest gives us the importance of the feature that is very consistent with the result of original method for calculating variable importance \cite{RandomForest,RandomForestOnline}. This ranking of feature importance is the crucial part of the analysis we we describe in the next chapter.
 
 
-		\subsubsection{Confusion Matrix, Similarity and Distance}
-	Confusion matrix depicts when and how frequently a classifier makes mistakes. The row labels of the matrix usually correspond to  true labels and column labels correspond to predicted labels. An element $c_{ij}$ in a confusion matrix represents the number of occurrences that a classifier predicted an instance of class $i$ as class $j$. So it is easy to notice that diagonal elements of a confusion matrix, namely $c_{ii}$ for $i = 1,...,n$ represents the correct predictions of a classifier. What we are interested in, however, lies in off-diagonal elements of a confusion matrix. This information that a classifier gets confused with classes $i$ and $j$ implies the similarity or distance between classes: if the points of two different classes in a high dimensional feature space are often misclassified as each other,  
+		\subsubsection{Confusion Matrix and Similarity}
+	Confusion matrix depicts when and how frequently a classifier makes mistakes. The row labels of the matrix usually correspond to  true labels and column labels correspond to predicted labels. An element $c_{ij}$ in a confusion matrix represents the number of occurrences that a classifier predicted an instance of class $i$ as class $j$. So it is easy to notice that diagonal elements of a confusion matrix, namely $c_{ii}$ for $i = 1,...,n$ represents the correct predictions of a classifier. What we are interested in, however, lies in off-diagonal elements of a confusion matrix. The information that a classifier gets confused with classes $i$ and $j$ implies the similarity or distance between classes: if the points of two different classes in a high dimensional feature space are often misclassified as each other,  
 the points of the two classes are in fact overlapped to some extent in the feature space, implying that these classes are so similar the distance between them is small.
 
-Using a confusion matrix as either similarity or distance matrix involves following issues:
+Using a confusion matrix as a similarity matrix involves following issues:
 \begin{enumerate}
-	\item  In a confusion matrix the higher a value of an element $c_{ij}$ the more similar the classes $i$ and $j$. This is fine for a similarity matrix. In a distance matrix, however, similar classes should have a small value for a corresponding element $d_{ij}$.
 	\item In a confusion matrix classes with abundant data tend to have large counts for elements in the matrix due to the abundance of test data whereas classes with fewer data have fewer counts in the matrix.
-	\item Usually the confusion matrix is not symmetrical, but a number of similarity/distance-related methods assume an input matrix has the symmetry.
+	\item Usually the confusion matrix is not symmetrical, but a number of similarity-related methods assume an input matrix has the symmetry.
 \end{enumerate}
 
-Therefore we proceed on the following operations in order to derive a similarity/distance matrix based on a confusion matrix:
+Therefore we proceed on the following operations in order to derive a similarity matrix based on a confusion matrix:
 \begin{enumerate}
 	\item Normalize each row $i$ of the confusion matrix so that $\sum_{j=1}^J c_{ij} = 1$
 	\item Symmetrize the resulting matrix from operation $1$ by setting each pair of symmetric elements as: $c_{ij},c_{ji} = \max (c_{ij},c_{ji})$
-	\item For a distance matrix, convert each element of normalized symmetrical confusion matrix as follows: $c_{ij} := 1 - c_{ij}$, so that similar classes have smaller values and dissimilar classes have large values.
 \end{enumerate}
 
-We utilize both similarity and distance matrices in experiments which are described in the subsequent chapter.
+We utilize the similarity matrix produced in this way in experiments which are described in the subsequent chapter.
 		
 \section{Analyses}
 In this chapter, we present experimental settings for analyses, each of which tries to gain some insights for answering the questions we proposed in the introduction, and show the results of such analyses.
@@ -298,7 +302,7 @@ In this chapter, we present experimental settings for analyses, each of which tr
 The first question we have asked was: \textit{What aspects of network structure make a specific category of network different from others?} This question can be answered by looking at the statistics of feature importance from random forest classifiers. The experimental setting is the following: 
 
 \begin{enumerate}
-	\item We select a set of six representative network sub-domains since not all of the sub-domains have enough number of samples to support our findings. These representative sub-domains are: protein interaction, ecological food web, metabolic, connectome,  online social and communication (autonomous system)
+	\item We select a set of six representative network sub-domains since not all of the sub-domains have enough number of samples to support our findings. These representative sub-domains are: protein interaction, ecological food web, metabolic, connectome (brain networks),  online social and communication (autonomous system)
 	\item For each representative class we proceed to run binary classification 1000 times using random forest in which all of the class labels are grouped together except the target class label. A set of features for this task includes: clustering coefficient, degree assortativity and $k = 4$ connected network motifs, thus the total of eight features. In each run we split the data set into training and test sets with the ratio of $7:3$ while preserving the ratio of class distribution. In each run the score of accuracy and AUC (Area Under the ROC Curve) is calculated and the ranking of feature importance is recorded. We then average accuracy and AUC scores over 1000 runs and aggregate all of the recorded rankings of feature importance.
 	\item Lastly we select the two most importance features from the aggregated ranking, plot the all of the data points in the two dimensional feature space.
 \end{enumerate}
@@ -307,7 +311,9 @@ Fig.\ref{2d_figures} shows two dimensional plots for representative network sub-
 
 Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature importance. In this figure, one can observe the general trend of informative feature set and the "strength" of those features in the ranking. For example, the motif $m4\_6$ of metabolic networks and the motif $m4\_1$ of online social networks are the most important features and their strength is quite dominant:  $m4\_6$ of metabolic networks ranks as the first 996 times out of 1000 runs and $m4\_1$ of online social networks ranks as the first 963 times  out of 1000 runs, respectively.
 
-%These most importance features selected from aggregated rankings 
+These distinguishing features observed in the figures seem to have some implications for the process in a network. Ecological food-webs display the abundance of $m4\_4$ subgraphs, that are thought to be a major constituent elements in the food-webs as it describes layers of food chain. Animals in the same layer in the food chain do not often prey on each other, but prey on animals in a layer below and they are preyed on by animals in a layer above. Online social networks have an unusual number of $m4\_1$ subgraphs, namely $k = 4$ clique, and this indicates the strong locality of social connections. On the other hand, communication networks exhibit the underrepresented number of  $m4\_1$ subgraphs. This may imply the underlying growing or "construction" mechanism of communication systems: the whole system needs to be connected in order for the Internet to work, but does not need too many connections among autonomous systems as the cost for connections should be lowered.
+
+ 
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
@@ -377,65 +383,62 @@ Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature im
 
 
 \subsection{Similarities in Networks of Different Kinds}
-Every network belongs to some sort of network domain or sub-domain that usually describes the properties and even structure of a network. As we have seen in the previous section, some networks of selected representative sub-domains exhibit structural uniqueness which makes them stand out among others in the feature space.
-
-However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig. \ref{2d_figures}, which leads to a question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest, confusion matrix and dendrogram of hierarchical clustering.  
+Every network belongs to some sort of network domain or sub-domain that usually describes the properties and even structure of a network. As we have seen in the previous section, some networks of selected representative sub-domains exhibit structural uniqueness which makes them stand out among others in the feature space. However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig. \ref{2d_figures}, which leads to the question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest and confusion matrix.  
 
 \subsubsection{Experimental Settings}
-We derive structural similarity/distance between network (sub-) domains from a confusion matrix that describes when a random forest classifier makes mistakes and when it does not. However, due to the nature of the classification algorithm and randomly splitting the data into training and testing sets, there involves some randomness in a confusion matrix every time one runs the analysis. Therefore, in order to alleviate a factor of randomness as much as possible, we run the analysis 1000 times and average the outcomes, namely confusion matrices and feature importance. 
+We derive structural similarity between network (sub-) domains from a confusion matrix that describes when a random forest classifier makes mistakes and when it does not. However, due to the nature of the classification algorithm and randomly splitting the data into training and testing sets, there involves some randomness in a confusion matrix every time one runs the analysis. Therefore, in order to remove the factor of randomness as much as possible, we run the analysis 1000 times and average the outcomes, namely confusion matrices. 
 
-In order to see the effect of class imbalance problem, we formulate four sampling strategies: no-sampling, namely running the analysis on the original data set; random over-sampling in which minority classes are over-sampled to an extent where all classes have the same number of instances as the largest class; random under-sampling in which majority classes are under-sampled to an extent where all classes have the same number of instances at the smallest class; SMOTE in which all minority classes have synthesized new instances so that the number of data points equals to the one of the largest class. A set of features includes, as before, clustering coefficient, degree assortativity and $k = 4$ connected network motifs.
+In order to see the effect of class imbalance problem, we use four sampling methods: no-sampling, namely running the analysis on the original data set; random over-sampling in which minority classes are over-sampled to an extent where all classes have the same number of instances as the largest class; random under-sampling in which majority classes are under-sampled to an extent where all classes have the same number of instances as the smallest class; SMOTE in which all minority classes have synthesized new instances so that the number of data points equals to the one of the largest class. A set of features includes, as before, clustering coefficient, degree assortativity and $k = 4$ connected network motifs which result in 8 featrues.
  
  
 \subsubsection{Network Domains} 
-We first proceed to work on classification of network domains that include: Biological, Economic, Social, Informational, Synthetic, Technological and Transportation.
-Fig.\ref{confusion} shows the aggregated confusion matrices for each of the sampling strategies. The number of each cell in a confusion matrix represents an averaged frequency that an instance of class $i$ is classified as class $j$ in 1000 experiments. As the majority classes inherently contain a number of test data points that leads to a larger count in the confusion matrix, there needs to be some normalization so that each class of network domains becomes comparable with others. The normalization in this study is defined as the following: Let $c_{ij}$ be an element in a confusion matrix. We normalize this quantity by a summation of elements in a row $c_{ij}$ belongs to, namely $\sum_{j=1}^N c_{ij}$, where $N$ is the number of network domains. 
+We first proceed to work on classification of network domains that include: Biological, Economic, Social, Informational, Synthetic, Technological and Transportation. Fig.\ref{confusion} shows the aggregated confusion matrices for each of the sampling strategies. In an aggregated confusion matrix, each cell represents the averaged frequency that an instance of class $i$ is classified as class $j$ in 1000 experiments. As the majority classes inherently contain a number of test data points that leads to a larger count in the confusion matrix, there needs to be some normalization so that each class of network domains becomes comparable with others. The normalization in this study is defined as the following: Let $c_{ij}$ be an element in a confusion matrix. We normalize this quantity by a summation of elements in a row $c_{ij}$ belongs to, namely $\sum_{j=1}^N c_{ij}$, where $N$ is the number of network domains. 
 
-The diagonal elements of confusion matrices shown in Fig.\ref{confusion} indicate the correct classifications. In every sampling strategy, instances of all network domains are relatively classified correctly, which is observable from the intensity of cells' color, except Informational network for which we observe unsuccessful classifications. In spite of the fact that the classification accuracy for random under-sampling results in 73\%, the confusion matrix for the sampling strategy exhibits the strong diagonal pattern, which may imply that instances of various network domains are inherently quite separable.
+The diagonal elements of confusion matrices shown in Fig.\ref{confusion} indicate the correct classifications. In every sampling strategy, instances of all network domains are relatively classified correctly, which is observable from the intensity of cells' color, except Informational network for which we observe unsuccessful classifications. In spite of the fact that for random-under sampling there are only 26 instances for the training set of each domain, the confusion matrix for the sampling method exhibits a very strong diagonal pattern, which may imply that instances of various network domains are inherently quite separable.
 
-Although it is a meaningful result that the instances of network domains may inherently be separable, our focus now moves on to the off-diagonal elements of confusion matrices. In all matrices, a number of instances of Informational networks are classified as other domains, such as Biological, Synthesized and Technological which is observable from elements of a row corresponding to  "true Informational." Also instances of many domains are classified as Biological networks, observed in elements of a column corresponding to "predicted Biological." These pieces of information imply the existence of underlying similarities within network domains. However, it is hard to perceive the structure of inter-domain similarity just by looking at the confusion matrix. Here, we construct a "meta" network of network domains from an adjacency matrix that is constructed based on a confusion matrix that is shown in Fig.\ref{meta_network}. In all cases Biological, Informational and Technological domains are connected with wide edges together, indicating their structural similarities derived from confusion matrices. Strengths of connectedness of other domains, such as Social, Transportation, etc., are dependent on sampling strategy. This analysis based on network domains is informative in a sense that it consistently exhibits the well connected group of domains that includes Biological, Informational and Technological. However, each network domain includes sub-domains within itself and these network sub-domains are quite diverse in terms of network's function. For example, neural networks in a brain and ecological food web, both in Biological domain, function very differently. Grouping sub-domains of different functions together as a single category may lose some information local to a specific sub-domain. Therefore, we proceed to analyze the networks on a more fine-grained setting, namely using network sub-domains as the class label in classification tasks.
+Although it is a meaningful result that the instances of network domains may inherently be separable, our focus now moves on to the off-diagonal elements of confusion matrices. In all matrices, a number of instances of Informational networks are classified as other domains, such as Biological, Synthesized and Technological which is observable from elements of a row corresponding to  "true Informational." Also instances of many domains are classified as Biological networks, observed in elements of a column corresponding to "predicted Biological." These pieces of information imply the existence of underlying similarities within network domains. However, it is hard to perceive the structure of inter-domain similarity just by looking at the confusion matrix. Therefore, we construct a "meta" network of network domains from a weighted adjacency matrix that is constructed based on a confusion matrix that is shown in Fig.\ref{meta_network}. In all cases Biological, Informational and Technological domains are connected with wide edges together, indicating their structural similarities derived from confusion matrices. This analysis based on network domains is informative in a sense that it consistently exhibits the well connected group of domains that includes Biological, Informational and Technological. However, each network domain includes sub-domains within itself and these network sub-domains are quite diverse in terms of network's function. For example, neural networks in a brain and ecological food web, both in Biological domain, function very differently. Grouping sub-domains of different functions together as a single category may lose some information local to a specific sub-domain. Therefore, we proceed to analyze the networks on a more fine-grained setting, namely using network sub-domains as the class label in classification tasks.
  
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion.png}
-\caption{No sampling. Averaged accuracy: 89.19\%} \label{no_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion_domain_none.png}
+\caption{No sampling. Averaged accuracy: 89.81\%} \label{no_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion.png}
-\caption{Random over-sampling. Averaged accuracy: 89.79\%} \label{random_over_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion_domain_random_over.png}
+\caption{Random over-sampling. Averaged accuracy: 90.23\%} \label{random_over_confusion}
 \end{subfigure}
 
 \medskip
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion.png}
-\caption{Random under-sampling. Averaged accuracy: 73.47\%} \label{random_under_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion_domain_random_under.png}
+\caption{Random under-sampling. Averaged accuracy: 74.01\%} \label{random_under_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion.png}
-\caption{SMOTE. Averaged accuracy: 89.43\%} \label{smote_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion_domain_smote.png}
+\caption{SMOTE. Averaged accuracy: 89.47\%} \label{smote_confusion}
 \end{subfigure}
 \
-\caption{Confusion matrices for each of the sampling strategy. The number of each cell indicates an averaged count for a class $i$ to be classified as class $j$ in 1000 runs, where indices $i$ and $j$ correspond to a true label and predicted label, respectively. The color of each cell represents a value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix.} \label{confusion}
+\caption{Confusion matrices for each of the sampling strategy. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix.} \label{confusion}
 \end{figure}
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/None/graph.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/None/graph_none.png}
 \caption{No sampling} \label{no_graph}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/graph.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/graph_random_over.png}
 \caption{Random over-sampling.} \label{random_over_graph}
 \end{subfigure}
 
 \medskip
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/graph.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/graph_random_under.png}
 \caption{Random under-sampling.} \label{random_under_graph}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/graph.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/graph_smote.png}
 \caption{SMOTE.} \label{smote_graph}
 \end{subfigure}
 \
@@ -447,28 +450,28 @@ Although it is a meaningful result that the instances of network domains may inh
 Here we continue the same analysis as we have done in the previous section, but using network sub-domains as class labels for classification task.
 Although in total we have 37 network sub-domains as shown in Fig. \ref{sub_dist}, some sub-domains have only few instances, which makes it infeasible to do classification task as it involves train-test split of data and SMOTE assumes a training set to have enough amount of instances for selecting $k$ nearest neighbors. Therefore we first exclude sub-domains that the number of instances within themselves are less than seven. This filtering results in 23 network sub-domains for this analysis. 
 
-Same as the previous setting for network domain, we run classification tasks 1000 times for each sampling strategy, aggregate resulting confusion matrices, normalize and symmetrize them. Figure \ref{confusion_sub} shows the aggregated confusion matrices for each sampling strategy in which we can observe that all of the confusion matrices exhibit the strong diagonal pattern, an indication of underlying separability of network sub-domains. Note that, however, some sub-domains such as Bayesian, Web Graph, Offline Social, Water Distribution and Software Dependency, are often not classified correctly which may be due to the fewer number of instances and/or the fact that underlying structures of their instances are actually quite similar to ones of other sub-domains.
+Same as the previous setting for network domain, we run classification tasks 1000 times for each sampling method, aggregate resulting confusion matrices, normalize and symmetrize them. Figure \ref{confusion_sub} shows the aggregated confusion matrices for each sampling method in which we can observe that all of the confusion matrices exhibit the strong diagonal pattern, an indication of underlying separability of network sub-domains. Note that, however, some sub-domains such as Bayesian, Web Graph, Offline Social, Water Distribution and Software Dependency, are often not classified correctly which may be due to the fewer number of instances and/or the fact that underlying structures of their instances are actually quite similar to ones of other sub-domains.
 
-In order to visualize the underlying similarities within network sub-domain, we again construct meta networks of sub-domains based on aggregated confusion matrices, which are shown in Fig.\ref{meta_network}. From this figure, we can observe the diversity within a network category that corresponds to the color of nodes in a meta network: Informational networks including Web Graph, Bayesian and Peer to Peer, are not clustered together at all; Biological networks, such as Metabolic, Gene regulation, Food Web, etc. seem to have some sort of sub-clusters spread across the entire meta network. Figure \ref{meta_network} essentially implies that network domains are not necessarily a good indicator for the similarity between network instances of the same domain. Then the question is \textit{what could be a good indicator of similarity in networks of different kinds?} In order to answer this question, we first need to discover the "communities" of meta networks which are groups of nodes within which the edge density is high, but between which the edge density is low \cite{Modularity1,Modularity2}.
+In order to visualize the underlying similarities within network sub-domain, we again construct meta networks of sub-domains based on a weighted adjacency matrix derived from aggregated confusion matrices, shown in Fig.\ref{meta_network}. From this figure, we can observe the network domain is not necessarily a good indicator of sub-domain clustering: informational networks including web graph, bayesian and peer to peer network and biological networks, such as metabolic, gene regulation, food web, etc. are not clustered together, meaning that we do not observe the sub-domains having the same color forming a community together. Then the question is: \textit{What could be a good indicator of similarity in networks of different kinds?} In order to answer this question, we first need to discover the communities of meta networks which are groups of nodes within which the edge density is high, but between which the edge density is low.
 
 \begin{figure}[H]
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/confusion.png}
-	\caption{No sampling. Averaged accuracy: 90.92\%} \label{no_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/confusion_none.png}
+	\caption{No sampling. Averaged accuracy: 90.71\%} \label{no_confusion_sub}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/confusion.png}
-	\caption{Random over-sampling. Averaged accuracy: 91.59\%} \label{random_over_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/confusion_random_over.png}
+	\caption{Random over-sampling. Averaged accuracy: 91.24\%} \label{random_over_confusion_sub}
 	\end{subfigure}
 	
 	\medskip
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion.png}
-	\caption{Random under-sampling. Averaged accuracy: 69.73\%} \label{random_under_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion_random_under.png}
+	\caption{Random under-sampling. Averaged accuracy: 69.48\%} \label{random_under_confusion_sub}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/confusion.png}
-	\caption{SMOTE. Averaged accuracy: 90.95\%} \label{smote_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/confusion_smote.png}
+	\caption{SMOTE. Averaged accuracy: 90.82\%} \label{smote_confusion_sub}
 	\end{subfigure}
 \
 \caption{Confusion matrices for each of the sampling strategy. The number of each cell indicates an averaged count for a sub-domain $i$ to be classified as sub-domain $j$ in 1000 runs, where indices $i$ and $j$ correspond to a true label and predicted label, respectively. The color of each cell represents a value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on the normalized value of a confusion matrix shown in above. Lines within confusion matrices indicate the separations of network domains.} \label{confusion_sub}
@@ -476,21 +479,21 @@ In order to visualize the underlying similarities within network sub-domain, we 
 
 \begin{figure}[H]
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph_none.png}
 	\caption{Meta network based on no sampling.} \label{no_graph_sub_original}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph_random_over.png}
 	\caption{Meta network based on random over-sampling.} \label{random_over_graph_sub_original}
 	\end{subfigure}
 	
 	\medskip
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph_random_under.png}
 	\caption{Meta network based on random under-sampling.} \label{random_under_graph_sub_original}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph_smote.png}
 	\caption{Meta network based on SMOTE.} \label{smote_graph_sub_original}
 	\end{subfigure}
 \
@@ -499,28 +502,45 @@ In order to visualize the underlying similarities within network sub-domain, we 
 
 \begin{figure}[H]
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph_community.png}
-	\caption{Meta network based on no sampling. The number of communities is $4$.} \label{no_graph_sub_community}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph_community_none.png}
+	\caption{Meta network based on no sampling. The number of communities is $3$.} \label{no_graph_sub_community}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph_community.png}
-	\caption{Meta network based on random over-sampling sampling.  The number of communities is $5$.} \label{random_over_graph_sub_community}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph_community_random_over.png}
+	\caption{Meta network based on random over-sampling sampling.  The number of communities is $4$.} \label{random_over_graph_sub_community}
 	\end{subfigure}
 	
 	\medskip
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph_community.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph_community_random_under.png}
 	\caption{Meta network based on random under-sampling.  The number of communities is $3$.} \label{random_under_graph_sub_community}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph_community.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph_community_smote.png}
 	\caption{Meta network based on SMOTE.  The number of communities is $4$.} \label{SMOTE_graph_sub_community}
 	\end{subfigure}
 \
 \caption{The meta networks of network sub-domains with community labelings. The color of node now corresponds to a community found by the algorithm.} \label{meta_network_community}
 \end{figure}
 
-Fig.\ref{meta_network_community} shows the meta networks of sub-domains on which the colors of nodes correspond to the community membership that is found by a community detection algorithm proposed by Clauset \textit{et al.} \cite{CNMAlgorithm}. The implementation of the modified version of this algorithm for weighted network is available in Python-igraph as a method \texttt{community\_fastgreedy()} \cite{igraph}.
+Fig.\ref{meta_network_community} shows the meta networks of sub-domains on which the colors of nodes correspond to the community membership that is found by a community detection algorithm proposed by Clauset \textit{et al.} \cite{CNMAlgorithm}. We have used the implementation of the modified version of this algorithm for weighted network that is available in Python-igraph as a method \texttt{community\_fastgreedy()} \cite{igraph}. From the figure \ref{meta_network_community}, one may notice that the community structure across different sampling methods is almost consistent, meaning the certain groups of sub-domains are always in the same community.  For instance, for all sampling methods, offline social, online social and forest fire model networks are in the same community. Some network sub-domains, however, change the community membership for some meta networks. For instance, metabolic network joins the community of software dependency for no sampling method, but joins the community of digital circuits for SMOTE. This variation of community membership across all meta networks can be expressed in a diagram shown in the figure \ref{community_overlaps}. In this figure sub-domains that are in the same community at least for one meta network are in the same circle. 
+
+From this diagram, one can notice the underlying principles of the community structure: these communities often correspond to the functionality, constraints and growing mechanism of networks. The sub-domains of the left side especially the ones consistently clustered together, such as digital circuit bayesian networks, water distribution networks, etc., seem to have a common property among them: they are some sort of a "flow" network. A list of such flow includes: electrical signal (digital circuit), information (bayesian), water (water distribution), nutrient (fungal), people/trains (subway) and cars (road). Also, if we look at the meta networks, digital circuit and bayesian networks are always strongly connected together. This may be due to the fact that they are both an input-output network as well as being a flow network. The rest of the flow networks have another common property, that is, physical embedding of the network. These networks have a strong constraint of the physical limitation. For instance, it is almost impossible for a node in a physically embedded network to have a thousand connections upon it.
+
+The sub-domain of the right side, again the ones consistently clustered together including software dependency, protein interactions, web graphs, scale-free, etc. appear to have the same growing mechanism of the network.
+
+
+
+
+\begin{figure}[ht]
+		\begin{center}
+		\vspace{0.5cm}
+		\includegraphics[clip,width=12cm,height = 6cm]{figs/community_overlaps.png}
+		\vspace{0.5cm}
+		\caption{Overlaps of community memberships. Each circle in this figure means that sub-domains in the circle are in the same community for a meta network corresponding to a specific sampling method. Online social, offline social and forest fire networks are in the same community across all meta networks. Sub-domains on the left circle including digital circuits, bayesian networks, etc., are consistently in the same community with some other sub-domains, such as ER network and metabolic network, joining the community. The same phenomenon is observed for the community of software dependency, proteins, etc., that corresponds to the circle on the right side.}
+		\label{community_overlaps}
+ 		\end{center}
+\end{figure}
 
 \clearpage
 
