@@ -318,21 +318,21 @@ These distinguishing features observed in the figures seem to have some implicat
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/one_by_many/protein/2d.png}
-\caption{Protein interaction. average accuracy: 98.07\%; average AUC score: 0.713} \label{protein_2d}
+\caption{Protein interaction. average accuracy: 97.44\%; average AUC score: 0.693} \label{protein_2d}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/one_by_many/food_web/2d.png}
-\caption{Ecological food web. average accuracy: 99.76\%; average AUC score: 0.946} \label{foodweb_2d}
+\caption{Ecological food web. average accuracy: 99.34\%; average AUC score: 0.802} \label{foodweb_2d}
 \end{subfigure}
 
 \medskip
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/one_by_many/metabolic/2d.png}
-\caption{Metabolic. average accuracy: 99.1\%; average AUC score: 0.936} \label{metabolic_2d}
+\caption{Metabolic. average accuracy: 99.13\%; average AUC score: 0.94} \label{metabolic_2d}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/one_by_many/connectome/2d.png}
-\caption{Connectome. average accuracy: 98.71\%; average AUC score: 0.682} \label{connectome_2d}
+\caption{Connectome. average accuracy: 98.8\%; average AUC score: 0.715} \label{connectome_2d}
 \end{subfigure}
 
 \medskip
@@ -342,7 +342,7 @@ These distinguishing features observed in the figures seem to have some implicat
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/one_by_many/communication/2d.png}
-\caption{Communication. average accuracy: 99.68\%; average AUC score: 0.976} \label{communication_2d}
+\caption{Communication. average accuracy: 99.61\%; average AUC score: 0.992} \label{communication_2d}
 \end{subfigure}
 
 \caption{2D plots for all representative network sub-domains. X axis corresponds to the most importance feature and y axis the second most important.} \label{2d_figures}
@@ -401,22 +401,22 @@ Although it is a meaningful result that the instances of network domains may inh
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion_domain_none.png}
-\caption{No sampling. Averaged accuracy: 89.81\%} \label{no_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion_None.png}
+\caption{No sampling. Averaged accuracy: 90.68\%} \label{no_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion_domain_random_over.png}
-\caption{Random over-sampling. Averaged accuracy: 90.23\%} \label{random_over_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion_RandomOver.png}
+\caption{Random over-sampling. Averaged accuracy: 90.27\%} \label{random_over_confusion}
 \end{subfigure}
 
 \medskip
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion_domain_random_under.png}
-\caption{Random under-sampling. Averaged accuracy: 74.01\%} \label{random_under_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion_RandomUnder.png}
+\caption{Random under-sampling. Averaged accuracy: 72.35\%} \label{random_under_confusion}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion_domain_smote.png}
-\caption{SMOTE. Averaged accuracy: 89.47\%} \label{smote_confusion}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion_SMOTE.png}
+\caption{SMOTE. Averaged accuracy: 89.84\%} \label{smote_confusion}
 \end{subfigure}
 \
 \caption{Confusion matrices for each of the sampling strategy. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix.} \label{confusion}
@@ -424,21 +424,21 @@ Although it is a meaningful result that the instances of network domains may inh
 
 \begin{figure}[H]
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/None/graph_none.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/None/g.png}
 \caption{No sampling} \label{no_graph}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/graph_random_over.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/g.png}
 \caption{Random over-sampling.} \label{random_over_graph}
 \end{subfigure}
 
 \medskip
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/graph_random_under.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/g.png}
 \caption{Random under-sampling.} \label{random_under_graph}
 \end{subfigure}\hspace*{\fill}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/graph_smote.png}
+\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/g.png}
 \caption{SMOTE.} \label{smote_graph}
 \end{subfigure}
 \
@@ -456,22 +456,22 @@ In order to visualize the underlying similarities within network sub-domain, we 
 
 \begin{figure}[H]
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/confusion_none.png}
-	\caption{No sampling. Averaged accuracy: 90.71\%} \label{no_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/confusion_sub_None.png}
+	\caption{No sampling. Averaged accuracy: 89.45\%} \label{no_confusion_sub}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/confusion_random_over.png}
-	\caption{Random over-sampling. Averaged accuracy: 91.24\%} \label{random_over_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/confusion_sub_RandomOver.png}
+	\caption{Random over-sampling. Averaged accuracy: 89.1\%} \label{random_over_confusion_sub}
 	\end{subfigure}
 	
 	\medskip
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion_random_under.png}
-	\caption{Random under-sampling. Averaged accuracy: 69.48\%} \label{random_under_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion_sub_RandomUnder.png}
+	\caption{Random under-sampling. Averaged accuracy: 69.23\%} \label{random_under_confusion_sub}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/confusion_smote.png}
-	\caption{SMOTE. Averaged accuracy: 90.82\%} \label{smote_confusion_sub}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/confusion_sub_SMOTE.png}
+	\caption{SMOTE. Averaged accuracy: 88.52\%} \label{smote_confusion_sub}
 	\end{subfigure}
 \
 \caption{Confusion matrices for each of the sampling strategy. The number of each cell indicates an averaged count for a sub-domain $i$ to be classified as sub-domain $j$ in 1000 runs, where indices $i$ and $j$ correspond to a true label and predicted label, respectively. The color of each cell represents a value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on the normalized value of a confusion matrix shown in above. Lines within confusion matrices indicate the separations of network domains.} \label{confusion_sub}
@@ -479,21 +479,21 @@ In order to visualize the underlying similarities within network sub-domain, we 
 
 \begin{figure}[H]
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph_none.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/g.png}
 	\caption{Meta network based on no sampling.} \label{no_graph_sub_original}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph_random_over.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/g.png}
 	\caption{Meta network based on random over-sampling.} \label{random_over_graph_sub_original}
 	\end{subfigure}
 	
 	\medskip
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph_random_under.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/g.png}
 	\caption{Meta network based on random under-sampling.} \label{random_under_graph_sub_original}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph_smote.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/g.png}
 	\caption{Meta network based on SMOTE.} \label{smote_graph_sub_original}
 	\end{subfigure}
 \
@@ -502,21 +502,21 @@ In order to visualize the underlying similarities within network sub-domain, we 
 
 \begin{figure}[H]
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/graph_community_none.png}
-	\caption{Meta network based on no sampling. The number of communities is $3$.} \label{no_graph_sub_community}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/g_community.png}
+	\caption{Meta network based on no sampling. The number of communities is $4$.} \label{no_graph_sub_community}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/graph_community_random_over.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/g_community.png}
 	\caption{Meta network based on random over-sampling sampling.  The number of communities is $4$.} \label{random_over_graph_sub_community}
 	\end{subfigure}
 	
 	\medskip
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/graph_community_random_under.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/g_community.png}
 	\caption{Meta network based on random under-sampling.  The number of communities is $3$.} \label{random_under_graph_sub_community}
 	\end{subfigure}\hspace*{\fill}
 	\begin{subfigure}{0.48\textwidth}
-	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/graph_community_smote.png}
+	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/g_community.png}
 	\caption{Meta network based on SMOTE.  The number of communities is $4$.} \label{SMOTE_graph_sub_community}
 	\end{subfigure}
 \
