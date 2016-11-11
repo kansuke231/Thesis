@@ -26,7 +26,7 @@
 \maketitle
 
 \begin{abstract}
-The structure of complex networks has been of interest in many scientific and engineering disciplines over decades. A number of scientists have reported findings that indicated the characteristics of network structure that are claimed to be universal, such as \textit{small-worldness} and long tail degree distribution. Domain specific characteristics, for example specific profiles of network motifs and high-triangle density in social networks, have also been reported previously. However, there is no comprehensive study of inter-domain relationships of complex networks based on the network structure. In this paper, we study over 1000 of real-world networks of diverse domains ranging from ecological food-web to online social network along with networks generated from four popular network models. Our study is data-driven, utilizing machine learning techniques such as random forest and confusion matrix and we show the relationships among network domains in terms of network structure. Our result indicates that there are some pairs of network domains (categories) that are inherently hard to distinguish based purely on network structure. We have found that these domains tend to have similar underlying mechanisms which generate a network or drive the growth of a network or processes which happen on a network itself.
+The structure of complex networks has been of interest in many scientific and engineering disciplines over decades. A number of scientists have reported findings that indicated the characteristics of network structure that are claimed to be universal, such as \textit{small-worldness} and long tail degree distribution. Domain specific characteristics, for example specific profiles of network motifs and high-triangle density in social networks, have also been reported previously. However, there is no comprehensive study of inter-domain relationships of complex networks based on the network structure. In this paper, we study over 1000 of real-world networks of diverse domains ranging from ecological food-web to online social network along with networks generated from four popular network models. Our study is data-driven, utilizing machine learning techniques such as random forest and confusion matrix and we show the relationships among network domains in terms of network structure. Our result indicates that there are some pairs of network domains (categories) that are inherently hard to distinguish based purely on network structure. We have found that these domains tend to have similar underlying mechanisms which generate a network or drive the growth of a network or processes which take place on a network itself.
   
 \end{abstract}
 \tableofcontents
@@ -195,6 +195,7 @@ where $N_i^{\text{original}}$ is the number of occurrence of a sub-graph $i$ in 
 	\end{equation}
 	
 In this study, we treat the significance profile for each subgraph as a feature and in total we have six features as network motifs.
+\newline
 
 
 
@@ -215,15 +216,12 @@ In this study, we treat the significance profile for each subgraph as a feature 
 \newpage
 \section{Data Sets}
 	\subsection{Description}	
-	Our network data set has been accumulated with a lot of effort over years and links to most of the data are available at \url{https://icon.colorado.edu}.
-	Since data format of real world networks is not standardized, we proceeded to convert all the data into a single format called \textit{Graph Modeling Language} or simply GML \cite{GML}. The format allows us to flexibly specify arbitrary node and edge attributes. We, however, do not use any node and edge attribute, including edge weight, as our study only focuses on simple network structure.
+	Our network data set has been accumulated with a lot of effort over years and hyperlinks to most of the data are available at the website of The Colorado Index of Complex Networks (ICON) \url{https://icon.colorado.edu}. ICON is essentially the place where hyperlinks to the network data are stored, rather than the data itself.  
+	Since data format of real world networks is not standardized, we proceeded to convert all the data into a single format called \textit{Graph Modeling Language} or simply GML \cite{GML}. The format allows us to flexibly specify arbitrary node and edge attributes. We, however, do not use any node and edge attribute, including edge weight, as well as edge directionality at all since not all of networks have such properties and we wanted to analyze a diverse set of networks. Thus, we treat all networks used in this study as a simple graph which is defined in the previous chapter. We have used only a fraction of all networks available on ICON due to the time constraint. We have also added some synthesized network data which are generated from specific models as follows: 1. Erd\H{o}s-R\'enyi random network (ER Network) \cite{ER_Network}, Watts-Strogatz model (Small World) \cite{watts1998cds}, Barab\'asi-Albert model (Scale Free) \cite{Barabasi99emergenceScaling} and the forest fire model (Forest Fire Network) \cite{ForestFire}. The details of network sub-domains are explained in the table \ref{tab:subdomain}.
 	
-	We have also added some synthesized network data which are generated from specific models as follows: 1. Erd\H{o}s-R\'enyi random network (ER Network) \cite{ER_Network}, Watts-Strogatz model (Small World) \cite{watts1998cds}, Barab\'asi-Albert model (Scale Free) \cite{Barabasi99emergenceScaling} and the forest fire model (Forest Fire Network) \cite{ForestFire}
-	
-	The distributions of network domains and sub-domains, as shown in figs.\ref{domain_ratio} and \ref{sub_dist}, are very skewed since instances of some network categories are hard to obtain due to their inherent difficulty of collecting data or legal concerns, or hard to analyze due to their network size. This skewed categorical distribution leads us to explore several sampling strategies, which are explained in the following chapter.
-	
+	The distributions of network domains and sub-domains, as shown in figs.\ref{domain_ratio} and \ref{sub_dist}, are very skewed since instances of some network categories are hard to obtain due to their inherent difficulty of collecting data or legal concerns, or hard to analyze due to their network size. This skewed categorical distribution leads us to explore several sampling methods, which are explained in the following chapter. 
 	\subsection{Feature Extraction}
-	After converting into GML format, we calculate a set of features explained in the precious chapter for each network. We have extensively used a Python library \textit{igraph} \cite{igraph} for extracting features including clustering coefficient and degree assortativity and other miscellaneous operations on network data. For calculating network motifs, we used a parallel motif computing algorithm for undirected motifs developed by Ahmed \textit{et al.} \cite{ahmed2015icdm}. A number of computations involved in this study are parallelized by using a command-line tool \textit{GNU Parallel} \cite{GNUParallel}.
+	After converting into GML format, we calculate a set of features explained in the previous chapter for each network. We have extensively used a Python library \textit{igraph} \cite{igraph} for extracting features including clustering coefficient and degree assortativity and other miscellaneous operations on network data. For calculating network motifs, we used a parallel motif computing algorithm for undirected motifs developed by Ahmed \textit{et al.} \cite{ahmed2015icdm}. A number of computations involved in this study are parallelized by using a command-line tool \textit{GNU Parallel} \cite{GNUParallel}.
 
 \begin{figure}[H]
 \begin{subfigure}{0.40\textwidth}
@@ -235,20 +233,23 @@ In this study, we treat the significance profile for each subgraph as a feature 
 \caption{}\label{sub_dist}
 \end{subfigure}\hspace*{\fill}
 
-\caption{(a): The categorical ratio of network domains. (b):  Count distribution of network sub-domains. Sub-domains of the same network domain are grouped together having the same color in the figure. Color code from top: Biological, Economic, Informational, Social, Synthesized, Technological and Transportation.} \label{category_dist}.
+\caption{(a): The categorical ratio of network domains. (b):  Count distribution of network sub-domains. Sub-domains of the same network domain are grouped together having the same color in the figure. Color code from top: Biological, Informational, Social, Synthesized, Technological and Transportation.} \label{category_dist}.
 \end{figure}
 
 
-
-%\begin{table}[ht]
-%  \begin{center}
-%    \caption{Network sub-domains and their descriptions.}
-%    \begin{tabular}{| l | l | p{9cm} |} \hline
 \newpage
 	\begin{longtable}{| l | l | p{9cm} |}
-	\caption{Network sub-domains and their descriptions.}\\
+	\caption{Network sub-domains and their descriptions.} \label{tab:subdomain}\\
+	
+	%header for the first page%
 	\hline
-      Sub-domain & Domain & Description  \\ \hline \hline
+ 	Sub-domain & Domain& Description \\ \hline \hline
+	 \endfirsthead
+	 % header for after the first page
+	 \multicolumn{3}{l}{\small\it Continued}\\ \hline
+	 Sub-domain & Domain& Description \\ \hline \hline
+ 	\endhead
+      %Sub-domain & Domain & Description  \\ \hline \hline
       Fungal &  Biological & Network of mycelial growth patterns of fungus or slime mold. Nodes are located at hyphal tips, branch points, and anastomoses. Edges represent cords.\\  \hline
       Metabolic &  Biological & Network of chemical reactions of metabolism in a cell.\\  \hline
       Proteins &  Biological & Physical contacts of proteins in a cell or in a living organism.\\  \hline
@@ -279,36 +280,72 @@ In this study, we treat the significance profile for each subgraph as a feature 
       Software Dependency &  Technological & Networks in which nodes represent either class, function or package and edges correspond to dependencies.\\  \hline
       Water Distribution &  Technological & Network of piping and junctions for water distribution system.\\  \hline
       Power Grid &  Technological & Network of power grid in which nodes correspond to transforms or power relay points and edges represent power lines.\\  \hline
-      Roads &  Technological & Network of roads where nodes are intersections and edges are roads.\\  \hline
-      Subway &  Technological & Subway networks of major cities around the world.\\  \hline
-      Airport &  Technological & Network of airports that are connected by flights between the airports.\\  \hline
-      \label{tab:subdomain}
-      \end{longtable}
-%    \end{tabular}
-%    \label{tab:subdomain}
-%  \end{center}
-%\end{table}
+      Roads &  Transportation & Network of roads where nodes are intersections and edges are roads.\\  \hline
+      Subway &  Transportation & Subway networks of major cities around the world.\\  \hline
+      Airport &  Transportation & Network of airports that are connected by flights between the airports.\\  \hline
+           
+\end{longtable}
 
 
 %%%%%%%%%%%%%%%% --- New Chapter --- %%%%%%%%%%%%%%%%
 \newpage
 \section{Methodology}
+After having converted networks into vectors in the feature space, there are a number of possible ways to analyze the distribution of points and labels and possibly learn the concept that governs such distribution in the feature space. In this study, we use random forest classifier along with the confusion matrix as a way to learn the underlying concept that differentiates different classes of networks. As we have seen in the previous chapter, the distribution of class labels is obviously skewed which leads us to use several sampling methods that are supposed to alleviate the problem. In this chapter, we explain such methodologies in the great detail.
 
 	\subsection{Sampling Methods}
-Most of machine learning algorithms perform well on evenly populated instances of multiple classes. However, once this class balance no longer persists, the algorithms perform poorly on minority classes . This problem, called \textit{class imbalance}, essentially causes any machine learning algorithm being naive to the data set to focus exclusively on the majority class, ignoring any minority classes. One of the most widely used approaches for mitigating the problem is sampling the data set of interest so that the distribution of classes becomes balanced. Although there are many proposed sampling strategies as of now \cite{SurveySampling}, we primarily use three sampling strategies in this study: random over-sampling, random under-sampling and SMOTE \cite{SMOTE}.
+Most of machine learning algorithms perform well on evenly populated instances of multiple classes. However, once this class balance no longer persists, the algorithms perform poorly on minority classes. This problem, called \textit{class imbalance}, essentially causes any machine learning algorithm that is naive to the data set to focus exclusively on the majority class, ignoring any minority classes. One of the most widely used approaches for mitigating the problem is sampling the data set of interest so that the distribution of classes becomes balanced. Although there are many proposed sampling strategies as of now \cite{SurveySampling}, we primarily use three sampling strategies in this study: random over-sampling, random under-sampling and SMOTE \cite{SMOTE}.
+
+ Here we establish the mathematical notations used in explaining sampling methods. Let $S$ be a set of pairs of $\vec{x_i}$ and $y_i$, namely $S =\{(\vec{x_i},y_i)\}, i = 1,...,n$ where $n$ is the number of data, $\vec{x_i} \in X$ is an instance of networks in the $N$-dimensional feature space and $y_i \in Y = \{1,...,C\}$ is a class label associated with the instance $\vec{x_i}$.   
 
 
-		\subsubsection{Random Over/Under Sampling}
-		Random sampling method is one of the simplest strategies for mitigating the class imbalance problem. \textit{Random Oversampling} essentially over-samples any minority classes to an extent that the number of instances in each class becomes even. However, this could potentially make a classifier overfit to points that are over-sampled, therefore lead to poor generalization. \textit{Random Undersampling}, on the other hand, under-samples the majority class, essentially throwing out some data in order to make the "cloud" of data points sparser. This "throwing out instances" implies an obvious drawback of this sampling method: It discards potentially important instances that compose the backbone of majority classes, implying the true shape of majority class is no longer retained.
+		\subsubsection{Random Over-sampling}
+		Random sampling method is one of the simplest strategies for mitigating the class imbalance problem. \textit{Random over-sampling} essentially over-samples any minority classes to an extent that the number of instances in each class becomes even. Here we explain this sampling method in a mathematical sense. Let $S_{maj} \subset S$ be the majority class, meaning a class having the largest number of instances, and $S_{min}^{j}$ be the $j$th minority class where $j = 1,...,C-1$ such that
+	
+	
+	\begin{equation}
+	S_{maj} \cap S_{min}^{1} \cap S_{min}^{2},..., \cap S_{min}^{C-1} = \{\},
+	\end{equation}
+	and
+	\begin{equation}
+	S_{maj} \cup S_{min}^{1} \cup S_{min}^{2},..., \cup S_{min}^{C-1} = S.
+	\end{equation}
+	
+	
+Let $E_{min}^j$ be a set of points that are sampled at uniformly random from a set $S_{min}^{j}$ that satisfies the following equality:
+
+	\begin{equation}
+	|S_{min}^{j}| + | E_{min}^j | = |S_{maj}|.
+	\end{equation}
+	
+ We then append the set $E_{min}^j$ to the corresponding set of the minority class $S_{min}^{j}$, namely $S_{min}^{j} := S_{min}^{j} + E_{min}^j$. The drawback of random over-sampling is a potential poor generalization due to the overfit of a classifier to the over-sampled instances.
+	
+	\subsubsection{Random Under-sampling}
+	\textit{Random under-sampling}, on the other hand, under-samples the majority class, essentially throwing out some data in order to make the "cloud" of data points sparser. This "throwing out instances" implies an obvious drawback of this sampling method: It discards potentially important instances that compose the backbone of majority classes, implying the true shape of majority class is no longer retained. Here, again, we explain this method using mathematics. Let $S_{min} \subset S$ be the minority class,
+meaning a class having the least number of instances, and  $S_{maj}^{j}$ be the $j$th majority class where $j = 1,...,C-1$, such that
+
+	\begin{equation}
+	S_{min} \cap S_{maj}^{1} \cap S_{maj}^{2},..., \cap S_{maj}^{C-1} = \{\},
+	\end{equation}
+	and
+	\begin{equation}
+	S_{min} \cup S_{maj}^{1} \cup S_{maj}^{2},..., \cup S_{maj}^{C-1} = S.
+	\end{equation}
+	
+Let $E_{maj}^j$ be a set of points that are sampled at uniformly random from a set $S_{maj}^{j}$ that satisfies the following equality:
+
+	\begin{equation}
+	|S_{min}^{j}| = | S_{maj}^j -  E_{maj}^j |.
+	\end{equation}
+Then, we subtract the set $S_{maj}^j$ by $E_{maj}^j$, thus $S_{maj}^j := S_{maj}^j -  E_{maj}^j$.
 		
 		\subsubsection{SMOTE}
-		\textit{Synthetic Minority Over-sampling Technique}, widely known as SMOTE \cite{SMOTE}, is an alternative sampling method that synthesizes data points in the training set for a classifier. The high level description of the sampling technique can be explained as follows:
+		\textit{Synthetic Minority Over-sampling Technique}, widely known as SMOTE \cite{SMOTE}, is an alternative sampling method that synthesizes data points in the training set for a classifier. Mathematically speaking, SMOTE is quite similar to random over-sampling, except the generation of a set $E_{min}^j$ for a minority class $S_{min}^j$. For each set of the minority class $j$, namely $S_{min}^j$, consider $K$ nearest neighbors of a point $\vec{x_i} \in S_{min}^j$ in the $N$-dimensional feature space. To generate a new point, first pick up one of the $K$ nearest neighbors, say $\vec{x_{n}}$, then multiply the corresponding feature vector difference with a weight  $\delta$  chosen from an interval $ [0,1]$ at uniformly random and add this vector to $\vec{x_i}$. Therefore, we have a newly synthesized point defined as follows:
 		
-		\begin{enumerate}
-			\item Ignore the majority class. If classification is multi-class, ignore all of the classes except the class on which one is going to sample.
-			\item For every minority class instance, choose its $k$ nearest neighbors. This $k$ is a parameter of the sampling algorithm.
-			\item On every line segment between a chosen data point and its  $k$ nearest neighbors, create new instances and place them randomly. See Figure \ref{smote} for this process.
-		\end{enumerate}
+		\begin{equation}
+		\vec{x_{new}} = \vec{x_{i}} + \delta*(\vec{x_{n}} - \vec{x_{i}}).
+		\end{equation}
+
+And one repeats this procedure for other neighbors of the point $\vec{x_i}$ and construct a set $E_{min}^j$. See the figure \ref{smote} for visualization the process synthesizing.	
 		
 		\begin{figure}[ht]
 		\begin{center}
@@ -319,6 +356,7 @@ Most of machine learning algorithms perform well on evenly populated instances o
 		\label{smote}
 		\end{center}
 		\end{figure}
+		
 
 The core concept of SMOTE is filling out the cloud of minority class instances by interpolating existing data points so it closely resembles a \textit{convex set}. This idea, making a convex set of minority instances by interpolation, assumes that the underling data distribution itself is convex. In a high dimensional space, it is often the case that the distribution of data forms a quite intricate manifold from which the data we observe is generated. So interpolating data points of the complex manifold yields a convex set, that is radically different from the underlying concept that a classifier tries to learn.
 
