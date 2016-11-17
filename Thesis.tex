@@ -44,7 +44,7 @@ The structure of complex networks has been of interest in many scientific and en
 	
 	 The degree of a node is a measure of how many edges are connected to a particular node, and the probability distribution $p(k)$ over all nodes essentially describes the "unfairness" in the network. If all of the nodes in a network have the exact same number of connections, the fairest case, then $p(k)$ behaves like Kronecker delta, where $p(k)$ has a value $1$ only at a specific degree $k$. Or if it is less fair, one may observe a narrow Gaussian-like distribution around an average degree. In the real world network, however, this almost never happens. What is observed most of the time instead, is a very skewed degree distribution in which most of the nodes have a few connections incident upon them, and very few nodes have a disproportionally large number of connections with them. \textit{Power-law} distribution is one of candidate distributions that describes the observed phenomenon well, and a network having this distribution is often called \textit{scale-free} network \cite{Barabasi99emergenceScaling}. Surprisingly, a number of networks  from diverse fields, such the Internet, metabolic reactions, World-Wide-Web, etc. have been claimed to be a scale-free network. However, one needs to be careful in order to validate if a network of interest indeed has the power-law degree distribution and it appears that a number of such claims need more statistically valid treatment such one proposed by Clauset \textit{et al.} for justification \cite{Clauset:PowerLaw}. The disproportionality of the skewed degree distribution indicates an existence of  \textit{hubs}, \textit{cores} or \textit{elites} in a network. Such important nodes in a network can play a critical role for a network to function properly and the failure of such nodes may result in a catastrophe \cite{ScaleFreeAttack}.
 	
-	The next common structural characteristic of networks is \textit{small-worldness}, first conceptually introduced by a Milgram's experiment \cite{Milgram} and mathematically proposed in a paper by Watts and Strogatz \cite{watts1998cds}. Watts and Strogatz proposed a random network model that, depending on a parameter setting, produces a network which has the following properties: 1. high density of triangles, implying that if three nodes are connected, it is likely that those three nodes actually compose a triangle; 2. low average distance between a pair of nodes, which indicates that from any node it is just a few steps, in average, to reach any other node in the network. These properties are accomplished by an existence of "long-range" connections bridging together pairs of nodes topologically far away from each other. Small-worldness holds seemingly contradicting properties together: the large degree of local-ness exhibited as a large clustering coefficient value and the large degree of global-ness expressed as a small value of mean geodesic distance.  These properties make small-world networks a very efficient system for information flow \cite{SmallWorldEfficiency} and synchronizing coupled oscillators in the network \cite{SmallWorldSynchronization}. Note that the small-worldness itself is orthogonal to the skewed degree distribution, meaning that so-called small-world networks can be constructed without the heavy-tail degree distribution. The definition of small world network presented above is, however, not generally used. Most of the researchers today regard small-world property as simply the low average pairwise distance between nodes that grows approximately as $O(\log(n))$.
+	The next common structural characteristic of networks is \textit{small-worldness}, first conceptually introduced by a Milgram's experiment \cite{Milgram} and mathematically proposed in a paper by Watts and Strogatz \cite{watts1998cds}. Watts and Strogatz proposed a random network model that, depending on a parameter setting, produces a network which has the following properties: 1. high density of triangles, implying that if three nodes are connected, it is likely that those three nodes actually compose a triangle; 2. low average distance between a pair of nodes, which indicates that from any node it is just a few steps, in average, to reach any other node in the network. These properties are accomplished by an existence of "long-range" connections bridging together pairs of nodes topologically far away from each other. Small-worldness holds seemingly contradicting properties together: the large degree of local-ness exhibited as a large clustering coefficient value and the large degree of global-ness expressed as a small value of mean geodesic distance.  These properties make small-world networks a very efficient system for information flow \cite{SmallWorldEfficiency} and synchronizing coupled oscillators in the network \cite{SmallWorldSynchronization}. Note that the small-worldness itself is orthogonal to the skewed degree distribution, meaning that so-called small-world networks can be constructed without the heavy-tail degree distribution. The definition of small world network presented above is, however, not generally used. Most of the researchers today regard small-world property as simply the low average pairwise distance between nodes that grows approximately as $O(\log n)$.
 	
 	
 	Many of the real-world networks contain \textit{modules} or \textit{communities} in which nodes are densely connected but among which there are sparse edges running. This structure is called \textit{community structure} of a network and there has been a number of studies investigating such communities and inventing a new algorithm for detecting communities in the network \cite{Modularity1, Modularity2, ModularityReview}. The communities in a network found by algorithms often correspond to the functional units of the network: a unit of chemical reactions producing vital chemical product in the metabolic network, a group of densely connected neurons taking charge of a cognitive function, such as language and visual processing, and a group of scientists working together in the same field.
@@ -101,12 +101,19 @@ In this thesis, we study approximately 1000 of various kinds of real-world netwo
 \newpage
 \section{What Is A Network?}
 	\subsection{Formal Definition}
-	Formally, a network or graph is a mathematical object consisting of a set of edges (arcs) and nodes (vertices), which can be written as $G = (E,V)$. In many cases, an \textit{adjacency matrix} is used as a representation of a network, where each element of the matrix $A_{ij}$ takes a binary value, $1$ for presence of an edge between nodes $i$ and $j$, and $0$ if there is no edge between these nodes in an unweighted network.  If edges of the network are weighted, meaning that  edges can have real values, then the network is called \textit{weighted}. Related with weighted networks is \textit{multigraph} in which any pair of nodes is allowed to have multiple edges connecting them. One should be careful here with the representation with an adjacency matrix for weighted network and multigraph, as the interpretation of the value of $A_{ij}$ depends on the context in which one treats the graph for the problem. For example, $A_{ij} = 2$ may describe an edge between $i$ and $j$ weighted by $2$, or there are \textit{two} edges running between $i$ and $j$. If the matrix is symmetric, namely $A_{ij} = A_{ji},  \forall i,j \in V$, the matrix represents an \textit{undirected} network in which edges do not have directionality at all. If the matrix is asymmetric, on the other hand, it's representing a \textit{directed} network, where edges have directionality. If the diagonal elements of a matrix $A$ are non-zero, the network has \textit{self-loops} which indicates that there are edges originating from and pointing to the exact same node. In many studies such self-loops are simply ignored for the sake of simplicity. The last, but not the least kind of network is \textit{bipartite network}, in which there are two groups of nodes and edges exist \textit{only} between nodes of different groups. An example of bipartite network is a network of cooperate board membership where there are groups of companies and board members and edges connect companies and board members. Often times, a bipartite network is converted into a network in which there is only one kind of nodes, for instance only board members in the case of cooperate board membership network, by an operation called one-mode projection. In the one-mode projected network of board members, an edge between persons $i$ and $j$ now represents the frequency that they sit on the same board for companies.
+	Formally, a network or graph is a mathematical object consisting of sets of edges (arcs) and nodes (vertices), which can be written as $G = (E,V)$. In many cases, an \textit{adjacency matrix} is used as a representation of a network, where each element of the matrix $A_{ij}$ takes a binary value, $1$ for presence of an edge between nodes $i$ and $j$, and $0$ if there is no edge between these nodes in an unweighted network.  If the matrix is symmetric, namely $A_{ij} = A_{ji},  \forall i,j \in V$, the matrix represents an \textit{undirected} network in which edges do not have directionality at all. If the matrix is asymmetric, on the other hand, it's representing a \textit{directed} network, where an element $A_{ij}$ implies an edge originating from the node $i$ and pointing to the node $j$. If edges of the network are weighted, meaning that edges can have real values, then the network is called \textit{weighted}. Related with weighted networks is \textit{multigraph} in which any pair of nodes is allowed to have multiple edges connecting them. One should be careful here with the representation with an adjacency matrix for weighted network and multigraph, as the interpretation of the value of $A_{ij}$ depends on the context in which one treats the graph for the problem. For example, $A_{ij} = 2$ may describe an edge between $i$ and $j$ weighted by $2$, or there are \textit{two} edges running between $i$ and $j$. If the diagonal elements of a matrix $A$ are non-zero, the network has \textit{self-loops} which indicates that there are edges originating from and pointing to the exact same node. In many studies such self-loops are simply ignored for the sake of simplicity. The last, but not the least kind of network is \textit{bipartite network}, in which there are two groups of nodes and edges exist \textit{only} between nodes of different groups. An example of bipartite network is a network of cooperate board membership where there are groups of companies and board members and edges connect companies and board members. Often times, a bipartite network is converted into a network in which there is only one kind of nodes, for instance only board members in the case of cooperate board membership network, by an operation called one-mode projection. In the one-mode projected network of board members, an edge between persons $i$ and $j$ now represents the frequency that they sit on the same board for companies.
 	
-	As such, there are many kinds of networks, each describing networks differently. In our study, for the sake of simplicity and comparability, we focus on using a \textit{simple graph}, in which edges have no directionality and weight and there is no self-loops.
+	As such, there are many kinds of networks, each describing networks differently. In our study, for the sake of simplicity and comparability, we focus on using a \textit{simple graph}, in which edges have no directionality and weight and there is no self-loops. A set of procedures for converting non-simple graphs into simple graphs is defined as follows:
+	
+	\begin{enumerate}
+		\item if a network is directed, then discard the directionality.
+		\item If a network is weighted, then convert any non-zero weight into $1$ and $0$ otherwise.
+		\item If a network is multigraph, namely having multiple edges between a pair of nodes, then merge them into one edge.
+		\item if a network contains self-loops, then discard them.
+	\end{enumerate}
 	
 	\subsection{Structural Features of A Network}
-	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. Some network features, however, are implicitly correlated with the size of networks, which itself is a very strong feature: the number of nodes in web graphs is usually a magnitude of $10^6$ or more whereas ecological food webs contain usually less than 100 nodes. Examples of such features include, for instance, distance-related features such as average path length and network diameter that are believed to grow approximately in the order of $\log(n)$, where $n$ is the number of nodes in a network. Another structural feature correlated with the size of the network is the modularity of network \cite{Modularity1}. Simply put, modularity quantifies the degree to which how much an observed network can be "partitioned" into modules within which edges are densely present but between which edges are sparsely present. The derivation of modularity is essentially based on comparing the original network with a random network having the same degree distribution which is called configuration model and the value of modularity is practically the degree of difference between the original graph and its randomized counterpart. If the size of a network is large, the random network becomes so different that the modularity value becomes large as well \cite{ResolutionLimit}.
+	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. Some network features, however, are implicitly correlated with the size of networks, which itself is a very strong feature: the number of nodes in web graphs is usually a magnitude of $10^6$ or more whereas ecological food webs contain usually less than 100 nodes. Examples of such features include, for instance, distance-related features such as average path length and network diameter that are believed to grow approximately in $O(\log n)$, where $n$ is the number of nodes in a network. Another structural feature correlated with the size of the network is the modularity of network \cite{Modularity1}. Simply put, modularity quantifies the degree to which how much an observed network can be "partitioned" into modules within which edges are densely present but between which edges are sparsely present. The derivation of modularity is essentially based on comparing the original network with a random network having the same degree distribution which is called configuration model and the value of modularity is practically the degree of difference between the original graph and its randomized counterpart. If the size of a network is large, the random network becomes so different that the modularity value becomes large as well \cite{ResolutionLimit, ModularityLimit}.
 	
 	The feature set we use in this study is scale-invariant, meaning that the size of network is supposed not to affect the value of a feature. This set of features allows us to compare networks without the notion of network size. In the following sections we describe important structural features that are relevant in this study.	
 	 
@@ -250,38 +257,38 @@ In this study, we treat the significance profile for each subgraph as a feature 
 	 Sub-domain & Domain& Description \\ \hline \hline
  	\endhead
       %Sub-domain & Domain & Description  \\ \hline \hline
-      Fungal &  Biological & Network of mycelial growth patterns of fungus or slime mold. Nodes are located at hyphal tips, branch points, and anastomoses. Edges represent cords.\\  \hline
-      Metabolic &  Biological & Network of chemical reactions of metabolism in a cell.\\  \hline
-      Proteins &  Biological & Physical contacts of proteins in a cell or in a living organism.\\  \hline
-      Connectome &  Biological & Network of neural connection in the brain at either the level of neuron or the level of anatomical region.\\  \hline
-      Food Web &  Biological & The relationships of predator-prey in terrestrial or aquatic animal kingdoms.\\  \hline
-      Gene regulation &  Biological & The interactions of molecular regulators that govern the gene expression.\\  \hline
-      Bayesian & Informational & Probabilistic model that contains a directed-acyclic-graph(DAG) in which nodes represent random variables and edges represent conditional dependence among these random variables.\\  \hline
-      PeerToPeer &  Informational & A kind of computer networks in which peers (computers) are equally privileged in the network for sharing files.\\  \hline
-      Web Graph &  Informational & Network of World-Wide-Web. Nodes represent web pages and edges represent hyper-links among web sites. \\  \hline
-      Language &  Informational & Networks of word adjacency and word association.\\  \hline
-      Relatedness &  Informational & Networks of relatedness, such as similarities among book purchased on online retailers. \\  \hline
-      Legal &  Informational & Network of legal citations. Nodes represent majority opinions written by the Supreme Court of the United States and edges represent citation.\\  \hline
-      Commerce &  Informational & Network of co-purchasing items on websites.\\  \hline
-      Recommendations &  Informational & Network of books, where edges represent the frequency that a pair of nodes (books) is co-purchased together.\\  \hline
-      Affiliation &  Social & Network of cooperate board members. Networks in this sub-domain are one-mode projected onto individuals.\\  \hline
-      Online Social &  Social & Network of friendship online, such as Facebook.\\  \hline
-      Offline Social &  Social & Network of friendship or some sort of inter-personal relationships offline.\\  \hline
-      Collaboration &  Social & Network of collaborations among people. This sub-domain includes collaboration of scientific papers, music, etc.\\  \hline
-      Fiction &  Social & Co-appearance network of fictional characters from books.\\  \hline
-      Relationships &  Social & Network of social relationship among managers from tech companies, Florentine families during the Italian Renaissance, etc.\\  \hline
-      Email &  Social & Network of emails.\\  \hline
-      Small World &  Synthesized & Networks generated by Watt-Strogatz model.\\  \hline
-      Forest Fire Network &  Synthesized & Networks generated by a Forest Fire Model proposed by Leskovec \textit{et al.} \\  \hline
-      ER Network &  Synthesized & Erd\H{o}s-R\'enyi random network. \\  \hline
-      Scale Free &  Synthesized & Networks generated by Barab\'asi-Albert model.\\  \hline
-      Communication &  Technological & Network of autonomous systems (the Internet).\\  \hline
-      Digital Circuit &  Technological & Networks of logical gates connected by wirings.\\  \hline
-      Software Dependency &  Technological & Networks in which nodes represent either class, function or package and edges correspond to dependencies.\\  \hline
-      Water Distribution &  Technological & Network of piping and junctions for water distribution system.\\  \hline
-      Power Grid &  Technological & Network of power grid in which nodes correspond to transforms or power relay points and edges represent power lines.\\  \hline
-      Roads &  Transportation & Network of roads where nodes are intersections and edges are roads.\\  \hline
-      Subway &  Transportation & Subway networks of major cities around the world.\\  \hline
+      Fungal &  Biological & Network of mycelial growth patterns of fungus or slime mold. Nodes are located at hyphal tips, branch points, and anastomoses. Edges represent cords.\\  %\hline
+      Metabolic &  Biological & Network of chemical reactions of metabolism in a cell.\\  %\hline
+      Proteins &  Biological & Physical contacts of proteins in a cell or in a living organism.\\  %\hline
+      Connectome &  Biological & Network of neural connection in the brain at either the level of neuron or the level of anatomical region.\\  %\hline
+      Food Web &  Biological & The relationships of predator-prey in terrestrial or aquatic animal kingdoms.\\  %\hline
+      Gene regulation &  Biological & The interactions of molecular regulators that govern the gene expression.\\ % \hline
+      Bayesian & Informational & Probabilistic model that contains a directed-acyclic-graph(DAG) in which nodes represent random variables and edges represent conditional dependence among these random variables.\\  %\hline
+      PeerToPeer &  Informational & A kind of computer networks in which peers (computers) are equally privileged in the network for sharing files.\\ % \hline
+      Web Graph &  Informational & Network of World-Wide-Web. Nodes represent web pages and edges represent hyper-links among web sites. \\  %\hline
+      Language &  Informational & Networks of word adjacency and word association that are extracted from books.\\  %\hline
+      Relatedness &  Informational & Networks of relatedness, such as similarities among book purchased on online retailers. \\ % \hline
+      Legal &  Informational & Network of legal citations. Nodes represent majority opinions written by the Supreme Court of the United States and edges represent citation.\\ % \hline
+      Commerce &  Informational & Network of co-purchasing items on websites.\\  %\hline
+      Recommendations &  Informational & Network of books, where edges represent the frequency that a pair of nodes (books) is co-purchased together.\\  %\hline
+      Affiliation &  Social & Network of cooperate boards and the directors that sit on them. Networks in this sub-domain are one-mode projected onto individuals.\\  %\hline
+      Online Social &  Social & Network of friendship online, such as Facebook.\\  %\hline
+      Offline Social &  Social & Network of friendship or some sort of inter-personal relationships offline.\\  %\hline
+      Collaboration &  Social & Network of collaborations among people. This sub-domain includes collaboration of scientific papers, music, etc.\\  \%hline
+      Fiction &  Social & Co-appearance network of fictional characters from books.\\  %\hline
+      Relationships &  Social & Network of social relationship among managers from tech companies, Florentine families during the Italian Renaissance, etc.\\ % \hline
+      Email &  Social & Network of emails.\\ % \hline
+      Small World &  Synthesized & Networks generated by Watt-Strogatz model.\\  %\hline
+      Forest Fire Network &  Synthesized & Networks generated by a Forest Fire Model proposed by Leskovec \textit{et al.} \\  %\hline
+      ER Network &  Synthesized & Erd\H{o}s-R\'enyi random network. \\  % \hline
+      Scale Free &  Synthesized & Networks generated by Barab\'asi-Albert model.\\  %\hline
+      Communication &  Technological & Network of autonomous systems (the Internet).\\  %\hline
+      Digital Circuit &  Technological & Networks of logical gates connected by wirings.\\ % \hline
+      Software Dependency &  Technological & Networks in which nodes represent either class, function or package and edges correspond to dependencies.\\  %\hline
+      Water Distribution &  Technological & Network of piping and junctions for water distribution system.\\ % \hline
+      Power Grid &  Technological & Network of power grid in which nodes correspond to transforms or power relay points and edges represent power lines.\\ % \hline
+      Roads &  Transportation & Network of roads where nodes are intersections and edges are roads.\\ % \hline
+      Subway &  Transportation & Subway networks of major cities around the world.\\ % \hline
       Airport &  Transportation & Network of airports that are connected by flights between the airports.\\  \hline
            
 \end{longtable}
@@ -299,53 +306,51 @@ Most of machine learning algorithms perform well on evenly populated instances o
 
 
 		\subsubsection{Random Over-sampling}
-		Random sampling method is one of the simplest strategies for mitigating the class imbalance problem. \textit{Random over-sampling} essentially over-samples any minority classes to an extent that the number of instances in each class becomes even. Here we explain this sampling method in a mathematical sense. Let $S_{maj} \subset S$ be the majority class, meaning a class having the largest number of instances, and $S_{min}^{j}$ be the $j$th minority class where $j = 1,...,C-1$ such that
-	
+		Random sampling method is one of the simplest strategies for mitigating the class imbalance problem. Random over-sampling essentially over-samples any minority classes to an extent that the number of instances in each class becomes even. Here we explain this sampling method in a mathematical sense. Let $S_{\rm{maj}} \subset S$ be the majority class, meaning a class having the largest number of instances, $S_{\rm{min}}^{j} \subset S$ the $j$th minority class where $j = 1,...,C-1$ and $P$ a set $\{S_{\rm{maj}}, S_{\rm{min}}^{1},...,S_{\rm{min}}^{C-1} \}$ such that
 	
 	\begin{equation}
-	S_{maj} \cap S_{min}^{1} \cap S_{min}^{2},..., \cap S_{min}^{C-1} = \{\},
+	S_{\rm{maj}} \cup S_{\rm{min}}^{1} \cup S_{\rm{min}}^{2},..., \cup S_{\rm{min}}^{C-1} = S,
 	\end{equation}
 	and
 	\begin{equation}
-	S_{maj} \cup S_{min}^{1} \cup S_{min}^{2},..., \cup S_{min}^{C-1} = S.
+	\forall S_1,S_2 \in P \land S_1 \neq S_2 \Rightarrow S_1 \cap S_2 = \emptyset,
 	\end{equation}
+
 	
-	
-Let $E_{min}^j$ be a set of points that are sampled at uniformly random from a set $S_{min}^{j}$ that satisfies the following equality:
+where $\emptyset$ means an empty set. Let $E_{\rm{min}}^j$ be a set of points that are sampled at uniformly random from a set $S_{\rm{min}}^{j}$ that satisfies the following equality:
 
 	\begin{equation}
-	|S_{min}^{j}| + | E_{min}^j | = |S_{maj}|.
+	|S_{\rm{min}}^{j}| + | E_{\rm{min}}^j | = |S_{\rm{maj}}|.
 	\end{equation}
 	
- We then append the set $E_{min}^j$ to the corresponding set of the minority class $S_{min}^{j}$, namely $S_{min}^{j} := S_{min}^{j} + E_{min}^j$. The drawback of random over-sampling is a potential poor generalization due to the overfit of a classifier to the over-sampled instances.
+ We then append the set $E_{\rm{min}}^j$ to the corresponding set of the minority class $S_{\rm{min}}^{j}$, namely $S_{\rm{min}}^{j} := S_{\rm{min}}^{j} + E_{\rm{min}}^j$. The drawback of random over-sampling is a potential poor generalization due to the overfit of a classifier to the over-sampled instances.
 	
 	\subsubsection{Random Under-sampling}
-	\textit{Random under-sampling}, on the other hand, under-samples the majority class, essentially throwing out some data in order to make the "cloud" of data points sparser. This "throwing out instances" implies an obvious drawback of this sampling method: It discards potentially important instances that compose the backbone of majority classes, implying the true shape of majority class is no longer retained. Here, again, we explain this method using mathematics. Let $S_{min} \subset S$ be the minority class,
-meaning a class having the least number of instances, and  $S_{maj}^{j}$ be the $j$th majority class where $j = 1,...,C-1$, such that
+	Random under-sampling, on the other hand, under-samples the majority class, essentially throwing out some data in order to make the "cloud" of data points sparser. This "throwing out instances" implies an obvious drawback of this sampling method: It discards potentially important instances that compose the backbone of majority classes, implying the true shape of majority class is no longer retained. Here, again, we explain this method using mathematics. Let $S_{\rm{min}} \subset S$ be the minority class, meaning a class having the least number of instances, $S_{\rm{maj}}^{j}$ the $j$th majority class where $j = 1,...,C-1$ and $P$ a set $\{S_{\rm{min}}, S_{\rm{maj}}^{1},...,S_{\rm{maj}}^{C-1} \}$ such that
 
 	\begin{equation}
-	S_{min} \cap S_{maj}^{1} \cap S_{maj}^{2},..., \cap S_{maj}^{C-1} = \{\},
+	S_{\rm{min}} \cup S_{\rm{maj}}^{1} \cup S_{\rm{maj}}^{2},..., \cup S_{\rm{maj}}^{C-1} = S
 	\end{equation}
 	and
 	\begin{equation}
-	S_{min} \cup S_{maj}^{1} \cup S_{maj}^{2},..., \cup S_{maj}^{C-1} = S.
+	\forall S_1,S_2 \in P \land S_1 \neq S_2 \Rightarrow S_1 \cap S_2 = \emptyset.
 	\end{equation}
 	
-Let $E_{maj}^j$ be a set of points that are sampled at uniformly random from a set $S_{maj}^{j}$ that satisfies the following equality:
+Let $E_{\rm{maj}}^j$ be a set of points that are sampled at uniformly random from a set $S_{\rm{maj}}^{j}$ that satisfies the following equality:
 
 	\begin{equation}
-	|S_{min}^{j}| = | S_{maj}^j -  E_{maj}^j |.
+	|S_{\rm{min}}^{j}| = | S_{\rm{maj}}^j -  E_{\rm{maj}}^j |.
 	\end{equation}
-Then, we subtract the set $S_{maj}^j$ by $E_{maj}^j$, thus $S_{maj}^j := S_{maj}^j -  E_{maj}^j$.
+Then, we subtract the set $S_{\rm{maj}}^j$ by $E_{\rm{maj}}^j$, thus $S_{\rm{maj}}^j := S_{\rm{maj}}^j -  E_{\rm{maj}}^j$.
 		
 		\subsubsection{SMOTE}
-		\textit{Synthetic Minority Over-sampling Technique}, widely known as SMOTE \cite{SMOTE}, is an alternative sampling method that synthesizes data points in the training set for a classifier. Mathematically speaking, SMOTE is quite similar to random over-sampling, except the generation of a set $E_{min}^j$ for a minority class $S_{min}^j$. For each set of the minority class $j$, namely $S_{min}^j$, consider $K$ nearest neighbors of a point $\vec{x_i} \in S_{min}^j$ in the $N$-dimensional feature space. To generate a new point, first pick up one of the $K$ nearest neighbors, say $\vec{x_{n}}$, then multiply the corresponding feature vector difference with a weight  $\delta$  chosen from an interval $ [0,1]$ at uniformly random and add this vector to $\vec{x_i}$. Therefore, we have a newly synthesized point defined as follows:
+		\textit{Synthetic Minority Over-sampling Technique}, widely known as SMOTE \cite{SMOTE}, is an alternative sampling method that synthesizes data points in the training set for a classifier. Mathematically speaking, SMOTE is quite similar to random over-sampling, except the generation of a set $E_{\rm{min}}^j$ for a minority class $S_{\rm{min}}^j$. For each set of the minority class $j$, namely $S_{\rm{min}}^j$, consider $K$ nearest neighbors of a point $\vec{x_i} \in S_{\rm{min}}^j$ in the $N$-dimensional feature space. To generate a new point, first pick up one of the $K$ nearest neighbors, say $\vec{x_{n}}$, then multiply the corresponding feature vector difference with a weight  $\delta$  chosen from an interval $ [0,1]$ at uniformly random and add this vector to $\vec{x_i}$. Therefore, we have a newly synthesized point defined as follows:
 		
 		\begin{equation}
-		\vec{x_{new}} = \vec{x_{i}} + \delta*(\vec{x_{n}} - \vec{x_{i}}).
+		\vec{x_{\rm{new}}} = \vec{x_{i}} + \delta*(\vec{x_{n}} - \vec{x_{i}}).
 		\end{equation}
 
-And one repeats this procedure for other neighbors of the point $\vec{x_i}$ and construct a set $E_{min}^j$. See the figure \ref{smote} for visualization of the synthesizing process.	
+And one repeats this procedure for other neighbors of the point $\vec{x_i}$ and construct a set $E_{\rm{min}}^j$. See the figure \ref{smote} for visualization of the synthesizing process.	
 		
 		\begin{figure}[ht]
 		\begin{center}
@@ -358,7 +363,7 @@ And one repeats this procedure for other neighbors of the point $\vec{x_i}$ and 
 		\end{figure}
 		
 
-The core concept of SMOTE is filling out the cloud of minority class instances by interpolating existing data points so it closely resembles a \textit{convex set}. This idea, making a convex set of minority instances by interpolation, assumes that the underling data distribution itself is convex. In a high dimensional space, it is often the case that the distribution of data forms a quite intricate manifold from which the data we observe is generated. So interpolating data points of the complex manifold yields a convex set, that is radically different from the underlying concept that a classifier tries to learn.
+The core concept of SMOTE is filling out the cloud of minority class instances by interpolating existing data points so that it closely resembles a \textit{convex set}. This idea, making a convex set of minority instances by interpolation, assumes that the shape of a manifold of the underling data distribution itself is convex. In a high dimensional space, it is often the case that the distribution of data forms a quite intricate non-convex manifold from which the data we observe is generated. Therefore one must be careful when using a sampling methods like SMOTE that the resulting set of points by interpolation of data points of such complex manifold is likely to be a convex set, that may radically be different from the underlying concept that a classifier tries to learn.
 
 	\subsection{Classification}
 	In order to find similarities and differences of data of different classes, one needs to develop a notion of similarity between the classes. In this study we derive such notion of similarity from confusion matrices that are produced by random forest classifiers. Following sub-sections describe the details of decision tree which is an essential component of random forest, random forest classifier and confusion matrix.
