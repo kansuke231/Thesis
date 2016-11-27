@@ -1,0 +1,84 @@
+\documentclass[defaultstyle,11pt]{thesis}
+
+\usepackage{enumitem}
+\usepackage{fixltx2e}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[tbtags]{amsmath}
+\usepackage{textcomp}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage[top=25truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+
+%%%%%%%%%%%%   All the preamble material:   %%%%%%%%%%%%
+
+\title{Structure of Complex Networks across Domains}
+
+\author{Kansuke}{Ikehara}
+
+\otherdegrees{B.Eng., Fukuoka Univesity, 2014}
+
+\degree{Master of Science}		%  #1 {long descr.}
+	{M.S., Computer Science}		%  #2 {short descr.}
+
+\dept{Department of}			%  #1 {designation}
+	{Computer Science}		%  #2 {name}
+
+\advisor{Prof.}				%  #1 {title}
+	{Aaron Clauset}			%  #2 {name}
+
+\reader{Prof.~Elizabeth Bradley}		%  2nd person to sign thesis
+\readerThree{Prof.~Jordan Boyd-Graber}		%  3rd person to sign thesis
+
+\abstract{ 
+	The structure of complex networks has been of interest in many scientific and engineering disciplines over decades. A number of studies in the field have been in focus of finding the common properties among different kinds of networks such as the heavy-tail degree distribution, small-worldness and modular structure and trying to establish a theory of structural universality in complex networks. However, there is no comprehensive study of network structure across a diverse set of domains in order to explain the structural diversity as we observe in the real-world networks. In this paper, we study 986 of real-world networks of diverse domains ranging from ecological food webs to online social networks along with 575 networks generated from four popular network models. Our study utilizes a number of  machine learning techniques such as random forest and confusion matrix and we show the relationships among network domains in terms of network structure. Our result indicates that there are some groups of network categories that are inherently hard to distinguish based purely on network structure. We have found that these network categories tend to have the similar underlying function, constraint and/or generative mechanism of networks. Our findings shed light on the possible direction along which we could uncover the hidden principles for the structural diversity of complex networks.
+}
+\dedication[Dedication]{	% NEVER use \OnePageChapter here.
+	TO DO.
+	}
+
+\acknowledgements{	\OnePageChapter	% *MUST* BE ONLY ONE PAGE!
+	TO DO.
+	}
+
+% \IRBprotocol{E927F29.001X}	% optional!
+
+\ToCisShort	% use this only for 1-page Table of Contents
+
+%\LoFisShort	% use this only for 1-page Table of Figures
+% \emptyLoF	% use this if there is no List of Figures
+
+%\LoTisShort	% use this only for 1-page Table of Tables
+% \emptyLoT	% use this if there is no List of Tables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%       BEGIN DOCUMENT...         %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\input chapter1.tex
+\input chapter2.tex
+\input chapter3.tex
+\input chapter4.tex
+\input chapter5.tex
+\input chapter6.tex
+\input chapter7.tex
+\input chapter8.tex
+
+%%%%%%%%%   then the Bibliography, if any   %%%%%%%%%
+\bibliographystyle{ieeetr}	% or "siam", or "alpha", etc.
+\nocite{*}		% list all refs in database, cited or not
+\bibliography{reference}		% Bib database in "refs.bib"
+
+%%%%%%%%%   then the Appendices, if any   %%%%%%%%%
+%\appendix
+%\input appendixA.tex
+%\input appendixB.tex
+
+
+\end{document}
+
