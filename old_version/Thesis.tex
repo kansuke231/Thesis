@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[..]{revtex4}
 \usepackage{enumitem}
 \usepackage{fixltx2e}
 \usepackage{hyperref}
@@ -7,10 +7,10 @@
 \usepackage{color}
 \usepackage[tbtags]{amsmath}
 \usepackage{textcomp}
-\usepackage{subcaption}
-\usepackage{longtable}
+%\usepackage{subcaption}
+%\usepackage{longtable}
 \usepackage{float}
-\usepackage[top=25truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+%\usepackage[top=25truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
 
 
 
@@ -19,16 +19,20 @@
 
 
 \def\vector#1{\mbox{\boldmath $#1$}}
+
 \begin{document}
 
 \title{Structure of complex networks across domains}
 \author{Kansuke Ikehara}
-\maketitle
+
 
 \begin{abstract}
 The structure of complex networks has been of interest in many scientific and engineering disciplines over decades. A number of studies in the field have been in focus of finding the common properties among different kinds of networks such as the heavy-tail degree distribution, small-worldness and modular structure and trying to establish a theory of structural universality in complex networks. However, there is no comprehensive study of network structure across a diverse set of domains in order to explain the structural diversity as we observe in the real-world networks. In this paper, we study 986 of real-world networks of diverse domains ranging from ecological food webs to online social networks along with 575 networks generated from four popular network models. Our study utilizes a number of  machine learning techniques such as random forest and confusion matrix and we show the relationships among network domains in terms of network structure. Our result indicates that there are some groups of network categories that are inherently hard to distinguish based purely on network structure. We have found that these network categories tend to have the similar underlying function, constraint and/or generative mechanism of networks. Our findings shed light on the possible direction along which we could uncover the hidden principles for the structural diversity of complex networks.
   
 \end{abstract}
+
+\maketitle
+
 \tableofcontents
 
 %%%%%%%%%%%%%%%% --- New Chapter --- %%%%%%%%%%%%%%%%
