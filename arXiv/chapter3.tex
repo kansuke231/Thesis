@@ -17,18 +17,35 @@ We show all the details of network sub-domains for our study in the table \ref{t
 	\section{Feature Extraction}
 	After converting into GML format, we calculate a set of features explained in the previous chapter for each network. We have extensively used a Python library \textit{igraph} \cite{igraph} for extracting features including clustering coefficient and degree assortativity and other miscellaneous operations on network data. For calculating network motifs, we used a parallel motif computing algorithm for undirected motifs developed by Ahmed \textit{et al.} \cite{ahmed2015icdm}. A number of computations involved in this study are parallelized by using a command-line tool \textit{GNU Parallel} \cite{GNUParallel}.
 
-\begin{figure}[H]
-\begin{subfigure}{0.40\textwidth}
-\includegraphics[width=\linewidth]{figs/category_ratio.png}
-\caption{}\label{domain_ratio}
-\end{subfigure}\hspace*{\fill}
-\begin{subfigure}{0.45\textwidth}
-\includegraphics[width=\linewidth]{figs/subdomain_dist.png}
-\caption{}\label{sub_dist}
-\end{subfigure}\hspace*{\fill}
+
+\begin{figure}
+\centering 
+\subfloat[plot]{%
+  \includegraphics[width=0.3\columnwidth]{figs/category_ratio.png}%
+  \label{plot:sval}%
+}\qquad
+\subfloat[plot]{%
+  \includegraphics[width=0.3\columnwidth]{figs/subdomain_dist.png}%
+  \label{plot:whatever}%
+}
 
 \caption{(a): The categorical ratio of network domains. (b):  Count distribution of network sub-domains. Sub-domains of the same network domain are grouped together having the same color in the figure. Color code from top: Biological, Informational, Social, Synthesized, Technological and Transportation.} \label{category_dist}.
+
 \end{figure}
+
+
+%%\begin{figure}
+%%\begin{subfigure}{0.40\textwidth}
+%%\includegraphics[width=\linewidth]{figs/category_ratio.png}
+%%\caption{}\label{domain_ratio}
+%%\end{subfigure}\hspace*{\fill}
+%%\begin{subfigure}{0.45\textwidth}
+%%\includegraphics[width=\linewidth]{figs/subdomain_dist.png}
+%%\caption{}\label{sub_dist}
+%%\end{subfigure}\hspace*{\fill}
+%%
+%%\caption{(a): The categorical ratio of network domains. (b):  Count distribution of network sub-domains. Sub-domains of the same network domain are grouped together having the same color in the figure. Color code from top: Biological, Informational, Social, Synthesized, Technological and Transportation.} \label{category_dist}.
+%%\end{figure}
 
 
 \newpage
