@@ -30,77 +30,83 @@ For some network sub-domains, however, implications of the distinguishing featur
 
 \begin{figure}
 \centering 
-\subfloat[plot]{%
+
+\subfloat[Protein interaction.  Average AUC score: 0.689]{%
   \includegraphics[width=0.3\columnwidth]{figs/one_by_many/protein/2d.png}%
-  %\caption{Protein interaction.  Average AUC score: 0.689}%
    \label{protein_2d}%
 }\qquad
-\subfloat[plot]{%
+\subfloat[Ecological food web. Average AUC score: 0.804]{%
   \includegraphics[width=0.3\columnwidth]{figs/one_by_many/food_web/2d.png}%
-  %\caption{Ecological food web. Average AUC score: 0.804}%
   \label{foodweb_2d}%
 }
+
+\medskip
+
+\subfloat[Metabolic. Average AUC score: 0.94]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/metabolic/2d.png}%
+   \label{metabolic_2d}%
+}\qquad
+\subfloat[Connectome. Average AUC score: 0.716]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/connectome/2d.png}%
+  \label{connectome_2d}%
+}
+
+\medskip
+
+\subfloat[Online social. Average AUC score: 0.94]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/online_social/2d.png}%
+   \label{online_social_2d}%
+}\qquad
+\subfloat[Communication. Average AUC score: 0.992]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/communication/2d.png}%
+  \label{communication_2d}%
+}
+
+
+\caption{2D plots for all representative network sub-domains. X axis corresponds to the most importance feature and y axis the second most important.} \label{2d_figures}.
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\centering 
+
+\subfloat[Protein interaction. ]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/protein/feature_importance.png}%
+   \label{protein_feature}%
+}\qquad
+\subfloat[Ecological food web. ]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/food_web/feature_importance.png}%
+  \label{foodweb_feature}%
+}
+
+\medskip
+
+\subfloat[Metabolic.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/metabolic/feature_importance.png}%
+   \label{metabolic_feature}%
+}\qquad
+\subfloat[Connectome.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/connectome/feature_importance.png}%
+  \label{connectome_feature}%
+}
+
+\medskip
+
+\subfloat[Online social.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/online_social/feature_importance.png}%
+   \label{online_social_feature}%
+}\qquad
+\subfloat[Communication.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/one_by_many/communication/feature_importance.png}%
+  \label{communication_feature}%
+}
+
+
 \caption{Aggregated rankings of feature importance. The height of a color bar indicates a frequency of the corresponding specific feature being at the rank. The importance decreases along the x-axis} \label{feature_importance_figures}.
 \end{figure}
 
 
-
-%\medskip
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/metabolic/2d.png}
-%\caption{Metabolic. Average AUC score: 0.94} \label{metabolic_2d}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/connectome/2d.png}
-%\caption{Connectome. Average AUC score: 0.716} \label{connectome_2d}
-%\end{subfigure}
-%
-%\medskip
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/online_social/2d.png}
-%\caption{Online social. Average AUC score: 0.94} \label{online_social_2d}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/communication/2d.png}
-%\caption{Communication. Average AUC score: 0.992} \label{communication_2d}
-%\end{subfigure}
-%
-%\caption{2D plots for all representative network sub-domains. X axis corresponds to the most importance feature and y axis the second most important.} \label{2d_figures}
-%\end{figure}
-%
-%\begin{figure}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/protein/feature_importance.png}
-%\caption{Protein interaction.} \label{protein_feature}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/food_web/feature_importance.png}
-%\caption{Ecological food web.} \label{foodweb_feature}
-%\end{subfigure}
-%
-%\medskip
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/metabolic/feature_importance.png}
-%\caption{Metabolic. } \label{metabolic_feature}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/connectome/feature_importance.png}
-%\caption{Connectome.} \label{connectome_feature}
-%\end{subfigure}
-%
-%\medskip
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/online_social/feature_importance.png}
-%\caption{Online social.} \label{online_social_feature}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/one_by_many/communication/feature_importance.png}
-%\caption{Communication.} \label{communication_feature}
-%\end{subfigure}
-%
-%\caption{Aggregated rankings of feature importance. The height of a color bar indicates a frequency of the corresponding specific feature being at the rank. The importance decreases along the x-axis} \label{feature_importance_figures}.
-%\end{figure}
-%
 
 \section{Similarities in Networks of Different Kinds}
 Every network belongs to some sort of network domain or sub-domain that usually describes the properties and even structure of a network. As we have seen in the previous section, some networks of selected representative sub-domains exhibit structural uniqueness which makes them stand out among others in the feature space. However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig. \ref{2d_figures}, which leads to the question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest and confusion matrix.  
@@ -124,52 +130,56 @@ These pieces of information imply the existence of underlying similarities withi
 This analysis which is based on network domains is informative in a sense that it consistently exhibits the well connected group of domains that includes Biological, Informational and Technological. However, each network domain includes sub-domains within itself and these network sub-domains are quite diverse in terms of network's function. For example, neural networks in a brain and ecological food web, both in Biological domain, function very differently. Grouping sub-domains of different functions together as a single category may lose some information local to a specific sub-domain. Therefore, we proceed to analyze the networks on a more fine-grained setting, namely using network sub-domains as the class label in classification tasks.
  
 
-%\begin{figure}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/None/confusion_None.png}
-%\caption{No sampling.} \label{no_confusion}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/confusion_RandomOver.png}
-%\caption{Random over-sampling. } \label{random_over_confusion}
-%\end{subfigure}
-%
-%\medskip
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/confusion_RandomUnder.png}
-%\caption{Random under-sampling. } \label{random_under_confusion}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/confusion_SMOTE.png}
-%\caption{SMOTE.} \label{smote_confusion}
-%\end{subfigure}
-%\
-%\caption{Confusion matrices for each of the sampling strategy. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix.} \label{confusion}
-%\end{figure}
-%
-%\begin{figure}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/None/g.png}
-%\caption{No sampling} \label{no_graph}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomOver/g.png}
-%\caption{Random over-sampling.} \label{random_over_graph}
-%\end{subfigure}
-%
-%\medskip
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/RandomUnder_26/g.png}
-%\caption{Random under-sampling.} \label{random_under_graph}
-%\end{subfigure}\hspace*{\fill}
-%\begin{subfigure}{0.48\textwidth}
-%\includegraphics[width=\linewidth]{figs/similarity/Domain/SMOTE/g.png}
-%\caption{SMOTE.} \label{smote_graph}
-%\end{subfigure}
-%\
-%\caption{Domain networks for different sampling strategies. The widths of edges are proportional to the magnitude of a value in a symmetrized, normalized confusion matrix. Biological, Informational and Technological domains are well connected in all cases.} \label{meta_network}
-%\end{figure}
-%
+\begin{figure}
+\centering 
+\subfloat[No sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/None/confusion_None.png}%
+   \label{no_confusion}%
+}
+\subfloat[Random over-sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/RandomOver/confusion_RandomOver.png}%
+  \label{random_over_confusion}%
+}
+
+\medskip
+
+\subfloat[Random under-sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/RandomUnder_26/confusion_RandomUnder.png}%
+   \label{random_under_confusion}%
+}
+\subfloat[SMOTE]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/SMOTE/confusion_SMOTE.png}%
+  \label{smote_confusion}%
+ }
+\caption{Confusion matrices for each of the sampling strategy. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix. } \label{confusion}.
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{figure}
+\centering 
+\subfloat[No sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/None/g.png}%
+   \label{no_graph}%
+}
+\subfloat[Random over-sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/RandomOver/g.png}%
+  \label{random_over_graph}%
+}
+
+\medskip
+
+\subfloat[Random under-sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/RandomUnder_26/g.png}%
+   \label{random_under_graph}%
+}
+\subfloat[SMOTE]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/Domain/SMOTE/g.png}%
+  \label{smote_graph}%
+ }
+\caption{Domain networks for different sampling strategies. The widths of edges are proportional to the magnitude of a value in a symmetrized, normalized confusion matrix. Biological, Informational and Technological domains are well connected in all cases.} \label{meta_network}.
+\end{figure}
 
 \subsection{Network Sub-domains}
 Here we continue the same analysis as we have done in the previous section, but using network sub-domains as class labels for classification tasks.
@@ -186,74 +196,83 @@ Fig.\ref{meta_network_community} shows the networks of sub-domains on which the 
 Some network sub-domains, however, change the community membership for some subdomain networks. For instance, online social network and forest fire model networks join the community of off-line social network for no sampling, random-over sampling and random-under sampling method, but joins the community of software dependency (red color) for SMOTE sampling. This variation of community membership across all subdomain networks could be attributed to the effect of each sampling method on decision surfaces a classifier builds for classification. For instance, decision surfaces built by a classifier under the random under-sampling strategy should be simple shape-wise since the training set is very sparse in terms of the number of data points. On the other hand, decision surfaces built by a classifier for random over-sampling should be more toward complicated shape-wise and lead to over-fitting as the number of data points for training is larger and duplicated points force the classifier to adjust itself to those points. Therefore this variation of decision surfaces may lead some data points to be classified differently for different sampling method, which ultimately leads to the variation of community memberships.
 
 
-%\begin{figure}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/confusion_sub_None.png}
-%	\caption{No sampling. } \label{no_confusion_sub}
-%	\end{subfigure}\hspace*{\fill}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/confusion_sub_RandomOver.png}
-%	\caption{Random over-sampling. } \label{random_over_confusion_sub}
-%	\end{subfigure}
-%	
-%	\medskip
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion_sub_RandomUnder.png}
-%	\caption{Random under-sampling. } \label{random_under_confusion_sub}
-%	\end{subfigure}\hspace*{\fill}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/confusion_sub_SMOTE.png}
-%	\caption{SMOTE. } \label{smote_confusion_sub}
-%	\end{subfigure}
-%\
-%\caption{Confusion matrices for each of the sampling method. The white cells in confusion matrices indicate zero occurrence of corresponding classifications: sub-domain $i$ is misclassified as sub-domain $j$. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on the normalized value of a confusion matrix shown in above. Lines within confusion matrices indicate the separations of network domains.} \label{confusion_sub}
-%\end{figure}
-%
-%\begin{figure}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/g.png}
-%	\caption{subdomain network based on no sampling.} \label{no_graph_sub_original}
-%	\end{subfigure}\hspace*{\fill}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/g.png}
-%	\caption{subdomain network based on random over-sampling.} \label{random_over_graph_sub_original}
-%	\end{subfigure}
-%	
-%	\medskip
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/g.png}
-%	\caption{subdomain network based on random under-sampling.} \label{random_under_graph_sub_original}
-%	\end{subfigure}\hspace*{\fill}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/g.png}
-%	\caption{subdomain network based on SMOTE.} \label{smote_graph_sub_original}
-%	\end{subfigure}
-%\
-%\caption{The networks of sub-domains. The color of each node corresponds to a domain the sub-domain (node) belongs to and width of each edge corresponds to the similarity of sub-domains derived from the aggregated confusion matrix.} \label{meta_network}
-%\end{figure}
-%
-%\begin{figure}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/None/g_community.png}
-%	\caption{subdomain network based on no sampling. The number of communities is $4$.} \label{no_graph_sub_community}
-%	\end{subfigure}\hspace*{\fill}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomOver/g_community.png}
-%	\caption{subdomain network based on random over-sampling sampling.  The number of communities is $4$.} \label{random_over_graph_sub_community}
-%	\end{subfigure}
-%	
-%	\medskip
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/RandomUnder_all5/g_community.png}
-%	\caption{subdomain network based on random under-sampling.  The number of communities is $3$.} \label{random_under_graph_sub_community}
-%	\end{subfigure}\hspace*{\fill}
-%	\begin{subfigure}{0.48\textwidth}
-%	\includegraphics[width=\linewidth]{figs/similarity/SubDomain/SMOTE/g_community.png}
-%	\caption{subdomain network based on SMOTE.  The number of communities is $4$.} \label{SMOTE_graph_sub_community}
-%	\end{subfigure}
-%\
-%\caption{The networks of sub-domains with community labelings. The color of a node now corresponds to a community found by the algorithm and width of each edge corresponds to the similarity of sub-domains derived from the aggregated confusion matrix.} \label{meta_network_community}
-%\end{figure}
+\begin{figure}
+\centering 
+\subfloat[No sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/None/confusion_sub_None.png}%
+   \label{no_confusion_sub}%
+}
+\subfloat[Random over-sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/RandomOver/confusion_sub_RandomOver.png}%
+  \label{random_over_confusion_sub}%
+}
+
+\medskip
+
+\subfloat[Random under-sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion_sub_RandomUnder.png}%
+   \label{random_under_confusion_sub}%
+}
+\subfloat[SMOTE]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/SMOTE/confusion_sub_SMOTE.png}%
+  \label{smote_confusion_sub}%
+ }
+\caption{Confusion matrices for each of the sampling method. The white cells in confusion matrices indicate zero occurrence of corresponding classifications: sub-domain $i$ is misclassified as sub-domain $j$. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on the normalized value of a confusion matrix shown in above. Lines within confusion matrices indicate the separations of network domains.} \label{confusion_sub}.
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\centering 
+\subfloat[No sampling.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/None/g.png}%
+   \label{no_graph_sub_original}%
+}
+\subfloat[Random over-sampling.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/RandomOver/g.png}%
+  \label{random_over_graph_sub_original}%
+}
+
+\medskip
+
+\subfloat[Random under-sampling]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/g.png}%
+   \label{random_under_graph_sub_original}%
+}
+\subfloat[SMOTE]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/SMOTE/g.png}%
+  \label{smote_graph_sub_original}%
+ }
+\caption{The networks of sub-domains. The color of each node corresponds to a domain the sub-domain (node) belongs to and width of each edge corresponds to the similarity of sub-domains derived from the aggregated confusion matrix.} \label{meta_network}.
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+\centering 
+\subfloat[No sampling. The number of communities is $4$]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/None/g_community.png}%
+   \label{no_graph_sub_original}%
+}
+\subfloat[Random over-sampling. The number of communities is $4$.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/RandomOver/g_community.png}%
+  \label{random_over_graph_sub_original}%
+}
+
+\medskip
+
+\subfloat[Random under-sampling.  The number of communities is $3$.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/g_community.png}%
+   \label{random_under_graph_sub_original}%
+}
+\subfloat[SMOTE. The number of communities is $4$.]{%
+  \includegraphics[width=0.3\columnwidth]{figs/similarity/SubDomain/SMOTE/g_community.png}%
+  \label{smote_graph_sub_original}%
+ }
+\caption{The networks of sub-domains with community labelings. The color of a node now corresponds to a community found by the algorithm and width of each edge corresponds to the similarity of sub-domains derived from the aggregated confusion matrix.} \label{meta_network_community} \label{meta_network_community}.
+\end{figure}
+
+
 
 
 
@@ -269,7 +288,7 @@ Although there are some exceptional cases, our findings from this experiment pro
 \begin{figure}[ht]
 		\begin{center}
 		\vspace{0.5cm}
-		\includegraphics[clip,width=12cm,height = 9cm]{figs/overlaps.png}
+		\includegraphics[clip,width=9cm,height = 6cm]{figs/overlaps.png}
 		\vspace{0.5cm}
 		\caption{Overlaps of community memberships. The intensity of color for each cell in the matrix indicates the frequency of two sub-domains being in the same community.  There are three groups of sub-domains that almost constantly share the community membership: (i) community of social networks including online social, forest fire model, offline social, and so on; (ii) community of networks claimed to have a power-law degree distribution including scale-free network, metabolic network, web graph, etc. with some exceptions such as small world network; (iii) community of networks that are physically embedded, having an input-output function or containing some sort of flow on the network, which include road, digital circuit and fungal networks.}
 		\label{community_overlaps}
