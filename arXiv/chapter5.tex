@@ -1,7 +1,7 @@
-\chapter{Analyses}
+\section*{Analyses}
 In this chapter, we present experimental settings for analyses, each of which helps us to gain insights for answering the questions we proposed in the introduction, namely questions about the distinguishing structural features, existence of indistinguishable pairs of network categories and its implication. We present the results of such analyses in a sequential order along with those questions. 
 
-\section{Discriminative Feature Set}
+\subsection*{Discriminative Feature Set}
 The first question of focus is about the set of distinguishing features that make a category of networks "stand out" among others. In order to address this question, we look at the 
  statistics of feature importance that are derived from a random forest classifier. The assumption here is that distinguishing features should be able to split the data in the feature space into sub-spaces such that separation of class labels is good, meaning that these sub-spaces should only contain nearly a single class label within themselves. The degree of goodness of separation is expressed as the decrease of Gini impurity and if a feature is distinguishing one category of networks from the others, then selecting the feature in a decision tree should gain a large decrease of Gini impurity in splitting the data and the feature should be highly ranked in the feature importance ranking. Therefore, if we observe a feature that ranks as the top in the ranking many times for binary classifications in which positive label corresponds to the class of interest and the negative label corresponds to everything else grouped together, we could assert that the feature is distinguishing for a specific kind of networks from the rest. 
  
@@ -108,7 +108,7 @@ For some network sub-domains, however, implications of the distinguishing featur
 
 
 
-\section{Similarities in Networks of Different Kinds}
+\subsection*{Similarities in Networks of Different Kinds}
 Every network belongs to some sort of network domain or sub-domain that usually describes the properties and even structure of a network. As we have seen in the previous section, some networks of selected representative sub-domains exhibit structural uniqueness which makes them stand out among others in the feature space. However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig. \ref{2d_figures}, which leads to the question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest and confusion matrix.  
 
 \subsection{Experimental Settings}

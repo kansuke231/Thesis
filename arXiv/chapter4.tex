@@ -1,7 +1,7 @@
-\chapter{Methodology}
+\section*{Methodology}
 After having converted networks into vectors in the feature space, there are a number of possible ways to analyze the distribution of points and labels and possibly learn the concept that governs such distribution in the feature space. In this study, we use random forest classifier along with the confusion matrix as a way to learn the underlying concept that differentiates different classes of networks. As we have seen in the previous chapter, the distribution of class labels is obviously skewed which leads us to use several sampling methods that are supposed to alleviate the problem. In this chapter, we explain such methodologies in detail.
 
-	\section{Sampling Methods}
+	\subsection*{Sampling Methods}
 Most of the machine learning algorithms perform well on evenly populated instances of multiple classes. However, once this class balance no longer persists, the algorithms perform poorly on minority classes. This problem, called \textit{class imbalance}, causes any machine learning algorithm that is naive to the data set to focus exclusively on the majority class, ignoring any minority classes. One of the most widely used approaches for mitigating the problem is sampling the data set of interest so that the distribution of classes becomes balanced. Although there are many proposed sampling strategies as of now \cite{SurveySampling}, we primarily use three sampling strategies in this study: random over-sampling, random under-sampling and SMOTE \cite{SMOTE}.
 
  Here we establish the mathematical notations used in explaining sampling methods. Let $S$ be a set of pairs of $\vec{x_i}$ and $y_i$, namely $S =\{(\vec{x_i},y_i)\}$, for $i = 1,...,n$ where $n$ is the number of data, $\vec{x_i} \in X$ is an instance of networks in the $N$-dimensional feature space and $y_i \in Y = \{1,...,C\}$ is a class label associated with the instance $\vec{x_i}$.   
@@ -67,7 +67,7 @@ And one repeats this procedure for other neighbors of the point $\vec{x_i}$ and 
 
 The core concept of SMOTE is filling out the cloud of minority class instances by interpolating existing data points so that it closely resembles a \textit{convex set}. This idea, making a convex set of minority instances by interpolation, assumes that the shape of a manifold of the underling data distribution itself is convex. In a high dimensional space, it is often the case that the distribution of data forms a quite intricate non-convex manifold on which the data we observe is generated. Therefore one must be careful when using a sampling method like SMOTE that the resulting set of points by interpolation of data points of such complex manifold is likely to be a convex set, that may radically be different from the underlying concept that a classifier tries to learn.
 
-	\section{Classification}
+	\subsection*{Classification}
 	In order to find similarities and differences of data of different classes, one needs to develop a notion of similarity between the classes. In this study we derive such notion of similarity from confusion matrices that are produced by random forest classifiers. Following sub-sections describe the details of decision tree which is an essential component of random forest, random forest classifier and confusion matrix.
 	
 		\subsection{Decision Tree}

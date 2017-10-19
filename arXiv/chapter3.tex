@@ -1,5 +1,5 @@
-\chapter{Data Sets}
-	\section{Description}	
+\section*{Data Sets}
+	%subsection{Description}	
 	Our network data set has been accumulated with a lot of effort over the years and hyperlinks to most of the data are available at the website of The Colorado Index of Complex Networks (ICON) \url{https://icon.colorado.edu}. ICON is a place where hyperlinks to the network data are stored, rather than the data itself.  
 	Since the data format of real world networks is not standardized, we proceeded to convert all the data into a single format called \textit{Graph Modeling Language} or simply GML \cite{GML}. The format allows us to flexibly specify arbitrary node and edge attributes. We, however, do not use any node and edge attribute, including edge weight, as well as edge directionality at all since not all networks have such properties and we wanted to analyze a diverse set of networks. Thus, we treat all networks used in this study as a simple graph which is defined in the previous chapter. We have used only a fraction of all networks available on ICON due to the time constraint. We have also added some synthesized network data which are generated from four specific models briefly explained in the following:
 	 
@@ -14,24 +14,25 @@
 	\end{enumerate}
 
 We show all the details of network sub-domains for our study in the table \ref{tab:subdomain}. The distributions of network domains and sub-domains, as shown in figs.\ref{domain_ratio} and \ref{sub_dist}, are very skewed since instances of some network categories are hard to obtain due to their inherent difficulty of collecting data or legal concerns, or hard to analyze due to their network size and this leads us to explore several sampling methods, which are explained in the following chapter. 
-	\section{Feature Extraction}
-	After converting into GML format, we calculate a set of features explained in the previous chapter for each network. We have extensively used a Python library \textit{igraph} \cite{igraph} for extracting features including clustering coefficient and degree assortativity and other miscellaneous operations on network data. For calculating network motifs, we used a parallel motif computing algorithm for undirected motifs developed by Ahmed \textit{et al.} \cite{ahmed2015icdm}. A number of computations involved in this study are parallelized by using a command-line tool \textit{GNU Parallel} \cite{GNUParallel}.
+	
+%\subsection{Feature Extraction}
+After converting into GML format, we calculate a set of features explained in the previous chapter for each network. We have extensively used a Python library \textit{igraph} \cite{igraph} for extracting features including clustering coefficient and degree assortativity and other miscellaneous operations on network data. For calculating network motifs, we used a parallel motif computing algorithm for undirected motifs developed by Ahmed \textit{et al.} \cite{ahmed2015icdm}. A number of computations involved in this study are parallelized by using a command-line tool \textit{GNU Parallel} \cite{GNUParallel}.
 
 
-\begin{figure}
+\begin{figure*}
 \centering 
 \subfloat[plot]{%
-  \includegraphics[width=0.3\columnwidth]{figs/category_ratio.png}%
+  \includegraphics[width=0.7\columnwidth]{figs/category_ratio.png}%
   \label{plot:sval}%
 }\qquad
 \subfloat[plot]{%
-  \includegraphics[width=0.3\columnwidth]{figs/subdomain_dist.png}%
+  \includegraphics[width=0.7\columnwidth]{figs/subdomain_dist.png}%
   \label{plot:whatever}%
 }
 
 \caption{(a): The categorical ratio of network domains. (b):  Count distribution of network sub-domains. Sub-domains of the same network domain are grouped together having the same color in the figure. Color code from top: Biological, Informational, Social, Synthesized, Technological and Transportation.} \label{category_dist}.
 
-\end{figure}
+\end{figure*}
 
 
 %%\begin{figure}
@@ -49,7 +50,7 @@ We show all the details of network sub-domains for our study in the table \ref{t
 
 
 \newpage
-	\begin{longtable}{| l | l | p{9cm} |}
+	\begin{longtable*}{| l | l | p{9cm} |}
 	\caption{Network sub-domains and their descriptions.} \label{tab:subdomain}\\
 	
 	%header for the first page%
@@ -95,4 +96,4 @@ We show all the details of network sub-domains for our study in the table \ref{t
       Subway &  Transportation & Subway networks of major cities around the world.\\ % \hline
       Airport &  Transportation & Network of airports that are connected by flights between the airports.\\  \hline
            
-\end{longtable}
+\end{longtable*}
