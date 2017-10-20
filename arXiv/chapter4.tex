@@ -57,7 +57,7 @@ And one repeats this procedure for other neighbors of the point $\vec{x_i}$ and 
 		\begin{figure}[ht]
 		\begin{center}
 		\vspace{0.5cm}
-		\includegraphics[clip,width=7cm,height = 2cm]{figs/SMOTE.png}
+		\includegraphics[clip,width=7.5cm,height = 2cm]{figs/SMOTE.png}
 		\vspace{0.5cm}
 		\caption{Synthesizing phase of SMOTE. Here the number of nearest neighbors $k$ is 3.}
 		\label{smote}
@@ -73,7 +73,10 @@ The core concept of SMOTE is filling out the cloud of minority class instances b
 		\subsection{Decision Tree}
 		Decision tree is a model which describes the relationship between input variables and output class by recursively asking a question on a single input variable and splitting the data set into two based on the answer to the question until a data set has enough homogeneity of a class in it. In a high dimensional space, such spitting the data set corresponds to hyperplane in the space. The algorithm for learning decision tree splits the data set based on a criterion of values of an input variable such that the resulting data sets become less heterogeneous or less``impure" in terms of class labels. One of the widely used such criteria and the one we use in this study is \textit{Gini impurity}. The definition of Gini impurity for a data set with $J$ classes is the following:
 	\begin{equation}
-	I_G(f) = \sum_{i=1}^J f_i(1-f_i) = \sum_{i=1}^J (f_i-f_i^2) =  \sum_{i=1}^J f_i - \sum_{i=1}^J f_i^2 = 1- \sum_{i=1}^J f_i^2,
+		\begin{split}
+	I_G(f) = \sum_{i=1}^J f_i(1-f_i) = \sum_{i=1}^J (f_i-f_i^2) \\
+	  = \sum_{i=1}^J f_i - \sum_{i=1}^J f_i^2 = 1- \sum_{i=1}^J f_i^2,
+		\end{split}
 	\end{equation}
 where $f_i$ is a probability that an item that belongs to class $i$ is chosen in the data set. Gini impurity becomes $0$ if all items in a set belong to the same class, meaning the set is "pure" and takes a value greater than $0$ if the set contains items of multiple classes. Each splitting essentially seeks the best possible value of an input variable such that the decrease of Gini impurity is the largest when the data set is split at the value (or hyperplane defined with it). Splitting continues until no further improvement can be made and the terminal of a tree are called leaves of the tree, each corresponding to one of the class labels in the data set.
 		
