@@ -10,7 +10,7 @@
 		\item if a network contains self-loops, then discard them.
 	\end{enumerate}
 	
-	\section{Structural Features of A Network}
+	\subsection*{Structural Features of A Network}
 	There are many ways to characterize a network in a quantitative manner that use the network's structural features \cite{Newman:NetworksIntro,NetworkCharacterizationSurvey}. Some network features, however, are implicitly correlated with the size of networks, which itself is a very strong feature: the number of nodes in web graphs is usually a magnitude of $10^6$ or more whereas ecological food webs contain usually less than 100 nodes. Examples of such features include, for instance, distance-related features such as the average path length and network diameter that are believed to grow approximately in $O(\log n)$, where $n$ is the number of nodes in a network. Another structural feature correlated with the size of the network is the modularity of network \cite{Modularity1}. Simply put, modularity quantifies the degree to which how much an observed network can be "partitioned" into modules within which edges are densely present but between which edges are sparsely present. The derivation of modularity is essentially based on comparing the original network with a random network having the same degree distribution which is called the configuration model and the value of modularity is practically the degree of difference between the original graph and its randomized counterpart. If the size of a network is large, the random network becomes so different that the modularity value becomes large as well \cite{ResolutionLimit, ModularityLimit}.
 	
 	The feature set we use in this study is scale-invariant, meaning that the size of network does not affect the value of a feature. This set of features allows us to compare networks without the notion of network size. In the following sections we describe important structural features that are relevant in this study.	
@@ -91,11 +91,12 @@ In this study, we treat the significance profile for each subgraph as a feature 
 \begin{table}[htb]
   %\begin{center}
     \caption{Network Features.}
-    \begin{tabular}{| l | p{3cm} |} \hline
+    %\begin{tabular}{| l | p{5cm} |} \hline
+    \begin{tabular}{| p{3cm} | p{5cm} |} \hline
       Name of the feature & Explanation  \\ \hline \hline
       Clustering coefficient &  The probability that a connected triplet ($k=3$ subgraph) is a triangle \\  %\hline
       Degree assortativity &  Correlation between a pair of connected nodes' degree. \\  %\hline
-      Network motifs ($m4\_1$, $m4\_2$,..., $m4\_6)$& The normalized z score of a subgraph's frequency compared to that of an ensemble of random networks having the exact same degree distribution. \\ \hline
+      Network motifs & The normalized z score of a subgraph's frequency compared to that of an ensemble of random networks having the exact same degree distribution. \\ \hline
     \end{tabular}
     \label{tab:feature}
   %\end{center}
