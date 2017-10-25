@@ -13,10 +13,10 @@ The first question of focus is about the set of distinguishing features that mak
 	\item Lastly we select the two most important features from the aggregated ranking, plot all of the data points in the two dimensional feature space in which x and y axes correspond to the most and second most important features, respectively. This visualization will help us understand to what degree and how a category of networks can be separated from the rest in the two dimensional feature space if there exists any pair of distinguishing features.
 \end{enumerate}
 
-Fig.\ref{2d_figures} shows two dimensional plots for the representative network sub-domains with axes being the top two important features selected from the statistics of aggregated feature importance shown in Fig.\ref{feature_importance_figures}. One important observation here is that the AUC score captures the separability and the degree of "spread" of a specific class label in the two dimensional feature space: the averaged AUC score for protein interaction networks shown in Fig.\ref{protein_2d} is 0.693 and the data points are spread across the large region of the feature space; the 2D plot of communication networks as shown in Fig. \ref{communication_2d}, on the other hand, displays a cluster of points corresponding to the class and the averaged AUC score for binary classifications is 0.992 which is much higher than that of protein interaction networks. The degree of spread of data points implies the structural variability of networks within a single category. For example, protein interaction networks and connectome exhibit the high structural variability of networks in a space defined by the selected features, whereas other network categories such as metabolic networks, ecological food webs, etc. exhibit the low structural variability in the selected features. This suggests the possible need for adding a new set of features for protein interaction networks and connectome with which we could distinguish them from the other kinds. 
+Fig.~\ref{2d_figures} shows two dimensional plots for the representative network sub-domains with axes being the top two important features selected from the statistics of aggregated feature importance shown in Fig.~\ref{feature_importance_figures}. One important observation here is that the AUC score captures the separability and the degree of "spread" of a specific class label in the two dimensional feature space: the averaged AUC score for protein interaction networks shown in Fig.~\ref{protein_2d} is 0.693 and the data points are spread across the large region of the feature space; the 2D plot of communication networks as shown in Fig.~ \ref{communication_2d}, on the other hand, displays a cluster of points corresponding to the class and the averaged AUC score for binary classifications is 0.992 which is much higher than that of protein interaction networks. The degree of spread of data points implies the structural variability of networks within a single category. For example, protein interaction networks and connectome exhibit the high structural variability of networks in a space defined by the selected features, whereas other network categories such as metabolic networks, ecological food webs, etc. exhibit the low structural variability in the selected features. This suggests the possible need for adding a new set of features for protein interaction networks and connectome with which we could distinguish them from the other kinds. 
 
 
-Fig.\ref{feature_importance_figures} shows the aggregated rankings of feature importance. In this figure, one can observe the general trend of an informative feature set and the "strength" of those features in the ranking. For example, the motif $m4\_6$, a connected path, of metabolic networks and the motif $m4\_1$, $k=4$ clique, of online social networks are the most important features and their strength is quite dominant:  $m4\_6$ of metabolic networks ranks as the first 939 times out of 1000 runs and $m4\_1$ of online social networks ranks as the first 974 times  out of 1000 runs, respectively. It is interesting to note that for online social networks clustering coefficient and degree assortativity, both long known for distinguishing features for social networks in general do not rank as the most or even the second most important features here.  On the other hand, the ranking of feature importance for connectome displays a lack of definitive features that can be seen in the almost equal frequencies of features appearing at any rank. This indicates that none of the features we have used cannot explain the network category succinctly: for online social networks we can describe the networks as having an extraordinarily number of $k=4$ cliques when compared to their randomized counterparts; we cannot, however, describe connectome  in such a way with the feature set.
+Fig.~\ref{feature_importance_figures} shows the aggregated rankings of feature importance. In this figure, one can observe the general trend of an informative feature set and the "strength" of those features in the ranking. For example, the motif $m4\_6$, a connected path, of metabolic networks and the motif $m4\_1$, $k=4$ clique, of online social networks are the most important features and their strength is quite dominant:  $m4\_6$ of metabolic networks ranks as the first 939 times out of 1000 runs and $m4\_1$ of online social networks ranks as the first 974 times  out of 1000 runs, respectively. It is interesting to note that for online social networks clustering coefficient and degree assortativity, both long known for distinguishing features for social networks in general do not rank as the most or even the second most important features here.  On the other hand, the ranking of feature importance for connectome displays a lack of definitive features that can be seen in the almost equal frequencies of features appearing at any rank. This indicates that none of the features we have used cannot explain the network category succinctly: for online social networks we can describe the networks as having an extraordinarily number of $k=4$ cliques when compared to their randomized counterparts; we cannot, however, describe connectome  in such a way with the feature set.
 
 
 
@@ -103,7 +103,7 @@ For some network sub-domains, however, implications of the distinguishing featur
 
 
 \subsection*{Similarities in Networks of Different Kinds}
-Every network belongs to some sort of network domain or sub-domain that usually describes the properties and even structure of a network. As we have seen in the previous section, some networks of selected representative sub-domains exhibit structural uniqueness which makes them stand out among others in the feature space. However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig. \ref{2d_figures}, which leads to the question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest and confusion matrix.  
+Every network belongs to some sort of network domain or sub-domain that usually describes the properties and even structure of a network. As we have seen in the previous section, some networks of selected representative sub-domains exhibit structural uniqueness which makes them stand out among others in the feature space. However we can also observe the overlaps between networks of representative sub-domains and networks of other sub-domains in the Fig.~\ref{2d_figures}, which leads to the question we have asked:  \textit{Are there any sets of network categories that are inherently indistinguishable from each other based on network structure?} In this section we explore the structural similarities of different kinds of network domains and sub-domains using machine learning techniques such as random forest and confusion matrix.  
 
 \subsection*{Experimental Settings}
 We derive structural similarity between network (sub-) domains from a confusion matrix that describes when a random forest classifier makes mistakes and when it does not. However, due to the nature of the classification algorithm and randomly splitting the data into training and testing sets, there involves some randomness in a confusion matrix every time one runs the analysis. Therefore, in order to remove the factor of randomness as much as possible, we run the analysis 1000 times and average the outcomes, namely confusion matrices. Averaging confusion matrices is done element-wise: an element of averaged confusion matrix, say $c$ is defined as $c = \frac{1}{1000}*\sum_{i=1}^{1000} c_i$, where $c_i$ is the corresponding element of an $i$th confusion matrix.
@@ -112,13 +112,13 @@ In order to control and compare the impact of class imbalance problem, we use fo
  
  
 \subsection*{Network Domains} 
-We first proceed to work on classification of network domains that include Biological, Social, Informational, Synthetic, Technological and Transportation. Fig.\ref{confusion} shows the aggregated confusion matrices for each of the sampling strategies. In an aggregated confusion matrix, each cell represents the averaged frequency that an instance of class $i$ is classified as class $j$ in 1000 experiments. As the majority classes inherently contain a number of test data points that leads to a larger count in the confusion matrix, there needs to be some normalization so that each class of network domains becomes comparable with others. The normalization in this study is defined as the following: Let $c_{ij}$ be an element in a confusion matrix. We normalize this quantity by a summation of elements in a row $c_{ij}$ belongs to, namely $\sum_{j=1}^N c_{ij}$, where $N$ is the number of network domains. 
+We first proceed to work on classification of network domains that include Biological, Social, Informational, Synthetic, Technological and Transportation. Fig.~\ref{confusion} shows the aggregated confusion matrices for each of the sampling strategies. In an aggregated confusion matrix, each cell represents the averaged frequency that an instance of class $i$ is classified as class $j$ in 1000 experiments. As the majority classes inherently contain a number of test data points that leads to a larger count in the confusion matrix, there needs to be some normalization so that each class of network domains becomes comparable with others. The normalization in this study is defined as the following: Let $c_{ij}$ be an element in a confusion matrix. We normalize this quantity by a summation of elements in a row $c_{ij}$ belongs to, namely $\sum_{j=1}^N c_{ij}$, where $N$ is the number of network domains. 
 
-The diagonal elements of confusion matrices shown in Fig.\ref{confusion} indicate the correct classifications. In every sampling method, instances of all network domains are relatively classified correctly, which is observable from the colors of the diagonal cells, except Informational networks for which we observe unsuccessful classifications. In spite of the fact that for random-under sampling there are only 26 instances for the training set of each domain, the confusion matrix for the sampling method still exhibits a strong diagonal pattern, which may imply that instances of various network domains are inherently quite separable in the feature space.
+The diagonal elements of confusion matrices shown in Fig.~\ref{confusion} indicate the correct classifications. In every sampling method, instances of all network domains are relatively classified correctly, which is observable from the colors of the diagonal cells, except Informational networks for which we observe unsuccessful classifications. In spite of the fact that for random-under sampling there are only 26 instances for the training set of each domain, the confusion matrix for the sampling method still exhibits a strong diagonal pattern, which may imply that instances of various network domains are inherently quite separable in the feature space.
 
 Although it is a meaningful result that the instances of network domains may inherently be separable, our focus now moves on to the off-diagonal elements of confusion matrices. In all matrices, a number of instances of Informational networks are classified as other domains, such as Biological, Synthesized and Technological which is observable from elements of a row corresponding to  "true Informational." Also some instances of network domains are classified as Biological networks, observed in elements of a column corresponding to "predicted Biological." 
 
-These pieces of information imply the existence of underlying similarities within network domains. However, it is hard to perceive the structure of inter-domain similarity just by looking at the confusion matrix. Therefore, we construct a network of network domains from a similarity matrix (weighted undirected adjacency matrix) that is constructed based on a confusion matrix that is shown in Fig.\ref{meta_network}. The operation for constructing the similarity matrix based on the normalized confusion matrix is straightforward: we symmetrize the matrix by taking the maximum of two elements in the matrix that are symmetric to each other with respect to a diagonal line. In all cases Biological, Informational and Technological domains are connected with wide edges together, indicating their structural similarities derived from confusion matrices are quite high. From the figure, it appears that there is no "winning" sampling method that produces an outstanding result of a domain network, which means that all of the sampling methods practically produce domain networks that are practically the same.
+These pieces of information imply the existence of underlying similarities within network domains. However, it is hard to perceive the structure of inter-domain similarity just by looking at the confusion matrix. Therefore, we construct a network of network domains from a similarity matrix (weighted undirected adjacency matrix) that is constructed based on a confusion matrix that is shown in Fig.~\ref{meta_network}. The operation for constructing the similarity matrix based on the normalized confusion matrix is straightforward: we symmetrize the matrix by taking the maximum of two elements in the matrix that are symmetric to each other with respect to a diagonal line. In all cases Biological, Informational and Technological domains are connected with wide edges together, indicating their structural similarities derived from confusion matrices are quite high. From the figure, it appears that there is no "winning" sampling method that produces an outstanding result of a domain network, which means that all of the sampling methods practically produce domain networks that are practically the same.
 
 
 This analysis which is based on network domains is informative in a sense that it consistently exhibits the well connected group of domains that includes Biological, Informational and Technological. However, each network domain includes sub-domains within itself and these network sub-domains are quite diverse in terms of network's function. For example, neural networks in a brain and ecological food web, both in Biological domain, function very differently. Grouping sub-domains of different functions together as a single category may lose some information local to a specific sub-domain. Therefore, we proceed to analyze the networks on a more fine-grained setting, namely using network sub-domains as the class label in classification tasks.
@@ -127,19 +127,22 @@ This analysis which is based on network domains is informative in a sense that i
 \begin{figure*}
 \centering 
 \subfloat[No sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/None/confusion_None.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/None/confusion_None.png}%
    \label{no_confusion}%
 }
 \subfloat[Random over-sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/RandomOver/confusion_RandomOver.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/RandomOver/confusion_RandomOver.png}%
   \label{random_over_confusion}%
 }
+
+\medskip
+
 \subfloat[Random under-sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/RandomUnder_26/confusion_RandomUnder.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/RandomUnder_26/confusion_RandomUnder.png}%
    \label{random_under_confusion}%
 }
 \subfloat[SMOTE]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/SMOTE/confusion_SMOTE.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/SMOTE/confusion_SMOTE.png}%
   \label{smote_confusion}%
  }
 \caption{Confusion matrices for each of the sampling strategy. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on this normalized value of a confusion matrix. } \label{confusion}.
@@ -151,19 +154,22 @@ This analysis which is based on network domains is informative in a sense that i
 \begin{figure*}
 \centering 
 \subfloat[No sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/None/g.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/None/g.png}%
    \label{no_graph}%
 }
 \subfloat[Random over-sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/RandomOver/g.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/RandomOver/g.png}%
   \label{random_over_graph}%
 }
+
+\medskip
+
 \subfloat[Random under-sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/RandomUnder_26/g.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/RandomUnder_26/g.png}%
    \label{random_under_graph}%
 }
 \subfloat[SMOTE]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/Domain/SMOTE/g.png}%
+  \includegraphics[width=0.8\columnwidth]{figs/similarity/Domain/SMOTE/g.png}%
   \label{smote_graph}%
  }
 \caption{Domain networks for different sampling strategies. The widths of edges are proportional to the magnitude of a value in a symmetrized, normalized confusion matrix. Biological, Informational and Technological domains are well connected in all cases.} \label{meta_network}.
@@ -171,15 +177,15 @@ This analysis which is based on network domains is informative in a sense that i
 
 \subsection*{Network Sub-domains}
 Here we continue the same analysis as we have done in the previous section, but using network sub-domains as class labels for classification tasks.
-Although in total we have 33 network sub-domains as shown in Fig. \ref{sub_dist}, some sub-domains have only few instances, which makes it infeasible to proceed to classification tasks as they involve train-test split of data and SMOTE assumes a training set to have enough amount of instances for selecting $k$ nearest neighbors. Therefore we first exclude sub-domains that the number of instances within themselves are less than seven, which enables us to split the training and test sets in the ratio of $7:3$ while keeping the class distribution in both sets the same and SMOTE to successfully find $k=3$ nearest neighbors for any sub-domain. This filtering results in 22 network sub-domains for this analysis\footnote{The excluded network subdomains are: Language, Relatedness, Legal, Commerce, Recommendations, Collaboration, Fiction, Relationships, Email, Power grid and Airport.}. 
+Although in total we have 33 network sub-domains as shown in Fig.~\ref{sub_dist}, some sub-domains have only few instances, which makes it infeasible to proceed to classification tasks as they involve train-test split of data and SMOTE assumes a training set to have enough amount of instances for selecting $k$ nearest neighbors. Therefore we first exclude sub-domains that the number of instances within themselves are less than seven, which enables us to split the training and test sets in the ratio of $7:3$ while keeping the class distribution in both sets the same and SMOTE to successfully find $k=3$ nearest neighbors for any sub-domain. This filtering results in 22 network sub-domains for this analysis\footnote{The excluded network subdomains are: Language, Relatedness, Legal, Commerce, Recommendations, Collaboration, Fiction, Relationships, Email, Power grid and Airport.}. 
 
-Same as the previous setting for network domain, we run classification tasks 1000 times for each sampling method, aggregate, normalize and symmetrize the resulting confusion matrices. Figure \ref{confusion_sub} shows the aggregated confusion matrices for each sampling method in which we can observe that all of the confusion matrices exhibit the diagonal pattern, an indication of underlying separability of network sub-domains. Note that, however, some sub-domains such as bayesian, web graph, offline social, water distribution and software dependency, are often not classified correctly which may be due to the few instances and/or the fact that network structures of their instances are actually quite similar to the ones of other sub-domains. It is obvious to notice that the aggregated confusion matrix for random under-sampling displays fewer white cells within itself, meaning that under this sampling method the classifier confused a number of sub-domains with other sub-domains.
+Same as the previous setting for network domain, we run classification tasks 1000 times for each sampling method, aggregate, normalize and symmetrize the resulting confusion matrices. Figure~\ref{confusion_sub} shows the aggregated confusion matrices for each sampling method in which we can observe that all of the confusion matrices exhibit the diagonal pattern, an indication of underlying separability of network sub-domains. Note that, however, some sub-domains such as bayesian, web graph, offline social, water distribution and software dependency, are often not classified correctly which may be due to the few instances and/or the fact that network structures of their instances are actually quite similar to the ones of other sub-domains. It is obvious to notice that the aggregated confusion matrix for random under-sampling displays fewer white cells within itself, meaning that under this sampling method the classifier confused a number of sub-domains with other sub-domains.
 
-In order to visualize the underlying similarities within network sub-domain, we again construct networks of sub-domains based on a weighted undirected adjacency matrix derived from aggregated confusion matrices, shown in Fig.\ref{meta_network}. From this figure, we can observe that the network domain is not necessarily a good indicator of sub-domain clustering: informational networks including web graph, bayesian and peer to peer network and biological networks, such as metabolic, fungal, food web, etc. are not clustered together, meaning that we do not observe the sub-domains having the same color forming a community together. This could be attributed to the fact that some network domains, such as biological networks, entail a broad spectrum of network sub-domains within itself whose instances are drastically different in terms of the physical size of the things nodes represent (from cells to animals) and the process of networks (from chemical reactions to prey-predator relationships). 
+In order to visualize the underlying similarities within network sub-domain, we again construct networks of sub-domains based on a weighted undirected adjacency matrix derived from aggregated confusion matrices, shown in Fig.~\ref{meta_network}. From this figure, we can observe that the network domain is not necessarily a good indicator of sub-domain clustering: informational networks including web graph, bayesian and peer to peer network and biological networks, such as metabolic, fungal, food web, etc. are not clustered together, meaning that we do not observe the sub-domains having the same color forming a community together. This could be attributed to the fact that some network domains, such as biological networks, entail a broad spectrum of network sub-domains within itself whose instances are drastically different in terms of the physical size of the things nodes represent (from cells to animals) and the process of networks (from chemical reactions to prey-predator relationships). 
 
 Then the question is: \textit{What could be a good indicator of similarity in networks of different kinds?} In order to answer this question, we first need to discover the communities of subdomain networks which are groups of nodes within which the weighted edge density is high, but between which the weighted edge density is low.
 
-Fig.\ref{meta_network_community} shows the networks of sub-domains on which the colors of nodes correspond to the community membership found by a community detection algorithm proposed by Clauset \textit{et al.} \cite{CNMAlgorithm}. We have used an implementation of the modified version of this algorithm for weighted network that is available in Python-igraph as a method \texttt{community\_fastgreedy()} \cite{igraph}. From Fig.\ref{meta_network_community}, one may notice that the community structure across different sampling methods is almost consistent, meaning that the certain groups of sub-domains are always in the same community.  For instance, for all sampling methods, offline social, connectome and affiliation networks are in the same community. 
+Fig.~\ref{meta_network_community} shows the networks of sub-domains on which the colors of nodes correspond to the community membership found by a community detection algorithm proposed by Clauset \textit{et al.} \cite{CNMAlgorithm}. We have used an implementation of the modified version of this algorithm for weighted network that is available in Python-igraph as a method \texttt{community\_fastgreedy()} \cite{igraph}. From Fig.~\ref{meta_network_community}, one may notice that the community structure across different sampling methods is almost consistent, meaning that the certain groups of sub-domains are always in the same community.  For instance, for all sampling methods, offline social, connectome and affiliation networks are in the same community. 
 
 Some network sub-domains, however, change the community membership for some subdomain networks. For instance, online social network and forest fire model networks join the community of off-line social network for no sampling, random-over sampling and random-under sampling method, but joins the community of software dependency (red color) for SMOTE sampling. This variation of community membership across all subdomain networks could be attributed to the effect of each sampling method on decision surfaces a classifier builds for classification. For instance, decision surfaces built by a classifier under the random under-sampling strategy should be simple shape-wise since the training set is very sparse in terms of the number of data points. On the other hand, decision surfaces built by a classifier for random over-sampling should be more toward complicated shape-wise and lead to over-fitting as the number of data points for training is larger and duplicated points force the classifier to adjust itself to those points. Therefore this variation of decision surfaces may lead some data points to be classified differently for different sampling method, which ultimately leads to the variation of community memberships.
 
@@ -187,19 +193,22 @@ Some network sub-domains, however, change the community membership for some subd
 \begin{figure*}
 \centering 
 \subfloat[No sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/None/confusion_sub_None.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/None/confusion_sub_None.png}%
    \label{no_confusion_sub}%
 }
 \subfloat[Random over-sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/RandomOver/confusion_sub_RandomOver.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/RandomOver/confusion_sub_RandomOver.png}%
   \label{random_over_confusion_sub}%
 }
+
+\medskip
+
 \subfloat[Random under-sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion_sub_RandomUnder.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/confusion_sub_RandomUnder.png}%
    \label{random_under_confusion_sub}%
 }
 \subfloat[SMOTE]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/SMOTE/confusion_sub_SMOTE.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/SMOTE/confusion_sub_SMOTE.png}%
   \label{smote_confusion_sub}%
  }
 \caption{Confusion matrices for each of the sampling method. The white cells in confusion matrices indicate zero occurrence of corresponding classifications: sub-domain $i$ is misclassified as sub-domain $j$. The color of each cell represents a count value normalized by the sum of all counts in a row the cell belongs to. Our similarity measurement is based on the normalized value of a confusion matrix shown in above. Lines within confusion matrices indicate the separations of network domains.} \label{confusion_sub}.
@@ -210,19 +219,22 @@ Some network sub-domains, however, change the community membership for some subd
 \begin{figure*}
 \centering 
 \subfloat[No sampling.]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/None/g.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/None/g.png}%
    \label{no_graph_sub_original}%
 }
 \subfloat[Random over-sampling.]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/RandomOver/g.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/RandomOver/g.png}%
   \label{random_over_graph_sub_original}%
 }
+
+\medskip
+
 \subfloat[Random under-sampling]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/g.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/g.png}%
    \label{random_under_graph_sub_original}%
 }
 \subfloat[SMOTE]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/SMOTE/g.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/SMOTE/g.png}%
   \label{smote_graph_sub_original}%
  }
 \caption{The networks of sub-domains. The color of each node corresponds to a domain the sub-domain (node) belongs to and width of each edge corresponds to the similarity of sub-domains derived from the aggregated confusion matrix.} \label{meta_network}.
@@ -233,19 +245,22 @@ Some network sub-domains, however, change the community membership for some subd
 \begin{figure*}
 \centering 
 \subfloat[No sampling. The number of communities is $4$]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/None/g_community.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/None/g_community.png}%
    \label{no_graph_sub_original}%
 }
 \subfloat[Random over-sampling. The number of communities is $4$.]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/RandomOver/g_community.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/RandomOver/g_community.png}%
   \label{random_over_graph_sub_original}%
 }
+
+\medskip
+
 \subfloat[Random under-sampling.  The number of communities is $3$.]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/g_community.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/RandomUnder_all5/g_community.png}%
    \label{random_under_graph_sub_original}%
 }
 \subfloat[SMOTE. The number of communities is $4$.]{%
-  \includegraphics[width=0.5\columnwidth]{figs/similarity/SubDomain/SMOTE/g_community.png}%
+  \includegraphics[width=0.9\columnwidth]{figs/similarity/SubDomain/SMOTE/g_community.png}%
   \label{smote_graph_sub_original}%
  }
 \caption{The networks of sub-domains with community labelings. The color of a node now corresponds to a community found by the algorithm and width of each edge corresponds to the similarity of sub-domains derived from the aggregated confusion matrix.} \label{meta_network_community} \label{meta_network_community}.
@@ -255,7 +270,7 @@ Some network sub-domains, however, change the community membership for some subd
 
 
 
-In order to facilitate analyzing the variation of community memberships, we have constructed a matrix, shown in Fig.\ref{community_overlaps} in which the frequency that two sub-domain share the same community membership corresponds to the color intensity. For instance offline social, connectome and affiliation networks are assigned to the same community four times. From this figure, one may notice that there appears to be three groups of sub-domains that are consistently assigned to the same community. The first one is a community of social networks including online and offline social networks as well as affiliation network and forest fire model with an exception of connectome, namely brain networks. This grouping of social networks could be attributed to the same underlying process, namely forest fire process: on online social networks, namely Facebook networks, one becomes a friend with someone, and finds other friends on the person's friend list, sends them friend requests and recursively continues the process; on off-line social networks, a person introduces his/her friends to you, they also introduce their friends to you and the process recursively continues. The possible explanations why we observe connectome being in the same community as such social networks are as follows: (i) the lack of feature or dimension in the feature space that distinguishes brain networks from social networks; (ii) the underlying generative mechanism of brain network is actually similar to that of social networks. As far as we know, however, there is no previous study investigating commonality of processes of both social and brain networks. Therefore it is reasonable to speculate here that we lacked a set of distinguishing features for connectome, which resulted in the clustering of the network with social networks.
+In order to facilitate analyzing the variation of community memberships, we have constructed a matrix, shown in Fig.~\ref{community_overlaps} in which the frequency that two sub-domain share the same community membership corresponds to the color intensity. For instance offline social, connectome and affiliation networks are assigned to the same community four times. From this figure, one may notice that there appears to be three groups of sub-domains that are consistently assigned to the same community. The first one is a community of social networks including online and offline social networks as well as affiliation network and forest fire model with an exception of connectome, namely brain networks. This grouping of social networks could be attributed to the same underlying process, namely forest fire process: on online social networks, namely Facebook networks, one becomes a friend with someone, and finds other friends on the person's friend list, sends them friend requests and recursively continues the process; on off-line social networks, a person introduces his/her friends to you, they also introduce their friends to you and the process recursively continues. The possible explanations why we observe connectome being in the same community as such social networks are as follows: (i) the lack of feature or dimension in the feature space that distinguishes brain networks from social networks; (ii) the underlying generative mechanism of brain network is actually similar to that of social networks. As far as we know, however, there is no previous study investigating commonality of processes of both social and brain networks. Therefore it is reasonable to speculate here that we lacked a set of distinguishing features for connectome, which resulted in the clustering of the network with social networks.
 
 The second group of sub-domains corresponds to the networks that have been claimed to have the power-law degree distribution which include scale-free network, metabolic network, web graph, etc. and some of these networks have been conjectured to grow according to a mechanism called preferential attachment. In this network generative process, newly added nodes in a network, for example newly created web page or software package, tend to connect to the popular or high-degree nodes, i.e. popular web sites or widely used software packages. The third and last group of sub-domains is the network of "flow" that includes electrical signal (digital circuit), information (bayesian), water (water distribution), nutrient (fungal), people/trains (subway) and cars (road).  Also, if we look at the subdomain networks, digital circuit and bayesian networks are always tightly connected together. This may be due to the fact that they are both an input-output network as well as being a flow network. The rest of the flow networks have another common property, that is, physical embedding of the network. These networks have a strong constraint of the physical limitation. For instance, it is almost impossible for a node in a physically embedded network to have a thousand connections upon it.
 
